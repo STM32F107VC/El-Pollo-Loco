@@ -25,7 +25,7 @@ class World {
             this.ctx.drawImage(enemy.img, enemy.x, enemy.y, enemy.width, enemy.height);
         });
 
-        // Draw() wird immer wieder neu aufgerufen
+        // Draw() wird immer wieder aufgerufen
         let self = this;
         requestAnimationFrame(function () {
             self.draw();
