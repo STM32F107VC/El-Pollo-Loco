@@ -1,6 +1,10 @@
 class World {
     ctx;
 
+    clouds = [
+        new Cloud()
+    ];
+
     character = new Character();
 
     enemies = [
@@ -23,6 +27,10 @@ class World {
 
         this.enemies.forEach(enemy => {
             this.ctx.drawImage(enemy.img, enemy.x, enemy.y, enemy.width, enemy.height);
+        });
+
+        this.clouds.forEach(cloud => {
+            this.ctx.drawImage(cloud.img, cloud.x, cloud.y, cloud.width, cloud.height);
         });
 
         // Draw() wird immer wieder aufgerufen
