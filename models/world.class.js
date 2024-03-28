@@ -2,16 +2,18 @@ class World {
     ctx;
 
     clouds = [
-        new Cloud()
+        // new Cloud('img/5_background/layers/4_clouds/1.png'),
+        new Cloud('img/5_background/layers/4_clouds/full.png')
     ];
 
-    backgoundObject = [
-        new BackgroundObject('img/5_background/layers/3_third_layer/2.png', 0)
-        // new BackgroundObject('img/5_background/layers/3_third_layer/1.png'),
-        // new BackgroundObject('img/5_background/layers/2_second_layer/2.png'),
-        // new BackgroundObject('img/5_background/layers/2_second_layer/1.png'),
-        // new BackgroundObject('img/5_background/layers/1_first_layer/2.png'),
-        // new BackgroundObject('img/5_background/layers/1_first_layer/1.png')
+    backgroundObject = [
+        new BackgroundObject('img/5_background/layers/air.png', 0),
+        new BackgroundObject('img/5_background/layers/3_third_layer/2.png', 0),
+        new BackgroundObject('img/5_background/layers/3_third_layer/1.png', 0),
+        new BackgroundObject('img/5_background/layers/2_second_layer/2.png', 0),
+        new BackgroundObject('img/5_background/layers/2_second_layer/1.png', 0),
+        new BackgroundObject('img/5_background/layers/1_first_layer/2.png', 0),
+        new BackgroundObject('img/5_background/layers/1_first_layer/1.png', 0)
     ];
 
     character = new Character();
@@ -32,16 +34,10 @@ class World {
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
+        this.addObjectsToMap(this.backgroundObject);
         this.addObjectsToMap(this.clouds);
-        this.addObjectsToMap(this.backgoundObject);
         this.addObjectsToMap(this.enemies);
         this.addToMap(this.character);
-
-        // this.enemies.forEach(enemy => { this.addToMap(enemy); });
-
-        // this.clouds.forEach(cloud => { this.addToMap(cloud); });
-
-        // this.backgoundObject.forEach(bgo => { this.addToMap(bgo) });
 
         // Draw() wird immer wieder aufgerufen
         let self = this;
