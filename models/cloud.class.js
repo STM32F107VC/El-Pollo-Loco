@@ -2,6 +2,7 @@ class Cloud extends MovableObject {
     y = 20;
     height = 300;
     width = 1000;
+    speed = 0.15;
 
     constructor(path) {
         super().loadImage(path);
@@ -13,7 +14,7 @@ class Cloud extends MovableObject {
     animate() {
         if (this.x >= 0) {
             setInterval(() => {
-                this.x -= 0.1;
+                this.x -= this.speed;
             }, 1000 / 60);
             if (this.x <= 0) {
                 this.x = 720;
