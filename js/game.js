@@ -1,6 +1,8 @@
 let canvas;
 let world;
 
+//Test variable
+let test;
 
 
 function init() {
