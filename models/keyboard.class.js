@@ -1,9 +1,9 @@
 class Keyboard {
-    LEFT;
-    RIGHT;
-    UP;
-    DOWN;
-    SPACE;
+    LEFT = false;
+    RIGH = false;
+    UP = false;
+    DOWN = false
+    SPAC = false;
 
     constructor() {
 

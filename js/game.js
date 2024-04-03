@@ -1,8 +1,6 @@
 let canvas;
 let world;
-
-//Test variable
-let test;
+let keyboard = new Keyboard();
 
 
 function init() {
@@ -13,6 +11,10 @@ function init() {
 
 addEventListener("keypress", (e) => {
     console.log(e);
+});
+
+addEventListener("keyup", () => {
+    console.log('Taste wurde los gelassen.');
 });
 
 // addEventListener("keydown", (event) => { });
