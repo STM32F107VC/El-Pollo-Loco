@@ -6,6 +6,8 @@ class MovableObject {
     img;
     imgCache = {};
     currentImage = 0;
+    speed = 0.15;
+    
 
     loadImage(path) {
         this.img = new Image();
@@ -28,9 +30,15 @@ class MovableObject {
         // }, 1000 / 6);
     }
 
+    // moveLeft() {
+    //     console.log('Moving left');
+    //     // ctx.setTransform(1, 0.5, -0.5, 1, 30, 10);
+    //     world.character.x -= 10;
+    // }
+
     moveLeft() {
-        console.log('Moving left');
-        // ctx.setTransform(1, 0.5, -0.5, 1, 30, 10);
-        world.character.x -= 10;
+        setInterval(() => {
+            this.x -= this.speed;
+        }, 1000 / 60);
     }
 }

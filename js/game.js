@@ -11,15 +11,19 @@ function init() {
     console.log('My character is', world.character);
 }
 
-addEventListener("keydown", (event) => { });
+addEventListener("keypress", (e) => {
+    console.log(e);
+});
+
+// addEventListener("keydown", (event) => { });
 
 /**
  * Onkeydown event listener 
  */
-onkeydown = (event) => {
-    let getKeyValue = event.code;
-    if (getKeyValue === 'Space') world.character.jump();
-    else if (getKeyValue === 'KeyA') world.character.moveLeft();
-    else if (getKeyValue === 'KeyD') world.character.moveRight();
-    // console.log('Key with number: ' + event.code + ' ' + 'was pressed.');
-};
+// onkeydown = (event) => {
+//     let getKeyValue = event.code;
+//     if (getKeyValue === 'Space') world.character.jump();
+//     else if (getKeyValue === 'KeyA') world.character.moveLeft();
+//     else if (getKeyValue === 'KeyD') world.character.moveRight();
+//     // console.log('Key with number: ' + event.code + ' ' + 'was pressed.');
+// };
