@@ -1,12 +1,14 @@
 class Keyboard {
     LEFT = false;
-    RIGH = false;
+    RIGHT = false;
     UP = false;
     DOWN = false
-    SPAC = false;
+    SPACE = false;
+    //throw
 
-    constructor() {
+    constructor() {}
 
-    }
+
+
 
 }
