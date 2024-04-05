@@ -7,8 +7,4 @@ class Keyboard {
     //throw
 
     constructor() {}
-
-
-
-
 }

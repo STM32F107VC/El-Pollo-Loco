@@ -41,12 +41,10 @@ class World {
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
         this.addObjectsToMap(this.backgroundObject);
         this.addObjectsToMap(this.clouds);
         this.addObjectsToMap(this.enemies);
         this.addToMap(this.character);
-
         // Draw() wird immer wieder aufgerufen
         let self = this;
         requestAnimationFrame(function () {
