@@ -7,6 +7,7 @@ class MovableObject {
     imgCache = {};
     currentImage = 0;
     speed = 0.15;
+    otherDirection = false;
     
 
     loadImage(path) {
@@ -24,7 +25,7 @@ class MovableObject {
 
     moveRight() {
         console.log('Moving right');
-        world.character.x += 10;
+        
         // setTimeout(() => {
         //     world.character.x += 0.1;
         // }, 1000 / 6);
