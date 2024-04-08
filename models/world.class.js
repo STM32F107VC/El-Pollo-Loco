@@ -13,7 +13,8 @@ class World {
         new BackgroundObject('img/5_background/layers/2_second_layer/2.png', 0),
         new BackgroundObject('img/5_background/layers/2_second_layer/1.png', 0),
         new BackgroundObject('img/5_background/layers/1_first_layer/2.png', 0),
-        new BackgroundObject('img/5_background/layers/1_first_layer/1.png', 0)
+        new BackgroundObject('img/5_background/layers/1_first_layer/1.png', 0),
+        new BackgroundObject('img/5_background/layers/air.png', 720),
     ];
 
     character = new Character();
@@ -27,6 +28,8 @@ class World {
     world;
     canvas;
     keyboard;
+    camera_x = 0;
+
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
@@ -41,10 +44,16 @@ class World {
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+        this.ctx.translate(this.camera_x, 0);
+
         this.addObjectsToMap(this.backgroundObject);
         this.addObjectsToMap(this.clouds);
         this.addObjectsToMap(this.enemies);
         this.addToMap(this.character);
+
+        this.ctx.translate(-this.camera_x, 0);
+
         // Draw() wird immer wieder aufgerufen
         let self = this;
         requestAnimationFrame(function () {
@@ -59,16 +68,27 @@ class World {
     }
 
     addToMap(mo) {
-        if(mo.otherDirection) {
-            this.ctx.save();
-            this.ctx.translate(mo.img.width, 1);
-            this.ctx.scale(-1, 1);
+        if (mo.otherDirection) {
+            // console.log(mo);
+            this.flipImage(mo);
         }
 
         this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
 
-        if(mo.otherDirection) {
-            this.ctx.restore();
+        if (mo.otherDirection) {
+            this.flipImageBack(mo);
         }
+    }
+
+    flipImage(mo) {
+        this.ctx.save();
+        this.ctx.translate(mo.width, 0);
+        this.ctx.scale(-1, 1);
+        mo.x = mo.x * -1;
+    }
+
+    flipImageBack(mo) {
+        this.ctx.restore();
+        mo.x = mo.x * -1;
     }
 }
