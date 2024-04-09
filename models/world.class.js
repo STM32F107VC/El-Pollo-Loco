@@ -1,31 +1,8 @@
 class World {
-    ctx;
-
-    clouds = [
-        // new Cloud('img/5_background/layers/4_clouds/1.png'),
-        new Cloud('img/5_background/layers/4_clouds/full.png')
-    ];
-
-    backgroundObject = [
-        new BackgroundObject('img/5_background/layers/air.png', 0),
-        new BackgroundObject('img/5_background/layers/3_third_layer/2.png', 0),
-        new BackgroundObject('img/5_background/layers/3_third_layer/1.png', 0),
-        new BackgroundObject('img/5_background/layers/2_second_layer/2.png', 0),
-        new BackgroundObject('img/5_background/layers/2_second_layer/1.png', 0),
-        new BackgroundObject('img/5_background/layers/1_first_layer/2.png', 0),
-        new BackgroundObject('img/5_background/layers/1_first_layer/1.png', 0),
-        new BackgroundObject('img/5_background/layers/air.png', 720),
-    ];
-
     character = new Character();
-
-    enemies = [
-        new Chicken(),
-        new Chicken(),
-        new Chicken()
-    ];
-
-    world;
+    level = level1;
+    ctx;
+    // world;
     canvas;
     keyboard;
     camera_x = 0;
@@ -47,9 +24,9 @@ class World {
 
         this.ctx.translate(this.camera_x, 0);
 
-        this.addObjectsToMap(this.backgroundObject);
-        this.addObjectsToMap(this.clouds);
-        this.addObjectsToMap(this.enemies);
+        this.addObjectsToMap(this.level.backgroundObject);
+        this.addObjectsToMap(this.level.clouds);
+        this.addObjectsToMap(this.level.enemies);
         this.addToMap(this.character);
 
         this.ctx.translate(-this.camera_x, 0);
@@ -69,7 +46,6 @@ class World {
 
     addToMap(mo) {
         if (mo.otherDirection) {
-            // console.log(mo);
             this.flipImage(mo);
         }
 
