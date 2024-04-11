@@ -29,6 +29,14 @@ class MovableObject {
         this.img.src = path;
     }
 
+    draw(ctx) {
+        ctx.beginPath();
+        ctx.lineWidth = '5';
+        ctx.strokeStyle = 'blue';
+        ctx.rect(mo.x, mo.y, mo.width, mo.height);
+        ctx.stroke();
+    }       
+
     loadImages(arr) {
         arr.forEach((path) => {
             let img = new Image();
@@ -52,9 +60,5 @@ class MovableObject {
     moveLeft() {
         this.x -= this.speed;
         this.otherDirection = true;
-    }
-
-    jump() {
-        this.speedY = 30;
     }
 }
