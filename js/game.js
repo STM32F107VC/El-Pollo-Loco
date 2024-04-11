@@ -2,7 +2,6 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 
-
 function init() {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
@@ -25,6 +24,7 @@ addEventListener("keydown", (e) => {
     }
     if (e.code == 'Space') {
         keyboard.SPACE = true;
+        console.log("Keyboard space key was pressed.");
     }
 });
 
@@ -43,5 +43,6 @@ addEventListener("keyup", (e) => {
     }
     if (e.code == 'Space') {
         keyboard.SPACE = false;
+        console.log("Keyboard space key was released.");
     }
 });
