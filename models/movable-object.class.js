@@ -30,12 +30,17 @@ class MovableObject {
     }
 
     draw(ctx) {
+        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+    }       
+
+    drawFrame(ctx) {
+        // Blue rectangle
         ctx.beginPath();
         ctx.lineWidth = '5';
         ctx.strokeStyle = 'blue';
-        ctx.rect(mo.x, mo.y, mo.width, mo.height);
+        ctx.rect(this.x, this.y, this.width, this.height);
         ctx.stroke();
-    }       
+    }
 
     loadImages(arr) {
         arr.forEach((path) => {

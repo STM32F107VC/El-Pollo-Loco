@@ -49,18 +49,17 @@ class World {
             this.flipImage(mo);
         }
 
-        this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
+        // this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
+        mo.draw(this.ctx);
+        mo.drawFrame(this.ctx);
 
         if (mo.otherDirection) {
             this.flipImageBack(mo);
         }
 
         // Blue rectangle
-        this.ctx.beginPath();
-        this.ctx.lineWidth = '5';
-        this.ctx.strokeStyle = 'blue';
-        this.ctx.rect(mo.x, mo.y, mo.width, mo.height);
-        this.ctx.stroke();
+        // this.drawRect(this.ctx, mo);
+
     }
 
     flipImage(mo) {
