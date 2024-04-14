@@ -51,13 +51,9 @@ class World {
 
         // console.log(mo);
         // this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
-        if(mo instanceof Character || mo instanceof Chicken || mo instanceof Endboss) {
-            mo.draw(this.ctx);
-            mo.drawFrame(this.ctx);
-        } else {
-            mo.draw(this.ctx);
-        }
-
+        mo.draw(this.ctx);
+        mo.drawFrame(this.ctx);
+        
         if (mo.otherDirection) {
             this.flipImageBack(mo);
         }
