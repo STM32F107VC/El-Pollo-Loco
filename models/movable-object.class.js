@@ -31,6 +31,7 @@ class MovableObject {
 
     draw(ctx) {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+        // this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
     }       
 
     drawFrame(ctx) {
