@@ -22,12 +22,20 @@ class World {
 
     checkCollisions() {
         setInterval(() => {
-            this.level.enemies.forEach((mo) => {
-                if (this.character.isColliding(mo)) {
-                    console.log("Collision with enemy," + mo);
+            this.level.enemies.forEach((enemy) => {
+                if (this.character.isColliding(enemy)) {
+                    this.character.energy -= 5;
+                    console.log("Collision with enemy, new energy = ", this.character.energy);
+                    if(this.character.isDead(this.character.energy)) {
+                        console.log('Character is dead.');
+                        this.character.playAnimation(this.character.IMAGES_DEAD);
+                    } else {
+                        console.log('Character gets hurt.');
+                        this.character.playAnimation(this.character.IMAGES_HURT);
+                    }
                 }
             });
-        }, 1000); 
+        }, 200); 
     }
 
     draw() {
@@ -59,7 +67,6 @@ class World {
         if (mo.otherDirection) {
             this.flipImage(mo);
         }
-
         // console.log(mo);
         // this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
         mo.draw(this.ctx);

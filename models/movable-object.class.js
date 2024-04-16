@@ -10,6 +10,7 @@ class MovableObject {
     otherDirection = false;
     speedY = 0;
     acceleration = 5;
+    energy = 100;
 
     applyGravity() {
         setInterval(() => {
@@ -45,11 +46,15 @@ class MovableObject {
         }
     }
 
-    isColliding(mo) {
-        return this.character.x + this.character.width < mo.x &&
-                    this.character.y + this.character.height < mo.y &&
-                        this.character.x < this.mo.x + mo.width &&
-                            this.character.y < this.mo.y + mo.height;
+    isColliding(enemy) {
+        return this.x + this.width > enemy.x &&
+                    this.y + this.height > enemy.y &&
+                        this.x < enemy.x + enemy.width &&
+                            this.y < enemy.y + enemy.height;
+    }
+
+    isDead(e) {
+        return e <= 0;
     }
 
     loadImages(arr) {
