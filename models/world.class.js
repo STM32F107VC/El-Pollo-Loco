@@ -24,15 +24,8 @@ class World {
         setInterval(() => {
             this.level.enemies.forEach((enemy) => {
                 if (this.character.isColliding(enemy)) {
-                    this.character.energy -= 5;
-                    console.log("Collision with enemy, new energy = ", this.character.energy);
-                    if(this.character.isDead(this.character.energy)) {
-                        console.log('Character is dead.');
-                        this.character.playAnimation(this.character.IMAGES_DEAD);
-                    } else {
-                        console.log('Character gets hurt.');
-                        this.character.playAnimation(this.character.IMAGES_HURT);
-                    }
+                    this.character.hit();
+                    // console.log("Collision with enemy, new energy = ", this.character.energy);
                 }
             });
         }, 200); 
