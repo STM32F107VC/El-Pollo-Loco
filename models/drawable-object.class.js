@@ -17,6 +17,17 @@ class DrawableObject {
         // this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
     }
 
+    drawFrame(ctx) {
+        // Blue rectangle
+        if (this instanceof Character || this instanceof Chicken || this instanceof Endboss) {
+            ctx.beginPath();
+            ctx.lineWidth = '5';
+            ctx.strokeStyle = 'blue';
+            ctx.rect(this.x, this.y, this.width, this.height);
+            ctx.stroke();
+        }
+    }
+
     loadImages(arr) {
         arr.forEach((path) => {
             let img = new Image();
