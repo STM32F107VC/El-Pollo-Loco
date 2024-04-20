@@ -1,3 +1,6 @@
-class statusBar {
-    
+class StatusBar extends DrawableObject{
+
+    constructor() {
+
+    }
 }
