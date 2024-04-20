@@ -43,7 +43,7 @@ class World {
 
         this.ctx.translate(-this.camera_x, 0);
 
-        // Draw() wird immer wieder aufgerufen
+        // draw() wird immer wieder aufgerufen
         let self = this;
         requestAnimationFrame(function () {
             self.draw();

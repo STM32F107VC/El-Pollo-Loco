@@ -1,17 +1,11 @@
 class MovableObject extends DrawableObject {
-    x = 120;
-    y = 300;
-    height = 150;
-    width = 100;
-    img;
-    imgCache = {};
-    currentImage = 0;
     speed = 0.15;
     otherDirection = false;
     speedY = 0;
     acceleration = 5;
     energy = 100;
     lastHit = 0;
+
 
     applyGravity() {
         setInterval(() => {
@@ -61,6 +55,13 @@ class MovableObject extends DrawableObject {
           let timepassed = new Date().getTime() - this.lastHit;
           timepassed = timepassed / 1000;
           return timepassed < 0.5;
+    }
+
+    playAnimation(images) {
+        let i = this.currentImage % images.length; // 1 % 6 = 0 Rest 1, 2 % 6 = 0 Rest 2, 3 % 6 = 0 Rest 3, 4 % 6 = 0, Rest 4, 5 % 6 = 0 Rest 5, 6 % 6 = 1 Rest 0, 7 % 6 = 1 Rest 1
+        let path = images[i];
+        this.img = this.imgCache[path];
+        this.currentImage++;
     }
 
     moveRight() {
