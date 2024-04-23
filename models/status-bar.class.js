@@ -31,25 +31,25 @@ class StatusBar extends DrawableObject {
   }
 
   resolveImageIndex() {
-    for (let i = 0; i < this.percentageValues.length; i++) {
-      let percentageValue = this.percentageValues[i];
-      if (this.percentage == percentageValue) {
-        return this.imageIndex[i];
-      }
-    }
-
-    // if(this.percentage == 100) {
-    //     return 5;
-    // } else if(this.percentage == 80) {
-    //     return 4;
-    // } else if(this.percentage == 60) {
-    //     return 3;
-    // } else if(this.percentage == 40) {
-    //     return 2;
-    // } else if(this.percentage == 20) {
-    //     return 1;
-    // } else {
-    //     return 0;
+    // for (let i = 0; i < this.percentageValues.length; i++) {
+    //   let percentageValue = this.percentageValues[i];
+    //   if (this.percentage == percentageValue) {
+    //     return this.imageIndex[i];
+    //   }
     // }
+
+    if(this.percentage == 100) {
+        return 5;
+    } else if(this.percentage == 80) {
+        return 4;
+    } else if(this.percentage == 60) {
+        return 3;
+    } else if(this.percentage == 40) {
+        return 2;
+    } else if(this.percentage == 20) {
+        return 1;
+    } else {
+        return 0;
+    }
   }
 }

@@ -27,12 +27,11 @@ class MovableObject extends DrawableObject {
     }
 
     hit() {
-        this.energy -=5;
+        this.energy -= 20;
         if(this.energy <= 0) {
             this.energy = 0;
         } else {
             this.lastHit = new Date().getTime();
-            this.setPercentage(40);
         }
     }
 
