@@ -18,6 +18,7 @@ class World {
 
     setWorld() {
         this.character.world = this;
+        this.statusBar.world = this;
     }
 
     checkCollisions() {
@@ -39,7 +40,12 @@ class World {
         this.addObjectsToMap(this.level.backgroundObject);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
+        
+        this.ctx.translate(-this.camera_x, 0); // backwars
+        //------ Space for fixed objects ------
         this.addToMap(this.statusBar);
+        this.ctx.translate(this.camera_x, 0); // forwards
+
         this.addToMap(this.character);
 
         this.ctx.translate(-this.camera_x, 0);
