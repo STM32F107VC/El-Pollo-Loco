@@ -2,9 +2,6 @@ class StatusBar extends DrawableObject {
     width = 200;
     height = 100;
 
-  percentageValues = [0, 20, 40, 60, 80, 100];
-  imageIndex = [0, 1, 2, 3, 4, 5];
-
   IMAGES = [
     "img/7_statusbars/1_statusbar/2_statusbar_health/green/0.png",
     "img/7_statusbars/1_statusbar/2_statusbar_health/green/20.png",
@@ -31,13 +28,7 @@ class StatusBar extends DrawableObject {
   }
 
   resolveImageIndex() {
-    // for (let i = 0; i < this.percentageValues.length; i++) {
-    //   let percentageValue = this.percentageValues[i];
-    //   if (this.percentage == percentageValue) {
-    //     return this.imageIndex[i];
-    //   }
-    // }
-    console.log(this.percentage);
+    // console.log(this.percentage);
 
     if(this.percentage <= 100 && this.percentage >= 80) {
         return 5;

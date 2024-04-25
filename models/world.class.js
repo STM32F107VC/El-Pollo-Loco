@@ -18,7 +18,6 @@ class World {
 
     setWorld() {
         this.character.world = this;
-        this.statusBar.world = this;
     }
 
     checkCollisions() {
