@@ -48,6 +48,5 @@ addEventListener("keyup", (e) => {
     }
     if(e.code == 'KeyD') {
         keyboard.THROW = false;
-
     }
 });
