@@ -25,9 +25,8 @@ addEventListener("keydown", (e) => {
     if (e.code == 'Space') {
         keyboard.SPACE = true;
     }
-    if(e.code == 'KeyT') {
+    if(e.code == 'KeyD') {
         keyboard.THROW = true;
-        console.log("Keyboard T key was pressed.");
     }
 });
 
@@ -47,7 +46,8 @@ addEventListener("keyup", (e) => {
     if (e.code == 'Space') {
         keyboard.SPACE = false;
     }
-    if(e.code == 'KeyT') {
+    if(e.code == 'KeyD') {
         keyboard.THROW = false;
+
     }
 });
