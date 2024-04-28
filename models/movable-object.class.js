@@ -19,6 +19,16 @@ class MovableObject extends DrawableObject {
         return this.y < 285;
     }
 
+    // isIdle() {
+    //     let currentTime = new Date().getTime();
+    //     currentTime = currentTime / 1000;
+    //     if(currentTime <= 5) {
+    //         currentTime += new Date().getTime();
+    //     } else {
+    //         return currentTime > 5;
+    //     }
+    // }
+
     isColliding(enemy) {
         return this.x + this.width > enemy.x &&
                     this.y + this.height > enemy.y &&
