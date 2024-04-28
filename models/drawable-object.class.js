@@ -12,6 +12,14 @@ class DrawableObject {
         this.img.src = path;
     }
 
+    loadImages(arr) {
+        arr.forEach((path) => {
+            let img = new Image();
+            img.src = path;
+            this.imgCache[path] = img;
+        });
+    }
+
     draw(ctx) {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
         // this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
@@ -26,13 +34,5 @@ class DrawableObject {
             ctx.rect(this.x, this.y, this.width, this.height);
             ctx.stroke();
         }
-    }
-
-    loadImages(arr) {
-        arr.forEach((path) => {
-            let img = new Image();
-            img.src = path;
-            this.imgCache[path] = img;
-        });
     }
 }

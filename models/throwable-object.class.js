@@ -12,14 +12,14 @@ class ThrowableObject extends MovableObject {
 
     constructor(imgPath, x) {
         super().loadImage(imgPath);
-        this.x = x * Math.random() + 400;
+        this.x = x * Math.random() + 950;
         // this.y = ;
         // this.playAnimation();
     }
 
-    throw() {
-        console.log('Entered throw function.');
-    }
+    // throw() {
+    //     console.log('Entered throw function.');
+    // }
 
     speed() {
 

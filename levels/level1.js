@@ -37,8 +37,10 @@ const level1 = new Level(
         new BackgroundObject('img/5_background/layers/1_first_layer/2.png', 719*3),
     ],
     [
+        new ThrowableObject('img/6_salsa_bottle/1_salsa_bottle_on_ground.png', 0),
         new ThrowableObject('img/6_salsa_bottle/1_salsa_bottle_on_ground.png', 200),
-        new ThrowableObject('img/6_salsa_bottle/2_salsa_bottle_on_ground.png', 200)
-        // new ThrowableObject('img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png', 150)
+        new ThrowableObject('img/6_salsa_bottle/2_salsa_bottle_on_ground.png', 400),
+        new ThrowableObject('img/6_salsa_bottle/1_salsa_bottle_on_ground.png', 600),
+        new ThrowableObject('img/6_salsa_bottle/2_salsa_bottle_on_ground.png', 800)
     ]
 );
