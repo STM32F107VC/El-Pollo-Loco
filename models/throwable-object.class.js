@@ -1,7 +1,7 @@
 class ThrowableObject extends MovableObject {
     width = 50;
     height = 50;
-    y = 380;
+    y = 270;
 
     IMAGES = [
         'img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png',
@@ -10,9 +10,10 @@ class ThrowableObject extends MovableObject {
         'img/6_salsa_bottle/bottle_rotation/4_bottle_rotation.png'
     ];
 
-    constructor(imgPath, x) {
-        super().loadImage(imgPath);
-        this.x = x * Math.random() + 950;
+    constructor() {
+        super();
+        this.loadImage('img/6_salsa_bottle/salsa_bottle.png');
+        // this.x = x * Math.random() + 950;
         // this.y = ;
         // this.playAnimation();
     }

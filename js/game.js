@@ -26,7 +26,7 @@ addEventListener("keydown", (e) => {
         keyboard.SPACE = true;
     }
     if(e.code == 'KeyD') {
-        keyboard.THROW = true;
+        keyboard.D = true;
     }
 });
 
@@ -47,6 +47,6 @@ addEventListener("keyup", (e) => {
         keyboard.SPACE = false;
     }
     if(e.code == 'KeyD') {
-        keyboard.THROW = false;
+        keyboard.D = false;
     }
 });

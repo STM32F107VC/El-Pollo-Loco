@@ -1,6 +1,7 @@
 class World {
     character = new Character();
     statusBar = new StatusBar();
+    throwableObject = [new ThrowableObject()];
     level = level1;
     ctx;
     canvas;
@@ -38,10 +39,12 @@ class World {
         this.ctx.translate(this.camera_x, 0);
 
         // this.addObjectsToMap(this.throwableObject);
+        this.addObjectsToMap(this.throwableObject);
         this.addObjectsToMap(this.level.backgroundObject);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
-        this.addObjectsToMap(this.level.throwableObject);
+
+        // this.addObjectsToMap(this.level.throwableObject);
 
         this.ctx.translate(-this.camera_x, 0); // backwars
         //------ Space for fixed objects ------
