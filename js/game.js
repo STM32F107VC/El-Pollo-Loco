@@ -28,6 +28,10 @@ addEventListener("keydown", (e) => {
     if(e.code == 'KeyD') {
         keyboard.D = true;
     }
+    if(e.code == 'KeyP') {
+        keyboard.P = true;
+    }
+
 });
 
 addEventListener("keyup", (e) => {
@@ -49,4 +53,7 @@ addEventListener("keyup", (e) => {
     if(e.code == 'KeyD') {
         keyboard.D = false;
     }
-});
+    if(e.code == 'KeyP') {
+        keyboard.P = false;
+    }
+});   
