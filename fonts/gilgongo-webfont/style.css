@@ -39,15 +39,6 @@
     src: local('Gilgongo Ombre'), url('GILGONO_.woff') format('woff');
     }
     
-
-    @font-face {
-    font-family: 'Gilgongo Pap';
-    font-style: normal;
-    font-weight: normal;
-    src: local('Gilgongo Pap'), url('GILGONP_.woff') format('woff');
-    }
-    
-
     @font-face {
     font-family: 'Gilgongo Sledge';
     font-style: normal;
