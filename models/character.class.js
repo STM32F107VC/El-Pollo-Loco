@@ -3,33 +3,34 @@ class Character extends MovableObject {
   speed = 15;
   world;
   walking_audio = new Audio("audio/running_pepe.mp3");
+  dead_audio = new Audio("audio/dead_pepe.mp3");
 
   currentTime = 0;
 
   IMAGES_IDLE = [
-    'img/2_character_pepe/1_idle/idle/I-1.png',
-    'img/2_character_pepe/1_idle/idle/I-2.png',
-    'img/2_character_pepe/1_idle/idle/I-3.png',
-    'img/2_character_pepe/1_idle/idle/I-4.png',
-    'img/2_character_pepe/1_idle/idle/I-5.png',
-    'img/2_character_pepe/1_idle/idle/I-6.png',
-    'img/2_character_pepe/1_idle/idle/I-7.png',
-    'img/2_character_pepe/1_idle/idle/I-8.png',
-    'img/2_character_pepe/1_idle/idle/I-9.png',
-    'img/2_character_pepe/1_idle/idle/I-10.png',
+    "img/2_character_pepe/1_idle/idle/I-1.png",
+    "img/2_character_pepe/1_idle/idle/I-2.png",
+    "img/2_character_pepe/1_idle/idle/I-3.png",
+    "img/2_character_pepe/1_idle/idle/I-4.png",
+    "img/2_character_pepe/1_idle/idle/I-5.png",
+    "img/2_character_pepe/1_idle/idle/I-6.png",
+    "img/2_character_pepe/1_idle/idle/I-7.png",
+    "img/2_character_pepe/1_idle/idle/I-8.png",
+    "img/2_character_pepe/1_idle/idle/I-9.png",
+    "img/2_character_pepe/1_idle/idle/I-10.png",
   ];
 
   IMAGES_LONG_IDLE = [
-    'img/2_character_pepe/1_idle/long_idle/I-11.png',
-    'img/2_character_pepe/1_idle/long_idle/I-12.png',
-    'img/2_character_pepe/1_idle/long_idle/I-13.png',
-    'img/2_character_pepe/1_idle/long_idle/I-14.png',
-    'img/2_character_pepe/1_idle/long_idle/I-15.png',
-    'img/2_character_pepe/1_idle/long_idle/I-16.png',
-    'img/2_character_pepe/1_idle/long_idle/I-17.png',
-    'img/2_character_pepe/1_idle/long_idle/I-18.png',
-    'img/2_character_pepe/1_idle/long_idle/I-19.png',
-    'img/2_character_pepe/1_idle/long_idle/I-20.png',
+    "img/2_character_pepe/1_idle/long_idle/I-11.png",
+    "img/2_character_pepe/1_idle/long_idle/I-12.png",
+    "img/2_character_pepe/1_idle/long_idle/I-13.png",
+    "img/2_character_pepe/1_idle/long_idle/I-14.png",
+    "img/2_character_pepe/1_idle/long_idle/I-15.png",
+    "img/2_character_pepe/1_idle/long_idle/I-16.png",
+    "img/2_character_pepe/1_idle/long_idle/I-17.png",
+    "img/2_character_pepe/1_idle/long_idle/I-18.png",
+    "img/2_character_pepe/1_idle/long_idle/I-19.png",
+    "img/2_character_pepe/1_idle/long_idle/I-20.png",
   ];
 
   IMAGES_WALKING = [
@@ -71,6 +72,7 @@ class Character extends MovableObject {
 
   constructor() {
     super().loadImage("../img/2_character_pepe/2_walk/W-21.png");
+    this.checkEnergy = this.checkEnergy.bind(this);
     this.loadImages(this.IMAGES_IDLE);
     this.loadImages(this.IMAGES_LONG_IDLE);
     this.loadImages(this.IMAGES_WALKING);
@@ -81,45 +83,55 @@ class Character extends MovableObject {
     this.applyGravity(this.IMAGES_JUMPING);
   }
 
+  checkMovement() {
+    if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
+      this.moveRight();
+      this.walking_audio.play();
+    }
+    if (this.world.keyboard.LEFT && this.x > 0) {
+      this.moveLeft();
+      this.walking_audio.play();
+    }
+    if (this.world.keyboard.SPACE && !this.isAboveGround()) {
+      this.jump();
+    }
+    this.world.camera_x = -this.x + 100;
+    statusbar;
+  }
+
   animate() {
     setInterval(() => {
       if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
         this.moveRight();
         this.walking_audio.play();
       }
-
       if (this.world.keyboard.LEFT && this.x > 0) {
         this.moveLeft();
         this.walking_audio.play();
       }
-
       if (this.world.keyboard.SPACE && !this.isAboveGround()) {
         this.jump();
       }
-
-      // if (this.world.keyboard.D) {
-      //   this.throw();
-      // }
-
       this.world.camera_x = -this.x + 100;
       statusbar;
     }, 1000 / 60);
+    
+    this.setStoppableInterval(this.checkEnergy, 50);
+  }
 
-    let interval =  setInterval(() => {
-      if (this.isDead()) {
-          this.playAnimation(this.IMAGES_DEAD);
-      } else if (this.isHurt()) {
-          this.playAnimation(this.IMAGES_HURT);
-      } else if (this.isAboveGround()) {
-          this.playAnimation(this.IMAGES_JUMPING);
-      } else {
-        if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-            // Walk animation
-            this.playAnimation(this.IMAGES_WALKING);
-        }
+  checkEnergy() {
+    if (this.isDead()) {
+      this.playAnimation(this.IMAGES_DEAD);
+    } else if (this.isHurt()) {
+      this.playAnimation(this.IMAGES_HURT);
+    } else if (this.isAboveGround()) {
+      this.playAnimation(this.IMAGES_JUMPING);
+    } else {
+      if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+        // Walk animation
+        this.playAnimation(this.IMAGES_WALKING);
       }
-       
-    }, 50);
+    }
   }
 
   jump() {

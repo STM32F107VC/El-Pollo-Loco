@@ -5,11 +5,9 @@ class Level {
     throwableObject;
     level_end_x = 2250;
 
-    //, throwableObject
     constructor(enemies, clouds, backgroundObject) {
         this.enemies = enemies;
         this.clouds = clouds;
         this.backgroundObject = backgroundObject;
-        // this.throwableObject = throwableObject;
     }
 }

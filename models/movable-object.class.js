@@ -16,22 +16,13 @@ class MovableObject extends DrawableObject {
   }
 
   isAboveGround() {
-    if (this instanceof ThrowableObject) { // Throwable objects should always fall
+    if (this instanceof ThrowableObject) {
+      // Throwable objects should always fall
       return true;
     } else {
       return this.y < 285;
     }
   }
-
-  // isIdle() {
-  //     let currentTime = new Date().getTime();
-  //     currentTime = currentTime / 1000;
-  //     if(currentTime <= 5) {
-  //         currentTime += new Date().getTime();
-  //     } else {
-  //         return currentTime > 5;
-  //     }
-  // }
 
   isColliding(enemy) {
     return (
@@ -62,7 +53,7 @@ class MovableObject extends DrawableObject {
   }
 
   playAnimation(images) {
-    let i = this.currentImage % images.length; // 1 % 6 = 0 Rest 1, 2 % 6 = 0 Rest 2, 3 % 6 = 0 Rest 3, 4 % 6 = 0, Rest 4, 5 % 6 = 0 Rest 5, 6 % 6 = 1 Rest 0, 7 % 6 = 1 Rest 1
+    let i = this.currentImage % images.length;
     let path = images[i];
     this.img = this.imgCache[path];
     this.currentImage++;
