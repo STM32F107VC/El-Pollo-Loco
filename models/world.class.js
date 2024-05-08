@@ -1,5 +1,6 @@
 class World {
-  character = new Character();
+  animationFrameId;
+  character = new Character(this.animationFrameId);
   statusBar = new StatusBar();
   throwableObject = [];
   level = level1;
@@ -77,7 +78,7 @@ class World {
 
     // draw() wird immer wieder aufgerufen
     let self = this;
-    requestAnimationFrame(function () {
+    this.animationFrameId = requestAnimationFrame(function () {
       self.draw();
     });
   }

@@ -14,16 +14,17 @@ class DrawableObject {
     console.log(id);
   }
 
-  stopGame(wa, da) {
+  stopGame(aFI) {
     this.intervalIds.forEach(clearInterval);
+    cancelAnimationFrame(aFI);
     // this.restartGame(wa, da);
-    this.showGameOverScreen();
+    stopGameScreen();
   }
 
   showGameOverScreen() {
     console.log('Game over.');
   }
-  
+
   loadImage(path) {
     this.img = new Image();
     this.img.src = path;
