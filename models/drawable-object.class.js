@@ -8,13 +8,22 @@ class DrawableObject {
   width = 100;
   intervalIds = [];
 
-  
   setStoppableInterval(fn, time) {
     let id = setInterval(fn, time);
-    console.log(id);
     this.intervalIds.push(id);
+    console.log(id);
   }
 
+  stopGame(wa, da) {
+    this.intervalIds.forEach(clearInterval);
+    // this.restartGame(wa, da);
+    this.showGameOverScreen();
+  }
+
+  showGameOverScreen() {
+    console.log('Game over.');
+  }
+  
   loadImage(path) {
     this.img = new Image();
     this.img.src = path;

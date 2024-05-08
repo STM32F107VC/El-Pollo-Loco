@@ -1,11 +1,23 @@
+
 let canvas;
 let world;
+let ctx;
+let genImg = new Image();
 let keyboard = new Keyboard();
 
 function init() {
-    canvas = document.getElementById('canvas');
+    // canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
     // console.log('My character is', world.character);
+}
+
+function startGameScreen() {
+    genImg.src = './img/9_intro_outro_screens/start/startscreen_2.png';
+    canvas = document.getElementById('canvas');
+    ctx = canvas.getContext('2d');
+    genImg.onload = function() {
+        ctx.drawImage(genImg, 0, 0, 720, 480);
+    }
 }
 
 addEventListener("keydown", (e) => {

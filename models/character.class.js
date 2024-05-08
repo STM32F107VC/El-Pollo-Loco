@@ -2,9 +2,10 @@ class Character extends MovableObject {
   y = 10;
   speed = 15;
   world;
-  walking_audio = new Audio("audio/running_pepe.mp3");
-  dead_audio = new Audio("audio/dead_pepe.mp3");
-
+  walking_audio = new Audio('audio/running_pepe.mp3');
+  dead_audio = new Audio('audio/dead_pepe.mp3');
+  hurt_audio = new Audio('audio/hurt_pepe.mp3');
+  jump_audio = new Audio('audio/jump_pepe.mp3');
   currentTime = 0;
 
   IMAGES_IDLE = [
@@ -83,22 +84,6 @@ class Character extends MovableObject {
     this.applyGravity(this.IMAGES_JUMPING);
   }
 
-  checkMovement() {
-    if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
-      this.moveRight();
-      this.walking_audio.play();
-    }
-    if (this.world.keyboard.LEFT && this.x > 0) {
-      this.moveLeft();
-      this.walking_audio.play();
-    }
-    if (this.world.keyboard.SPACE && !this.isAboveGround()) {
-      this.jump();
-    }
-    this.world.camera_x = -this.x + 100;
-    statusbar;
-  }
-
   animate() {
     setInterval(() => {
       if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
@@ -111,19 +96,24 @@ class Character extends MovableObject {
       }
       if (this.world.keyboard.SPACE && !this.isAboveGround()) {
         this.jump();
+        this.jump_audio.play();
       }
       this.world.camera_x = -this.x + 100;
       statusbar;
     }, 1000 / 60);
-    
+
     this.setStoppableInterval(this.checkEnergy, 50);
   }
 
   checkEnergy() {
     if (this.isDead()) {
       this.playAnimation(this.IMAGES_DEAD);
+      this.dead_audio.play();
+      this.stopGame(this.walking_audio, this.dead_audio);
+      window.location.reload()
     } else if (this.isHurt()) {
       this.playAnimation(this.IMAGES_HURT);
+      this.hurt_audio.play();
     } else if (this.isAboveGround()) {
       this.playAnimation(this.IMAGES_JUMPING);
     } else {
