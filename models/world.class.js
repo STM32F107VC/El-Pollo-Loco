@@ -1,7 +1,7 @@
 class World {
-  animationFrameId;
-  character = new Character(this.animationFrameId);
+  character = new Character();
   statusBar = new StatusBar();
+  animationFrameId;
   throwableObject = [];
   level = level1;
   ctx;

@@ -26,8 +26,8 @@ function startGameScreen() {
 }
 
 function stopGameScreen() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
   // awaitImgLoad(ctx, imgEndScreen, 0, 0, 720, 480);
-  // ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.drawImage(imgEndScreen, 0, 0, 720, 480);
 } 
 

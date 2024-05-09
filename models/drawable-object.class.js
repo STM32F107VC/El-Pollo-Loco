@@ -14,9 +14,9 @@ class DrawableObject {
     console.log(id);
   }
 
-  stopGame(aFI) {
+  stopGame() {
     this.intervalIds.forEach(clearInterval);
-    cancelAnimationFrame(aFI);
+    cancelAnimationFrame();
     // this.restartGame(wa, da);
     stopGameScreen();
   }

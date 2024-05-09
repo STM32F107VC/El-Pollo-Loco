@@ -6,6 +6,5 @@ class Keyboard {
     SPACE = false;
     D = false; // Throw bottle
     P = false;
-
     constructor() {}
 }

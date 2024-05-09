@@ -7,7 +7,6 @@ class Character extends MovableObject {
   hurt_audio = new Audio('audio/hurt_pepe.mp3');
   jump_audio = new Audio('audio/jump_pepe.mp3');
   currentTime = 0;
-  animationFrameID;
 
   IMAGES_IDLE = [
     "img/2_character_pepe/1_idle/idle/I-1.png",
@@ -72,10 +71,9 @@ class Character extends MovableObject {
     "img/2_character_pepe/5_dead/D-57.png",
   ];
 
-  constructor(aFI) {
+  constructor() {
     super().loadImage("../img/2_character_pepe/2_walk/W-21.png");
     this.checkEnergy = this.checkEnergy.bind(this);
-    this.animationFrameID = aFI;
     this.loadImages(this.IMAGES_IDLE);
     this.loadImages(this.IMAGES_LONG_IDLE);
     this.loadImages(this.IMAGES_WALKING);
@@ -111,8 +109,8 @@ class Character extends MovableObject {
     if (this.isDead()) {
       this.playAnimation(this.IMAGES_DEAD);
       // this.dead_audio.play();
-      this.stopGame(this.animationFrameID);
-      console.log(this);
+      this.stopGame(this.world.animationFrameId);
+      console.log(this.world.animationFrameId);
     } else if (this.isHurt()) {
       this.playAnimation(this.IMAGES_HURT);
       this.hurt_audio.play();
