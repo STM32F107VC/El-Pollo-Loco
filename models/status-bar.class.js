@@ -10,10 +10,7 @@ class StatusBar extends DrawableObject {
     super();
     this.IMAGES = IMAGES;
     console.log(this.IMAGES);
-    // Bilder beim instanziieren eines objekts übergeben oder Instanz evt. in level.class.js erstellen
     this.loadImages(IMAGES);
-    /*this.x = 25;// Wert an Konstruktor übergeben
-    this.y = 5;// Wert an Konstruktor übergeben*/
     this.x = x;
     this.y = y;
     console.log(percentage);
@@ -28,31 +25,31 @@ class StatusBar extends DrawableObject {
 
   resolveImageIndex() {
     console.log('Entered resolve ImagIndex function. Percentage Value is: ' + this.percentage + '.');
-    if (this.percentage <= 100 && this.percentage >= 80) {
-      return 5;
-    } else if (this.percentage <= 80 && this.percentage >= 60) {
-      return 4;
-    } else if (this.percentage <= 60 && this.percentage >= 40) {
-      return 3;
-    } else if (this.percentage <= 40 && this.percentage >= 20) {
-      return 2;
-    } else if (this.percentage <= 20 && this.percentage >= 10) {
-      return 1;
-    } else if (this.percentage < 10) {
-      return 0;
-    }
-    // if (this.percentage <= 100) {
+    // if (this.percentage <= 100 && this.percentage >= 80) {
     //   return 5;
-    // } else if (this.percentage <= 80) {
+    // } else if (this.percentage <= 80 && this.percentage >= 60) {
     //   return 4;
-    // } else if (this.percentage <= 60) {
+    // } else if (this.percentage <= 60 && this.percentage >= 40) {
     //   return 3;
-    // } else if (this.percentage <= 40) {
+    // } else if (this.percentage <= 40 && this.percentage >= 20) {
     //   return 2;
-    // } else if (this.percentage <= 20) {
+    // } else if (this.percentage <= 20 && this.percentage >= 10) {
     //   return 1;
-    // } else {
+    // } else if (this.percentage < 10) {
     //   return 0;
     // }
+    if (this.percentage == 100) {
+      return 5;
+    } else if (this.percentage == 80) {
+      return 4;
+    } else if (this.percentage == 60) {
+      return 3;
+    } else if (this.percentage == 40) {
+      return 2;
+    } else if (this.percentage == 20) {
+      return 1;
+    } else {
+      return 0;
+    }
   }
 }

@@ -1,6 +1,5 @@
 class World {
   character = new Character();
-  // statusBar = new StatusBar();
   animationFrameId;
   throwableObject = [];
   level = level1;
@@ -37,7 +36,10 @@ class World {
       if (this.character.isColliding(enemy)) {
         this.character.hit();
         console.log("Collision with enemy, new energy = ", this.character.energy);
-        this.level.statusBar.setPercentage(this.character.energy);
+        // this.level.statusBar[0].setPercentage(this.character.energy);
+        // this.level.statusBar[1].setPercentage(this.character.energy);
+        this.level.statusBar[2].setPercentage(this.character.energy);
+        // this.level.statusBar[3].setPercentage(this.character.energy);
       }
     });
   }

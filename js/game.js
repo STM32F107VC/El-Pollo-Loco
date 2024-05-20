@@ -10,6 +10,7 @@ let intro_audio = new Audio('audio/intro_sound _v1.mp3');
 
 function init() {
   pauseAudio(intro_audio);
+  initLevel();
   canvas.removeEventListener('click', init, false);
   world = new World(canvas, keyboard);
   // console.log('My character is', world.character);
