@@ -11,12 +11,11 @@ class DrawableObject {
   setStoppableInterval(fn, time) {
     let id = setInterval(fn, time);
     this.intervalIds.push(id);
-    console.log(id);
   }
 
-  stopGame() {
+  stopGame(aFI) {
     this.intervalIds.forEach(clearInterval);
-    cancelAnimationFrame();
+    cancelAnimationFrame(aFI);
     // this.restartGame(wa, da);
     stopGameScreen();
   }

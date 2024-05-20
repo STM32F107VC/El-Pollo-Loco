@@ -17,6 +17,7 @@ class World {
     this.setWorld();
     this.checkCollisions();
     this.run();
+    // hier init rein mit eventlistener
   }
 
   setWorld() {

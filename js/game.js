@@ -4,6 +4,7 @@ let ctx;
 let imgStartScreen = new Image();
 let imgStartGame = new Image();
 let imgEndScreen = new Image();
+let imgLandscape = new Image();
 let keyboard = new Keyboard();
 let intro_audio = new Audio('audio/intro_sound _v1.mp3');
 
@@ -16,10 +17,10 @@ function init() {
 }
 
 function startGameScreen() {
-  setImgSrc();
   canvas = document.getElementById("canvas");
   ctx = canvas.getContext("2d");
   canvas.addEventListener("click", init, false);
+  setImgSrc();
   awaitImgLoad(ctx, imgStartScreen, 0, 0, 720, 480);
   awaitImgLoad(ctx, imgStartGame, canvas.width / 2 - imgStartGame.width / 2, canvas.height / 2, 50, 50);
   playAudio(intro_audio);
@@ -27,9 +28,9 @@ function startGameScreen() {
 
 function stopGameScreen() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  // awaitImgLoad(ctx, imgEndScreen, 0, 0, 720, 480);
+  ctx.drawImage(imgLandscape, 0, 0, 720, 480);
   ctx.drawImage(imgEndScreen, 0, 0, 720, 480);
-} 
+}
 
 function playAudio(audio) {
   let newAudio = audio;
@@ -46,6 +47,7 @@ function setImgSrc() {
   imgStartScreen.src = './img/9_intro_outro_screens/start/startscreen_2.png';
   imgStartGame.src = 'img/start_game.png';
   imgEndScreen.src = 'img/9_intro_outro_screens/game_over/game over!.png';
+  imgLandscape.src = 'img/5_background/first_half_background.png';
 }
 
 function awaitImgLoad(ctx, img, posX, posY, width, height) {
