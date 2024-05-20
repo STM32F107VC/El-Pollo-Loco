@@ -3,12 +3,14 @@ class Level {
     clouds;
     backgroundObject;
     statusBar;
+    collectableObject;
     level_end_x = 2250;
 
-    constructor(enemies, clouds, backgroundObject, statusBar) {
+    constructor(enemies, clouds, backgroundObject, statusBar, collectableObject) {
         this.enemies = enemies;
         this.clouds = clouds;
         this.backgroundObject = backgroundObject;
         this.statusBar = statusBar;
+        this.collectableObject = collectableObject;
     }
 }

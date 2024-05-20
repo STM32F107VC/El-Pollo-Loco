@@ -30,6 +30,7 @@ function stopGameScreen() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.drawImage(imgLandscape, 0, 0, 720, 480);
   ctx.drawImage(imgEndScreen, 0, 0, 720, 480);
+  setTimeout(startGameScreen, 3000);
 }
 
 function playAudio(audio) {

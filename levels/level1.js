@@ -8,7 +8,7 @@ function initLevel() {
       // new Chicken(),
       // new Chicken(),
       // new ChickenSmall(),
-      new ChickenSmall(),
+      // new ChickenSmall(),
       new ChickenSmall(),
       new Endboss(),
     ],
@@ -76,6 +76,13 @@ function initLevel() {
         "img/7_statusbars/2_statusbar_endboss/orange/orange80.png",
         "img/7_statusbars/2_statusbar_endboss/orange/orange100.png"
       ], 25, 130, 100)
+    ],
+    [
+      new CollectableObject("img/6_salsa_bottle/1_salsa_bottle_on_ground.png"),
+      new CollectableObject("img/6_salsa_bottle/2_salsa_bottle_on_ground.png"),
+      new CollectableObject("img/6_salsa_bottle/1_salsa_bottle_on_ground.png"),
+      new CollectableObject("img/6_salsa_bottle/2_salsa_bottle_on_ground.png"),
+      new CollectableObject("img/6_salsa_bottle/1_salsa_bottle_on_ground.png")
     ]
   );
 }

@@ -127,7 +127,7 @@ class Character extends MovableObject {
   checkEnergy() {
     if (this.isDead()) {
       this.playAnimation(this.IMAGES_DEAD);
-      // this.dead_audio.play();
+      this.dead_audio.play();
       this.stopGame(this.world.animationFrameId);
       console.log(this.world.animationFrameId);
     } else if (this.isHurt()) {
