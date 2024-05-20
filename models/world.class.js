@@ -1,6 +1,6 @@
 class World {
   character = new Character();
-  statusBar = new StatusBar();
+  // statusBar = new StatusBar();
   animationFrameId;
   throwableObject = [];
   level = level1;
@@ -36,8 +36,8 @@ class World {
     this.level.enemies.forEach((enemy) => {
       if (this.character.isColliding(enemy)) {
         this.character.hit();
-        this.statusBar.setPercentage(this.character.energy);
-        // console.log("Collision with enemy, new energy = ", this.character.energy);
+        console.log("Collision with enemy, new energy = ", this.character.energy);
+        this.level.statusBar.setPercentage(this.character.energy);
       }
     });
   }
@@ -68,8 +68,11 @@ class World {
     // this.addObjectsToMap(this.level.throwableObject);
 
     this.ctx.translate(-this.camera_x, 0); // backwars
+
     //------ Space for fixed objects ------
-    this.addToMap(this.statusBar);
+    // this.addToMap(this.statusBar);
+    this.addObjectsToMap(this.level.statusBar);
+
     this.ctx.translate(this.camera_x, 0); // forwards
 
     this.addToMap(this.character);

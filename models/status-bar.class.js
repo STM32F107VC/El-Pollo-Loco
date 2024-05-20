@@ -1,6 +1,6 @@
 class StatusBar extends DrawableObject {
-  width = 200;
-  height = 100;
+  width = 150;
+  height = 60;
 
   IMAGES = [
     "img/7_statusbars/1_statusbar/2_statusbar_health/green/0.png",
@@ -22,15 +22,16 @@ class StatusBar extends DrawableObject {
 
   percentage = 100;
 
-  constructor() {
-    super();
+  constructor(path, x, y) {
+    super().loadImage(path);
     // Bilder beim instanziieren eines objekts übergeben oder Instanz evt. in level.class.js erstellen
     this.loadImages(this.IMAGES);
-    this.x = 25;// Wert an Konstruktor übergeben
-    this.y = 5;// Wert an Konstruktor übergeben
-    this.setPercentage(100);
+    /*this.x = 25;// Wert an Konstruktor übergeben
+    this.y = 5;// Wert an Konstruktor übergeben*/
+    this.x = x;
+    this.y = y;
+    // this.setPercentage(100);
   }
-
 
   setPercentage(percentage) {
     this.percentage = percentage;
