@@ -1,8 +1,7 @@
-class CollectableObject extends MovableObject {
+class CollectableBottle extends MovableObject {
 
     constructor(path) {
-        super();
-        this.loadImage(path);
+        super().loadImage(path);;
         
         this.height = 80;
         this.width = 60;

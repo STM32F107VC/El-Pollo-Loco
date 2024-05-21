@@ -1,6 +1,5 @@
 class World {
   character = new Character();
-  statusBar = new StatusBar();
   animationFrameId;
   throwableObject = [];
   level = level1;
@@ -8,6 +7,7 @@ class World {
   canvas;
   keyboard;
   camera_x = 0;
+  bottleState = 0;
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -17,7 +17,7 @@ class World {
     this.setWorld();
     this.checkCollisions();
     this.run();
-    // hier init rein mit eventlistener
+    // console.log(level);
   }
 
   setWorld() {
@@ -36,10 +36,28 @@ class World {
     this.level.enemies.forEach((enemy) => {
       if (this.character.isColliding(enemy)) {
         this.character.hit();
-        this.statusBar.setPercentage(this.character.energy);
         // console.log("Collision with enemy, new energy = ", this.character.energy);
+        this.level.statusBar[2].setPercentage(this.character.energy);
       }
     });
+
+    this.level.collectableBottle.forEach((bottle) => {
+      if(this.character.isColliding(bottle)) {
+        this.level.statusBar[0].setPercentage(20 + this.bottleState);
+        this.bottleState += 20;
+        this.removeBottle(bottle);
+        if(this.bottleState >= 100) this.resetBottleCount();
+      }
+    });
+  }
+
+  removeBottle(bottle) {
+    let arrayIndex = this.level.collectableBottle.indexOf(bottle);
+    this.level.collectableBottle.splice(arrayIndex, 1);
+  }
+
+  resetBottleCount() {
+    this.bottleState = 0;
   }
 
   checkThrowObjects() {
@@ -63,13 +81,18 @@ class World {
     this.addObjectsToMap(this.level.backgroundObject);
     this.addObjectsToMap(this.level.clouds);
     this.addObjectsToMap(this.level.enemies);
+    this.addObjectsToMap(this.level.collectableBottle);
+    this.addObjectsToMap(this.level.collectableCoin);
     this.addObjectsToMap(this.throwableObject);
-
     // this.addObjectsToMap(this.level.throwableObject);
 
     this.ctx.translate(-this.camera_x, 0); // backwars
+
     //------ Space for fixed objects ------
-    this.addToMap(this.statusBar);
+    // this.addToMap(this.statusBar);
+    this.addObjectsToMap(this.level.statusBar);
+   
+
     this.ctx.translate(this.camera_x, 0); // forwards
 
     this.addToMap(this.character);

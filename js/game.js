@@ -10,10 +10,10 @@ let intro_audio = new Audio('audio/intro_sound _v1.mp3');
 
 function init() {
   pauseAudio(intro_audio);
+  initLevel();
   canvas.removeEventListener('click', init, false);
   world = new World(canvas, keyboard);
   // console.log('My character is', world.character);
-  console.log("Init function");
 }
 
 function startGameScreen() {
@@ -30,6 +30,7 @@ function stopGameScreen() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.drawImage(imgLandscape, 0, 0, 720, 480);
   ctx.drawImage(imgEndScreen, 0, 0, 720, 480);
+  setTimeout(startGameScreen, 3000);
 }
 
 function playAudio(audio) {
