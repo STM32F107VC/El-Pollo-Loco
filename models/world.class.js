@@ -42,11 +42,12 @@ class World {
     });
 
     this.level.collectableBottle.forEach((bottle) => {
-      if(this.character.isColliding(bottle)) {
+      if(this.character.isColliding(bottle) && this.bottleState < 100) {
         this.level.statusBar[0].setPercentage(20 + this.bottleState);
         this.bottleState += 20;
         this.removeBottle(bottle);
-        if(this.bottleState >= 100) this.resetBottleCount();
+        console.log('Wert von bottleState beträgt:' + " " + this.bottleState);
+        // if(this.bottleState >= 100) this.resetBottleCount();
       }
     });
   }
@@ -56,14 +57,20 @@ class World {
     this.level.collectableBottle.splice(arrayIndex, 1);
   }
 
-  resetBottleCount() {
-    this.bottleState = 0;
-  }
+  // resetBottleCount() {
+  //   this.bottleState = 0;
+  // }
 
   checkThrowObjects() {
-    if (this.keyboard.D) {
+    if (this.keyboard.D && this.bottleState > 0) {
       let bottle = new ThrowableObject(this.character.x, this.character.y);
       this.throwableObject.push(bottle);
+      let updatedBottleState = this.bottleState -= 20;
+      // console.log('Wert von updatedBottleState beträgt:' + " " + updatedBottleState);
+      console.log('Wert von bottleState beträgt:' + " " + this.bottleState);
+      this.level.statusBar[0].setPercentage(updatedBottleState);
+    } else {
+      console.log('Keine bottles verfügbar.');
     }
   }
 
