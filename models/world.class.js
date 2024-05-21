@@ -41,7 +41,7 @@ class World {
       }
     });
 
-    this.level.collectableObject.forEach((bottle) => {
+    this.level.collectableBottle.forEach((bottle) => {
       if(this.character.isColliding(bottle)) {
         this.level.statusBar[0].setPercentage(20 + this.bottleState);
         this.bottleState += 20;
@@ -52,8 +52,8 @@ class World {
   }
 
   removeBottle(bottle) {
-    let arrayIndex = this.level.collectableObject.indexOf(bottle);
-    console.log(this.level.collectableObject.splice(arrayIndex, 1));
+    let arrayIndex = this.level.collectableBottle.indexOf(bottle);
+    this.level.collectableBottle.splice(arrayIndex, 1);
   }
 
   resetBottleCount() {
@@ -81,7 +81,8 @@ class World {
     this.addObjectsToMap(this.level.backgroundObject);
     this.addObjectsToMap(this.level.clouds);
     this.addObjectsToMap(this.level.enemies);
-    this.addObjectsToMap(this.level.collectableObject);
+    this.addObjectsToMap(this.level.collectableBottle);
+    this.addObjectsToMap(this.level.collectableCoin);
     this.addObjectsToMap(this.throwableObject);
     // this.addObjectsToMap(this.level.throwableObject);
 
