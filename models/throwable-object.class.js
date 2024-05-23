@@ -7,8 +7,8 @@ class ThrowableObject extends MovableObject {
     ];
 
     constructor(x, y) {
-        super();
-        this.loadImage('img/6_salsa_bottle/salsa_bottle.png');
+        super().loadImage('img/6_salsa_bottle/salsa_bottle.png');
+        this.loadImages(this.IMAGES);
         this.x = x;
         this.y = y;
         this.height = 80;
@@ -17,18 +17,15 @@ class ThrowableObject extends MovableObject {
     }
 
     throw(x, y) {
-        console.log('Entered throw function.');
         this.x = x + 150;
         this.y = y - 50;
         this.speedY = 30;
-        // this.playAnimation(this.IMAGES);
         this.applyGravity();
         setInterval(() => {
             this.x += 10;
         }, 25);
-    }
-
-    speed() {
-
+        setInterval(() => {
+            this.playAnimation(this.IMAGES);
+        }, 75);
     }
 } 
