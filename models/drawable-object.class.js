@@ -16,12 +16,7 @@ class DrawableObject {
   stopGame(aFI) {
     this.intervalIds.forEach(clearInterval);
     cancelAnimationFrame(aFI);
-    // this.restartGame(wa, da);
     stopGameScreen();
-  }
-
-  showGameOverScreen() {
-    console.log('Game over.');
   }
 
   loadImage(path) {

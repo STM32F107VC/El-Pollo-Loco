@@ -8,6 +8,7 @@ class World {
   keyboard;
   camera_x = 0;
   bottleState = 0;
+  coinState = 0;
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -17,7 +18,6 @@ class World {
     this.setWorld();
     this.checkCollisions();
     this.run();
-    // console.log(level);
   }
 
   setWorld() {
@@ -42,19 +42,32 @@ class World {
     });
 
     this.level.collectableBottle.forEach((salsaBottle) => {
-      if(this.character.isColliding(salsaBottle) && this.bottleState < 100) {
+      if (this.character.isColliding(salsaBottle) && this.bottleState < 100) {
         this.level.statusBar[0].setPercentage(20 + this.bottleState);
         this.bottleState += 20;
-        this.removeBottle(salsaBottle);
-        console.log('Wert von bottleState beträgt:' + " " + this.bottleState);
+        this.removeCollectableObject('Bottle', salsaBottle);
+        // console.log('Wert von bottleState beträgt:' + " " + this.bottleState);
+      }
+    });
+
+    this.level.collectableCoin.forEach((coin) => {
+      if (this.character.isColliding(coin) && this.coinState < 100) {
+        this.level.statusBar[1].setPercentage(20 + this.coinState);
+        this.coinState += 20;
+        this.removeCollectableObject('Coin', coin);
+        console.log('Wert von bottleState beträgt:' + " " + this.coinState);
       }
     });
   }
 
-  removeBottle(bottle) {
-    let arrayIndex = this.level.collectableBottle.indexOf(bottle);
-    this.level.collectableBottle.splice(arrayIndex, 1);
-  }  
+  removeCollectableObject(type, obj) {
+    // Dynamische Eigenschaftsnamen mit eckigen Klammern
+    let arrayName = `collectable${type}`;
+    let arrayIndex = this.level[arrayName].indexOf(obj);
+    if (arrayIndex > -1) {  // Sicherstellen, dass das Objekt im Array gefunden wurde
+      this.level[arrayName].splice(arrayIndex, 1);
+    }
+  }
 
   checkThrowObjects() {
     if (this.keyboard.D && this.bottleState > 0) {
@@ -63,7 +76,7 @@ class World {
       let updatedBottleState = this.bottleState -= 20;
       console.log('Wert von bottleState beträgt:' + " " + this.bottleState);
       this.level.statusBar[0].setPercentage(updatedBottleState);
-    } 
+    }
     // else {
     //   console.log('Keine bottles verfügbar.');
     // }
@@ -93,7 +106,6 @@ class World {
     //------ Space for fixed objects ------
     // this.addToMap(this.statusBar);
     this.addObjectsToMap(this.level.statusBar);
-   
 
     this.ctx.translate(this.camera_x, 0); // forwards
 

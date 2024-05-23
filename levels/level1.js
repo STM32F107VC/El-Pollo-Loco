@@ -83,10 +83,17 @@ function initLevel() {
       new CollectableBottle("img/6_salsa_bottle/2_salsa_bottle_on_ground.png"),
       new CollectableBottle("img/6_salsa_bottle/1_salsa_bottle_on_ground.png"),
       new CollectableBottle("img/6_salsa_bottle/1_salsa_bottle_on_ground.png"),
-      new CollectableBottle("img/6_salsa_bottle/1_salsa_bottle_on_ground.png"),
+      new CollectableBottle("img/6_salsa_bottle/1_salsa_bottle_on_ground.png")
     ], 
     [
-      new CollectableCoin("img/8_coin/coin_2.png", 300),
+      new CollectableCoin("img/8_coin/coin_2.png", 300, 150),
+      new CollectableCoin("img/8_coin/coin_2.png", 400, 175),
+      new CollectableCoin("img/8_coin/coin_2.png", 500, 175),
+      new CollectableCoin("img/8_coin/coin_2.png", 600, 175),
+      new CollectableCoin("img/8_coin/coin_2.png", 1000, 125),
+      new CollectableCoin("img/8_coin/coin_2.png", 1100, 150),
+      new CollectableCoin("img/8_coin/coin_2.png", 1200, 175),
+      new CollectableCoin("img/8_coin/coin_2.png", 1300, 175)
     ]
   );
 }
