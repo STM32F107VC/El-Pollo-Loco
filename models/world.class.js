@@ -9,6 +9,7 @@ class World {
   camera_x = 0;
   bottleState = 0;
   coinState = 0;
+  endbossLife = 0;
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -36,17 +37,18 @@ class World {
     this.level.enemies.forEach((enemy) => {
       if (this.character.isColliding(enemy)) {
         this.character.hit();
-        // console.log("Collision with enemy, new energy = ", this.character.energy);
         this.level.statusBar[2].setPercentage(this.character.energy);
       }
     });
+
+    // this.collisionWithCollectableObj();
+    // this.collisionWithCollectableObj();
 
     this.level.collectableBottle.forEach((salsaBottle) => {
       if (this.character.isColliding(salsaBottle) && this.bottleState < 100) {
         this.level.statusBar[0].setPercentage(20 + this.bottleState);
         this.bottleState += 20;
         this.removeCollectableObject('Bottle', salsaBottle);
-        // console.log('Wert von bottleState beträgt:' + " " + this.bottleState);
       }
     });
 
@@ -55,31 +57,47 @@ class World {
         this.level.statusBar[1].setPercentage(20 + this.coinState);
         this.coinState += 20;
         this.removeCollectableObject('Coin', coin);
-        console.log('Wert von bottleState beträgt:' + " " + this.coinState);
       }
     });
   }
 
+  // gross und kleinschreibung von coin und bottle beachten. für coinState und bottleState muss coin oder bottle klein geschrieben sein.
+  // collisionWithCollectableObj(type) {
+  //   let arrayName = `collectable${type}`;
+  //   this.level[arrayName].forEach((type) => {
+  //     if(this.character.isColliding(type) && this. < 100) {
+
+  //     }
+  //   });
+  // }
+
   removeCollectableObject(type, obj) {
-    // Dynamische Eigenschaftsnamen mit eckigen Klammern
     let arrayName = `collectable${type}`;
     let arrayIndex = this.level[arrayName].indexOf(obj);
-    if (arrayIndex > -1) {  // Sicherstellen, dass das Objekt im Array gefunden wurde
+    if (arrayIndex > -1) { 
       this.level[arrayName].splice(arrayIndex, 1);
     }
   }
 
   checkThrowObjects() {
     if (this.keyboard.D && this.bottleState > 0) {
-      let bottle = new ThrowableObject(this.character.x, this.character.y);
-      this.throwableObject.push(bottle);
+      let salsaBottle = new ThrowableObject(this.character.x, this.character.y);
+      let lastOffArr = this.level.enemies.length - 1;
+      if (this.level.enemies[lastOffArr].isColliding(salsaBottle)) {
+        console.log('Endboss got hit');
+        this.endbossLife += 20;
+        this.level.statusBar[3].setPercentage(100 - this.endbossLife);
+        console.log(this.endbossLife);
+      } else {
+        console.log('Endboss was not hit');
+      }
+
+
+      this.throwableObject.push(salsaBottle);
       let updatedBottleState = this.bottleState -= 20;
-      console.log('Wert von bottleState beträgt:' + " " + this.bottleState);
+      // console.log('Wert von bottleState beträgt:' + " " + this.bottleState);
       this.level.statusBar[0].setPercentage(updatedBottleState);
     }
-    // else {
-    //   console.log('Keine bottles verfügbar.');
-    // }
   }
 
   checkFullScreen() {

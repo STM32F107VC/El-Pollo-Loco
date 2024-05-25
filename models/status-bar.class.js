@@ -24,7 +24,7 @@ class StatusBar extends DrawableObject {
   }
 
   resolveImageIndex() {
-    console.log('Entered resolve ImagIndex function. Percentage Value is: ' + this.percentage + '.');
+    // console.log('Entered resolve ImagIndex function. Percentage Value is: ' + this.percentage + '.');
     // if (this.percentage <= 100 && this.percentage >= 80) {
     //   return 5;
     // } else if (this.percentage <= 80 && this.percentage >= 60) {

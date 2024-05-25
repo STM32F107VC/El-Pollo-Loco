@@ -39,17 +39,18 @@ class DrawableObject {
 
   drawFrame(ctx) {
     // Blue rectangle
-    if (
-      this instanceof Character ||
-      this instanceof Chicken ||
-      this instanceof Endboss ||
-      this instanceof ThrowableObject
-    ) {
-      ctx.beginPath();
-      ctx.lineWidth = "5";
-      ctx.strokeStyle = "blue";
-      ctx.rect(this.x, this.y, this.width, this.height);
-      ctx.stroke();
-    }
+    // if (
+    //   this instanceof Character ||
+    //   this instanceof Chicken ||
+    //   this instanceof Endboss ||
+    //   this instanceof ThrowableObject ||
+    //   this instanceof CollectableCoin
+    // ) {
+    //   ctx.beginPath();
+    //   ctx.lineWidth = "5";
+    //   ctx.strokeStyle = "blue";
+    //   ctx.rect(this.x, this.y, this.width, this.height);
+    //   ctx.stroke();
+    // }
   }
 }

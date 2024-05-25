@@ -58,7 +58,7 @@ function awaitImgLoad(ctx, img, posX, posY, width, height) {
 }
 
 addEventListener("keydown", (e) => {
-  console.log(e.code);
+  // console.log(e.code);
   if (e.code == "ArrowRight") {
     keyboard.RIGHT = true;
   }
