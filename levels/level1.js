@@ -10,7 +10,7 @@ function initLevel() {
       // new ChickenSmall(),
       // new ChickenSmall(),
       // new ChickenSmall(),
-      new Endboss(),
+      new Endboss()
     ],
     [
       new Cloud("img/5_background/layers/4_clouds/2.png", -720),
@@ -83,10 +83,19 @@ function initLevel() {
       new CollectableBottle("img/6_salsa_bottle/2_salsa_bottle_on_ground.png"),
       new CollectableBottle("img/6_salsa_bottle/1_salsa_bottle_on_ground.png"),
       new CollectableBottle("img/6_salsa_bottle/1_salsa_bottle_on_ground.png"),
-      new CollectableBottle("img/6_salsa_bottle/1_salsa_bottle_on_ground.png"),
+      new CollectableBottle("img/6_salsa_bottle/1_salsa_bottle_on_ground.png")
     ], 
     [
-      new CollectableCoin("img/8_coin/coin_2.png", 300),
+      new CollectableCoin("img/8_coin/coin_2.png", 300, 150),
+      new CollectableCoin("img/8_coin/coin_2.png", 400, 175),
+      new CollectableCoin("img/8_coin/coin_2.png", 500, 175),
+      new CollectableCoin("img/8_coin/coin_2.png", 600, 175),
+      new CollectableCoin("img/8_coin/coin_2.png", 900, 125),
+      new CollectableCoin("img/8_coin/coin_2.png", 1000, 150),
+      new CollectableCoin("img/8_coin/coin_2.png", 1100, 175),
+      new CollectableCoin("img/8_coin/coin_2.png", 1200, 175),
+      new CollectableCoin("img/8_coin/coin_2.png", 1400, 150),
+      new CollectableCoin("img/8_coin/coin_2.png", 1600, 175),
     ]
   );
 }
