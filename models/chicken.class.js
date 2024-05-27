@@ -21,7 +21,7 @@ class Chicken extends MovableObject {
         setInterval(() => {
             this.moveLeft();
             this.otherDirection = false;
-        }, 1000 / 60);
+        }, 1000/60);
         
         setInterval(() => {
             this.playAnimation(this.IMAGES_WALKING);
