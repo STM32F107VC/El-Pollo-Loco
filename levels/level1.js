@@ -90,10 +90,12 @@ function initLevel() {
       new CollectableCoin("img/8_coin/coin_2.png", 400, 175),
       new CollectableCoin("img/8_coin/coin_2.png", 500, 175),
       new CollectableCoin("img/8_coin/coin_2.png", 600, 175),
-      new CollectableCoin("img/8_coin/coin_2.png", 1000, 125),
-      new CollectableCoin("img/8_coin/coin_2.png", 1100, 150),
+      new CollectableCoin("img/8_coin/coin_2.png", 900, 125),
+      new CollectableCoin("img/8_coin/coin_2.png", 1000, 150),
+      new CollectableCoin("img/8_coin/coin_2.png", 1100, 175),
       new CollectableCoin("img/8_coin/coin_2.png", 1200, 175),
-      new CollectableCoin("img/8_coin/coin_2.png", 1300, 175)
+      new CollectableCoin("img/8_coin/coin_2.png", 1400, 150),
+      new CollectableCoin("img/8_coin/coin_2.png", 1600, 175),
     ]
   );
 }

@@ -43,6 +43,17 @@ class World {
 
     this.collisionWithCollectableObject('Bottle', 0);
     this.collisionWithCollectableObject('Coin', 1);
+
+    this.checkCoinDepot();
+
+  }
+
+  checkCoinDepot() {
+    if(this.coinState == 100) {
+      this.coinState = 0;
+      this.level.statusBar[1].setPercentage(0);
+      world.level.collectableBottle.push(new CollectableBottle("img/6_salsa_bottle/1_salsa_bottle_on_ground.png"));
+    }
   }
 
   collisionWithCollectableObject(type, i) {
@@ -58,6 +69,8 @@ class World {
       }
     });
   }
+
+
 
   toLowerCase(obj) {
     let lowerCaseInitialLetter = obj.toLowerCase();
