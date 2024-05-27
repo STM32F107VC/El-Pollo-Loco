@@ -41,40 +41,33 @@ class World {
       }
     });
 
-    // this.collisionWithCollectableObj();
-    // this.collisionWithCollectableObj();
+    this.collisionWithCollectableObject('Bottle', 0);
+    this.collisionWithCollectableObject('Coin', 1);
+  }
 
-    this.level.collectableBottle.forEach((salsaBottle) => {
-      if (this.character.isColliding(salsaBottle) && this.bottleState < 100) {
-        this.level.statusBar[0].setPercentage(20 + this.bottleState);
-        this.bottleState += 20;
-        this.removeCollectableObject('Bottle', salsaBottle);
-      }
-    });
-
-    this.level.collectableCoin.forEach((coin) => {
-      if (this.character.isColliding(coin) && this.coinState < 100) {
-        this.level.statusBar[1].setPercentage(20 + this.coinState);
-        this.coinState += 20;
-        this.removeCollectableObject('Coin', coin);
+  collisionWithCollectableObject(type, i) {
+    let arrayName = `collectable${type}`;
+    let lowerCaseInitialLetter = this.toLowerCase(type);
+    let accessObj = lowerCaseInitialLetter + `State`;
+    
+    this.level[arrayName].forEach((obj) => {
+      if (this.character.isColliding(obj) && this[accessObj] < 100) {
+        this.level.statusBar[i].setPercentage(20 + this[accessObj]);
+        this[accessObj] += 20;
+        this.removeCollectableObject(type, obj);
       }
     });
   }
 
-  // gross und kleinschreibung von coin und bottle beachten. für coinState und bottleState muss coin oder bottle klein geschrieben sein.
-  // collisionWithCollectableObj(type) {
-  //   let arrayName = `collectable${type}`;
-  //   this.level[arrayName].forEach((type) => {
-  //     if(this.character.isColliding(type) && this. < 100) {
-
-  //     }
-  //   });
-  // }
+  toLowerCase(obj) {
+    let lowerCaseInitialLetter = obj.toLowerCase();
+    return lowerCaseInitialLetter;
+  }
 
   removeCollectableObject(type, obj) {
     let arrayName = `collectable${type}`;
     let arrayIndex = this.level[arrayName].indexOf(obj);
-    if (arrayIndex > -1) { 
+    if (arrayIndex > -1) {
       this.level[arrayName].splice(arrayIndex, 1);
     }
   }
@@ -117,20 +110,17 @@ class World {
     this.addObjectsToMap(this.level.collectableBottle);
     this.addObjectsToMap(this.level.collectableCoin);
     this.addObjectsToMap(this.throwableObject);
-    // this.addObjectsToMap(this.level.throwableObject);
 
-    this.ctx.translate(-this.camera_x, 0); // backwars
+    this.ctx.translate(-this.camera_x, 0); // backward
 
     //------ Space for fixed objects ------
-    // this.addToMap(this.statusBar);
     this.addObjectsToMap(this.level.statusBar);
 
-    this.ctx.translate(this.camera_x, 0); // forwards
+    this.ctx.translate(this.camera_x, 0); // forward
 
     this.addToMap(this.character);
-    // this.addToMap(this.throwableObject);
 
-    this.ctx.translate(-this.camera_x, 0);
+    this.ctx.translate(-this.camera_x, 0); // backward
 
     // draw() wird immer wieder aufgerufen
     let self = this;
