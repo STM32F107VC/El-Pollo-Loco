@@ -62,20 +62,21 @@ class Endboss extends MovableObject {
     }
 
     animate() {
-        if (this.x - this.world.character.x < this.xDifference) {
+        // && this.x >= this.world.character.x
+        if (this.x - this.world.character.x < this.xDifference  && this.x >= this.world.character.x) {
             this.moveLeft();
             this.otherDirection = false;
             this.playAnimation(this.IMAGES_WALKING);
         }
-        if (this.x < this.world.character.x) {
+        if (this.x < this.world.character.x && this.x < this.world.level.level_end_x) {
             console.log('Move right');
+            console.log(this.world.level.level_end_x);
             this.moveRight();
             this.otherDirection = true;
             this.playAnimation(this.IMAGES_WALKING);
         } 
-        
-        // else {
-        //     this.playAnimation(this.IMAGES_ALERT);
-        // }
+        else {
+            this.playAnimation(this.IMAGES_ALERT);
+        }
     }
 }
