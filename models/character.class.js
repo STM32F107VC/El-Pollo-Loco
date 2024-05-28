@@ -102,31 +102,11 @@ class Character extends MovableObject {
       this.world.camera_x = -this.x + 100;
   }
 
-  // this.setStoppableInterval(this.checkKeyboardInput, 1000/60);
-  // checkKeyboardInput() {
-  //   if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
-  //     this.moveRight();
-  //     this.walking_audio.play();
-  //   }
-  //   if (this.world.keyboard.LEFT && this.x > 0) {
-  //     this.moveLeft();
-  //     this.walking_audio.play();
-  //   }
-  //   if (this.world.keyboard.SPACE && !this.isAboveGround()) {
-  //     this.jump();
-  //     this.jump_audio.play();
-  //   }
-  //   this.world.camera_x = -this.x + 100;
-  //   statusbar;
-  // }
-  
-
   checkEnergy() {
     if (this.isDead()) {
       this.playAnimation(this.IMAGES_DEAD);
       this.dead_audio.play();
       this.stopGame(this.world.animationFrameId);
-      console.log(this.world.animationFrameId);
     } else if (this.isHurt()) {
       this.playAnimation(this.IMAGES_HURT);
       this.hurt_audio.play();
