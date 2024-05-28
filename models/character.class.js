@@ -74,18 +74,19 @@ class Character extends MovableObject {
   constructor() {
     super().loadImage("../img/2_character_pepe/2_walk/W-21.png");
     this.checkEnergy = this.checkEnergy.bind(this);
+    this.animate = this.animate.bind(this); // Binde den Kontext von this
     this.loadImages(this.IMAGES_IDLE);
     this.loadImages(this.IMAGES_LONG_IDLE);
     this.loadImages(this.IMAGES_WALKING);
     this.loadImages(this.IMAGES_JUMPING);
     this.loadImages(this.IMAGES_HURT);
     this.loadImages(this.IMAGES_DEAD);
-    this.animate();
     this.applyGravity(this.IMAGES_JUMPING);
+    this.setStoppableInterval(this.animate, 1000/60);
+    this.setStoppableInterval(this.checkEnergy, 50);
   }
 
   animate() {
-    setInterval(() => {
       if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
         this.moveRight();
         this.walking_audio.play();
@@ -99,10 +100,6 @@ class Character extends MovableObject {
         this.jump_audio.play();
       }
       this.world.camera_x = -this.x + 100;
-      statusbar;
-    }, 1000 / 60);
-
-    this.setStoppableInterval(this.checkEnergy, 50);
   }
 
   // this.setStoppableInterval(this.checkKeyboardInput, 1000/60);

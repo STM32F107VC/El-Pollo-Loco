@@ -51,28 +51,18 @@ class World {
     let xCharacter = this.character.x;
     let endBoss = this.level.enemies[0];
     let xEndboss = endBoss.x;
-    if(xEndboss - xCharacter < difference) {
+    if(xEndboss - xCharacter < difference && xEndboss > 0) {
       setInterval(() => {
         endBoss.moveLeft();
         endBoss.otherDirection = false;
-        
-      }, 1000/60);
-    } else {
-
-    }
-    if(xEndboss - xCharacter > difference && xEndboss < 1900) {
+      }, 50);
+    } 
+    else if(xEndboss < xCharacter) {
       setInterval(() => {
-        // console.log('Move endboss to origin.');
-        console.log(xEndboss);
-        
         endBoss.moveRight();
-        // endBoss.otherDirection = true;
-      }, 1000/60);
-      if(xEndboss == 1900) {
-        endBoss.otherDirection = true;
-      }
-    }
-    
+      endBoss.otherDirection = true;
+      }, 50);      
+    }    
   }
 
   checkCoinDepot() {
@@ -144,12 +134,15 @@ class World {
     this.addObjectsToMap(this.level.collectableBottle);
     this.addObjectsToMap(this.level.collectableCoin);
     this.addObjectsToMap(this.throwableObject);
+
     this.ctx.translate(-this.camera_x, 0); // backward
     //------ Space for fixed objects ------
     this.addObjectsToMap(this.level.statusBar);
     this.ctx.translate(this.camera_x, 0); // forward
+
     this.addToMap(this.character);
     this.ctx.translate(-this.camera_x, 0); // backward
+
     // draw() wird immer wieder aufgerufen
     let self = this;
     this.animationFrameId = requestAnimationFrame(function () {
