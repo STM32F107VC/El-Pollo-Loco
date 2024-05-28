@@ -30,6 +30,7 @@ class World {
       this.checkCollisions();
       this.checkThrowObjects();
       this.checkFullScreen();
+      this.makeEndbossAlert();
     }, 200);
   }
 
@@ -40,12 +41,28 @@ class World {
         this.level.statusBar[2].setPercentage(this.character.energy);
       }
     });
-
     this.collisionWithCollectableObject('Bottle', 0);
     this.collisionWithCollectableObject('Coin', 1);
-
     this.checkCoinDepot();
+  }
 
+  makeEndbossAlert() {
+    let difference = 400;
+    let xCharacter = this.character.x;
+    let endBoss = this.level.enemies[0];
+    let xEndboss = endBoss.x;
+    if(xEndboss - xCharacter < difference && xEndboss > 0) {
+      setInterval(() => {
+        endBoss.moveLeft();
+        endBoss.otherDirection = false;
+      }, 50);
+    } 
+    else if(xEndboss < xCharacter) {
+      setInterval(() => {
+        endBoss.moveRight();
+      endBoss.otherDirection = true;
+      }, 50);      
+    }    
   }
 
   checkCoinDepot() {
@@ -60,7 +77,6 @@ class World {
     let arrayName = `collectable${type}`;
     let lowerCaseInitialLetter = this.toLowerCase(type);
     let accessObj = lowerCaseInitialLetter + `State`;
-    
     this.level[arrayName].forEach((obj) => {
       if (this.character.isColliding(obj) && this[accessObj] < 100) {
         this.level.statusBar[i].setPercentage(20 + this[accessObj]);
@@ -69,8 +85,6 @@ class World {
       }
     });
   }
-
-
 
   toLowerCase(obj) {
     let lowerCaseInitialLetter = obj.toLowerCase();
@@ -98,7 +112,6 @@ class World {
         console.log('Endboss was not hit');
       }
 
-
       this.throwableObject.push(salsaBottle);
       let updatedBottleState = this.bottleState -= 20;
       // console.log('Wert von bottleState beträgt:' + " " + this.bottleState);
@@ -114,9 +127,7 @@ class World {
 
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
     this.ctx.translate(this.camera_x, 0);
-
     this.addObjectsToMap(this.level.backgroundObject);
     this.addObjectsToMap(this.level.clouds);
     this.addObjectsToMap(this.level.enemies);
@@ -125,14 +136,11 @@ class World {
     this.addObjectsToMap(this.throwableObject);
 
     this.ctx.translate(-this.camera_x, 0); // backward
-
     //------ Space for fixed objects ------
     this.addObjectsToMap(this.level.statusBar);
-
     this.ctx.translate(this.camera_x, 0); // forward
 
     this.addToMap(this.character);
-
     this.ctx.translate(-this.camera_x, 0); // backward
 
     // draw() wird immer wieder aufgerufen
