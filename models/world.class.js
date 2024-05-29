@@ -44,7 +44,7 @@ class World extends DrawableObject {
         this.level.statusBar[2].setPercentage(this.character.energy);
       }
     });
- 
+
     this.collisionWithCollectableObject('Bottle', 0);
     this.collisionWithCollectableObject('Coin', 1);
     this.checkCoinDepot();
@@ -92,7 +92,6 @@ class World extends DrawableObject {
         this.endbossLife += 20;
         this.level.statusBar[3].setPercentage(100 - this.endbossLife);
         this.endBoss.hit();
-        this.endBoss.playAnimation(this.endBoss.IMAGES_HURT)
       }
       this.throwableObject.push(salsaBottle);
       let updatedBottleState = this.bottleState -= 20;

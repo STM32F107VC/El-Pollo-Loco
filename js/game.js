@@ -5,8 +5,10 @@ let imgStartScreen = new Image();
 let imgStartGame = new Image();
 let imgEndScreen = new Image();
 let imgLandscape = new Image();
+let deadEndboss = new Image();
 let keyboard = new Keyboard();
 let intro_audio = new Audio('audio/intro_sound _v1.mp3');
+document.fonts.load("50px Gilgongo Sledge");
 
 function init() {
   pauseAudio(intro_audio);
@@ -33,11 +35,18 @@ function stopGameScreen() {
   setTimeout(startGameScreen, 3000);
 }
 
-let wonGameScreen = () => {
+function wonGameScreen() {
+  let myDiv = document.getElementById('myDiv');
+  myDiv.classList.remove('d-none');
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.font = "50px Verdana red";
-  ctx.fillText("You win!", canvas.width/2 - 75, 100);
-  setTimeout(startGameScreen, 5000);
+  ctx.drawImage(imgLandscape, 0, 0, 720, 480);
+  ctx.drawImage(deadEndboss, canvas.width/2 - 100, canvas.height/5, 250, 400);
+  ctx.fillText("You win!", canvas.width/2, 125);
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#FFC700';
+  ctx.fillStyle = "rgb(255 199 0 / 90%)";
+  ctx.font = "75px Gilgongo Sledge";
+  // setTimeout(startGameScreen, 5000);
 }
 
 function playAudio(audio) {
@@ -56,6 +65,7 @@ function setImgSrc() {
   imgStartGame.src = 'img/start_game.png';
   imgEndScreen.src = 'img/9_intro_outro_screens/game_over/game over!.png';
   imgLandscape.src = 'img/5_background/first_half_background.png';
+  deadEndboss.src = 'img/4_enemie_boss_chicken/5_dead/G26.png';
 }
 
 function awaitImgLoad(ctx, img, posX, posY, width, height) {

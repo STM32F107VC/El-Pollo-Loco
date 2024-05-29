@@ -31,12 +31,15 @@
   </head>
 
   <body id="body" onload="startGameScreen();">
-    <h1>El Pollo Loco</h1>
+    <h1 class="dune-color">El Pollo Loco</h1>
 
-    <canvas id="canvas" width="720" height="480"></canvas>
+    <div class="container flex-box x-center">
+      <canvas id="canvas" width="720" height="480"></canvas>
+      <div id="myDiv" class="d-none" onclick="">Restart Game</div>
+    </div>
 
     <!-- Legend controll options -->
-    <div class="legend">
+    <div class="legend dune-color">
       <div class="flex-box gap-12px">
         <div>
           <span>⬅ = move left</span>

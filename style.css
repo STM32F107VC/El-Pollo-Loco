@@ -18,6 +18,7 @@ canvas {
 h1 {
     letter-spacing: 2px;
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+    font-size: 45px;
 }
 
 #startGame {
@@ -39,13 +40,30 @@ h1 {
 
 .gap-12px { gap: 12px; }
 
-.legend { 
-    color: #FFC700;
-    font-size: 14px; 
+.legend { font-size: 14px; }
+
+.dune-color { color: #FFC700; }
+
+.d-none { display: none; }
+
+.container { 
+    position: relative; 
+}
+
+#myDiv { 
+    position: absolute;
+    /* left: 50%;
+    right: 50%;  */
+    /* margin: auto; */
+    top: 10px;
 }
 
 @media screen and (max-width: 760px) {
     canvas { width: 100%; }
+}
+
+@media screen and (max-width: 500px) {
+    h1 { font-size: 30px; }
 }
 
 @media screen and (max-height: 480px) {

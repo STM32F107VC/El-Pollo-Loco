@@ -87,16 +87,17 @@ class Endboss extends MovableObject {
         if (this.isDead()) {
             this.x = this.xPrevious;
             this.playAnimation(this.IMAGES_DEAD);
-            
             setTimeout(() => {
                 this.applyGravity();
-            }, 800);
-
+            }, 300);
             setTimeout(() => {
                 this.stopGame(this.world.animationFrameId);
                 this.clearAllIntervals();
-                wonGameScreen(); 
+                this.world.character.clearAllIntervals();
+                wonGameScreen();
             }, 1200);    
+        } else if(this.isHurt()) {
+            this.playAnimation(this.IMAGES_HURT);
         }
     }
 }
