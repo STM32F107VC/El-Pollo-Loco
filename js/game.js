@@ -23,7 +23,7 @@ function startGameScreen() {
   setImgSrc();
   awaitImgLoad(ctx, imgStartScreen, 0, 0, 720, 480);
   awaitImgLoad(ctx, imgStartGame, canvas.width / 2 - imgStartGame.width / 2, canvas.height / 2, 50, 50);
-  playAudio(intro_audio);
+  // playAudio(intro_audio);
 }
 
 function stopGameScreen() {
@@ -33,11 +33,18 @@ function stopGameScreen() {
   setTimeout(startGameScreen, 3000);
 }
 
+let wonGameScreen = () => {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.font = "50px Verdana red";
+  ctx.fillText("You win!", canvas.width/2 - 75, 100);
+  setTimeout(startGameScreen, 5000);
+}
+
 function playAudio(audio) {
   let newAudio = audio;
   newAudio.autoplay = true;
   newAudio.loop = true;
-  // audio.play();
+  audio.play();
 }
 
 function pauseAudio(audio) {
