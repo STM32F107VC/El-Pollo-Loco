@@ -2,7 +2,6 @@ class Endboss extends MovableObject {
     height = 400;
     width = 250;
     y = 60;
-    // xDifference = 400;
     world;
     speed = 8;
 
@@ -50,33 +49,63 @@ class Endboss extends MovableObject {
     constructor() {
         super().loadImage(this.IMAGES_WALKING[0]);
         this.animate = this.animate.bind(this); // Binde den Kontext von this
+        this.checkEnergy = this.checkEnergy.bind(this);
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_ALERT);
         this.loadImages(this.IMAGES_ATTACK);
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
         this.x = 1900;
-        // this.animate();
         console.log(this);
-        this.setStoppableInterval(this.animate, 75);
+        this.setStoppableInterval(this.animate, 100);
+        this.setStoppableInterval(this.checkEnergy, 50);
     }
 
     animate() {
-        // && this.x >= this.world.character.x
-        if (this.x - this.world.character.x < this.xDifference  && this.x >= this.world.character.x) {
+        console.log(this.x - this.world.character.x);
+        if(this.x - this.world.character.x < 700) {
+            this.playAnimation(this.IMAGES_ALERT);
+        } 
+        if(this.x - this.world.character.x < 500 && this.x >= this.world.character.x) {
             this.moveLeft();
             this.otherDirection = false;
             this.playAnimation(this.IMAGES_WALKING);
         }
         if (this.x < this.world.character.x && this.x < this.world.level.level_end_x) {
-            console.log('Move right');
-            console.log(this.world.level.level_end_x);
             this.moveRight();
             this.otherDirection = true;
             this.playAnimation(this.IMAGES_WALKING);
-        } 
-        else {
-            this.playAnimation(this.IMAGES_ALERT);
         }
+        if(this.x - this.world.character.x < 150) {
+            this.playAnimation(this.IMAGES_ATTACK);
+        }
+        //&& this.x - this.world.character.x < -100
+
+        // if (this.x - this.world.character.x < this.xDifference && this.x >= this.world.character.x) {
+        //     this.moveLeft();
+        //     this.otherDirection = false;
+        //     this.playAnimation(this.IMAGES_WALKING);
+        // }
+        // else if (this.x < this.world.character.x && this.x < this.world.level.level_end_x) {
+        //     console.log('Move right');
+        //     console.log(this.world.level.level_end_x);
+        //     this.moveRight();
+        //     this.otherDirection = true;
+        //     this.playAnimation(this.IMAGES_WALKING);
+        // }
+        // else {
+        //     this.playAnimation(this.IMAGES_ALERT);
+        // }
+    }
+
+    checkEnergy() {
+        // console.log('Energy endboss:' + ' ' + this.energy);
+
+        // if (this.isDead()) {
+        //     this.playAnimation(this.IMAGES_DEAD);
+        //     // this.stopGame(this.world.animationFrameId);
+        //   } else if (this.isHurt()) {
+        //     this.playAnimation(this.IMAGES_HURT);
+        //   } 
     }
 }

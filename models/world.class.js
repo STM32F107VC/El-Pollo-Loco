@@ -3,7 +3,7 @@ class World {
   animationFrameId;
   throwableObject = [];
   level = level1;
-  arrayLength = this.level.enemies.length - 1;
+  lastArrayPlace = this.level.enemies.length - 1;
   ctx;
   canvas;
   keyboard;
@@ -11,7 +11,7 @@ class World {
   bottleState = 0;
   coinState = 0;
   endbossLife = 0;
-  endBoss = this.level.enemies[this.arrayLength];
+  endBoss = this.level.enemies[this.lastArrayPlace];
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -21,12 +21,12 @@ class World {
     this.setWorld();
     this.checkCollisions();
     this.run();
-  // console.log(this.endBoss);
+    // console.log(this.endBoss);
   }
 
   setWorld() {
     this.character.world = this;
-    this.level.enemies[this.arrayLength].world = this;
+    this.level.enemies[this.lastArrayPlace].world = this;
   }
 
   run() {
@@ -34,7 +34,6 @@ class World {
       this.checkCollisions();
       this.checkThrowObjects();
       this.checkFullScreen();
-      // this.makeEndbossAttack();
     }, 200);
   }
 
@@ -45,25 +44,22 @@ class World {
         this.level.statusBar[2].setPercentage(this.character.energy);
       }
     });
+
+    this.throwableObject.forEach((salsaBottle) => {
+      if (this.endBoss.isColliding(salsaBottle)) {
+        this.endBoss.hit();
+      }
+    });
+
+    // console.log('Character energy:' + ' ' + this.character.energy);
+
     this.collisionWithCollectableObject('Bottle', 0);
     this.collisionWithCollectableObject('Coin', 1);
     this.checkCoinDepot();
   }
 
-  // makeEndbossAttack() {
-  //   // console.log(this.endBoss.xDifference);
-  //   if(this.endBoss.x - this.character.x < this.endBoss.xDifference) {
-  //     setInterval(() => {
-  //       this.endBoss.moveLeft();
-  //       this.endBoss.otherDirection = false;
-  //       this.endBoss.playAnimation(this.endBoss.IMAGES_WALKING);
-        
-  //     }, 1000/60);
-  //   }  
-  // }
-
   checkCoinDepot() {
-    if(this.coinState == 100) {
+    if (this.coinState == 100) {
       this.coinState = 0;
       this.level.statusBar[1].setPercentage(0);
       world.level.collectableBottle.push(new CollectableBottle("img/6_salsa_bottle/1_salsa_bottle_on_ground.png"));
@@ -103,7 +99,7 @@ class World {
       if (this.level.enemies[lastOffArr].isColliding(salsaBottle)) {
         this.endbossLife += 20;
         this.level.statusBar[3].setPercentage(100 - this.endbossLife);
-      } 
+      }
       this.throwableObject.push(salsaBottle);
       let updatedBottleState = this.bottleState -= 20;
       this.level.statusBar[0].setPercentage(updatedBottleState);
