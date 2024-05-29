@@ -17,7 +17,7 @@ class MovableObject extends DrawableObject {
   }
 
   isAboveGround() {
-    if (this instanceof ThrowableObject) {
+    if (this instanceof ThrowableObject || this instanceof Endboss) {
       // Throwable objects should always fall
       return true;
     } else {

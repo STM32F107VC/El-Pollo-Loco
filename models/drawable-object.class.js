@@ -14,9 +14,12 @@ class DrawableObject {
   }
 
   stopGame(aFI) {
-    this.intervalIds.forEach(clearInterval);
+    this.clearAllIntervals();
     cancelAnimationFrame(aFI);
-    stopGameScreen();
+  }
+
+  clearAllIntervals() {
+    this.intervalIds.forEach(clearInterval);
   }
 
   loadImage(path) {
