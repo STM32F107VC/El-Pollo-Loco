@@ -44,11 +44,17 @@ h1 {
 
 .dune-color { color: #FFC700; }
 
+.bgc-dune { background-color: #FFC700 !important; } 
+
+.mtm-12px { margin-top: -12px; }
+
 .d-none { display: none; }
 
-.container { 
-    position: relative; 
-}
+.invisible { opacity: 0; }
+
+.container { position: relative; }
+
+.c-pointer { cursor: pointer; }
 
 #myDiv { 
     position: absolute;
@@ -56,6 +62,28 @@ h1 {
     right: 50%;  */
     /* margin: auto; */
     top: 10px;
+}
+
+.btn {
+    font-family: 'Gilgongo Sledge';
+    background-color: #51504c;
+    cursor: pointer;
+    box-shadow: 0px 4px 25px 1px #FFC700;
+    border-radius: 10px;
+    border: none;
+    padding: 8px 12px;
+}
+
+.btn:hover {
+    scale: 1.04;
+    transition: scale 200ms ease-in-out;
+}
+
+
+
+#showLegend {
+    
+    margin-top: 4px;
 }
 
 @media screen and (max-width: 760px) {

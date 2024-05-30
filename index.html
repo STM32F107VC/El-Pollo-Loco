@@ -35,11 +35,19 @@
 
     <div class="container flex-box x-center">
       <canvas id="canvas" width="720" height="480"></canvas>
-      <div id="myDiv" class="d-none" onclick="">Restart Game</div>
+      <div id="myDiv" class="flex-box dune-color gap-12px" onclick="">
+        <button class="btn bgc-dune">Play</button>
+        <button class="btn bgc-dune">Introduction</button>
+        <button class="btn bgc-dune">Mute Audio</button>
+        <button class="btn bgc-dune d-none">Play again</button>
+        <button class="btn bgc-dune d-none">Mute Audio</button>
+      </div>
     </div>
 
     <!-- Legend controll options -->
-    <div class="legend dune-color">
+    <button id="showLegend" class="dune-color btn" onclick="hideLegend();"
+    >Show legend</button>
+    <div id="legend" class="dune-color d-none c-pointer" onclick="hideLegend();">
       <div class="flex-box gap-12px">
         <div>
           <span>⬅ = move left</span>
@@ -54,7 +62,7 @@
           <span>D = throw bottle</span>
         </div>
       </div>
-
+      
       <div class="flex-box flex-column y-center mt-8px">
         <span>P = Fullscreen</span>
         <span>esc = leave Fullscreen</span>
