@@ -68,11 +68,18 @@ h1 {
     font-family: 'Gilgongo Sledge';
     background-color: #51504c;
     cursor: pointer;
-    box-shadow: 0px 10px 25px 1px #000000;
+    box-shadow: 0px 4px 25px 1px #FFC700;
     border-radius: 10px;
     border: none;
     padding: 8px 12px;
 }
+
+.btn:hover {
+    scale: 1.04;
+    transition: scale 200ms ease-in-out;
+}
+
+
 
 #showLegend {
     
