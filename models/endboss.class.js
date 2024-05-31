@@ -57,14 +57,14 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
         this.x = 1900;
-        console.log(this);
+        // console.log(this);
         this.setStoppableInterval(this.animate, 125);
         this.setStoppableInterval(this.checkEnergy, 75);
     }
 
     animate() {
         let distanceToCharacter = this.x - this.world.character.x;
-        if (distanceToCharacter < 700) {
+        if (distanceToCharacter < 700 && distanceToCharacter > 500) {
             this.playAnimation(this.IMAGES_ALERT);
         }
         if (distanceToCharacter < 500 && this.x >= this.world.character.x) {
@@ -95,7 +95,7 @@ class Endboss extends MovableObject {
                 this.clearAllIntervals();
                 this.world.character.clearAllIntervals();
                 wonGameScreen();
-            }, 1200);    
+            }, 2000);    
         } else if(this.isHurt()) {
             this.playAnimation(this.IMAGES_HURT);
         }
