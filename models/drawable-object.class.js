@@ -7,6 +7,14 @@ class DrawableObject {
   height = 150;
   width = 100;
   intervalIds = [];
+  startTime;
+
+  countPassedTime() {
+    let passedTime;
+    let endTime = new Date().getTime() / 1000;
+    passedTime = endTime - this.startTime;
+    return passedTime;
+  }
 
   setStoppableInterval(fn, time) {
     let id = setInterval(fn, time);
@@ -37,23 +45,5 @@ class DrawableObject {
 
   draw(ctx) {
     ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-    // this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
-  }
-
-  drawFrame(ctx) {
-    // Blue rectangle
-    // this instanceof CollectableCoin
-      // this instanceof Chicken ||
-
-    if (
-      this instanceof Character ||
-      this instanceof Endboss ||
-      this instanceof ThrowableObject) {
-      ctx.beginPath();
-      ctx.lineWidth = "5";
-      ctx.strokeStyle = "blue";
-      ctx.rect(this.x, this.y, this.width, this.height);
-      ctx.stroke();
-    }
   }
 }

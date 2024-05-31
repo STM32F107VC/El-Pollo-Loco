@@ -101,8 +101,6 @@ function showIntroduction() {
   canvas.classList.add('opacity-02');
   let div = document.getElementById('introduction');
   div.classList.remove('d-none');
-  // div.style.width = `${canvas.width}px`;
-  // div.style.height = `${canvas.height}px`;
 }
 
 function closeIntroduction() {
@@ -133,7 +131,6 @@ function hideLegend() {
 }
 
 addEventListener("keydown", (e) => {
-  // console.log(e.code);
   if (e.code == "ArrowRight") {
     keyboard.RIGHT = true;
   }

@@ -84,6 +84,8 @@ class Character extends MovableObject {
     this.applyGravity(this.IMAGES_JUMPING);
     this.setStoppableInterval(this.animate, 1000 / 60);
     this.setStoppableInterval(this.checkEnergy, 50);
+    this.startTime = new Date().getTime() / 1000;
+    // console.log(this.startTime);
   }
 
   animate() {
@@ -103,6 +105,13 @@ class Character extends MovableObject {
   }
 
   checkEnergy() {
+    // console.log(this.countPassedTime());
+    if(this.countPassedTime() >= 0) {
+      this.playAnimation(this.IMAGES_IDLE);
+    }
+    if(this.countPassedTime() >= 4) {
+      this.playAnimation(this.IMAGES_LONG_IDLE);
+    }
     if (this.isDead()) {
       this.playAnimation(this.IMAGES_DEAD);
       this.dead_audio.play();
@@ -113,8 +122,10 @@ class Character extends MovableObject {
       this.hurt_audio.play();
     } else if (this.isAboveGround()) {
       this.playAnimation(this.IMAGES_JUMPING);
+      this.startTime = new Date().getTime() / 1000;
     } else {
       if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+        this.startTime = new Date().getTime() / 1000;
         // Walk animation
         this.playAnimation(this.IMAGES_WALKING);
       }
