@@ -107,7 +107,7 @@ class Character extends MovableObject {
       this.playAnimation(this.IMAGES_DEAD);
       this.dead_audio.play();
       this.stopGame(this.world.animationFrameId);
-      stopGameScreen();
+      lostGameScreen();
     } else if (this.isHurt()) {
       this.playAnimation(this.IMAGES_HURT);
       this.hurt_audio.play();

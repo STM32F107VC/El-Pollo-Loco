@@ -56,6 +56,11 @@ h1 {
 
 .c-pointer { cursor: pointer; }
 
+.pos-btn {
+    position: absolute;
+    top: 10px;
+}
+
 #myDiv { 
     position: absolute;
     /* left: 50%;

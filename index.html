@@ -35,15 +35,16 @@
 
     <div class="container flex-box x-center">
       <canvas id="canvas" width="720" height="480"></canvas>
-      <div id="myDiv" class="flex-box dune-color gap-12px" onclick="">
-        <button class="btn">Play</button>
+
+      <div id="myDivStart" class="flex-box pos-btn dune-color gap-12px" onclick="">
+        <button class="btn" onclick="init();">Play</button>
         <button class="btn">Introduction</button>
         <button class="btn">Mute Audio</button>
-        
       </div>
-      <div>
-        <button class="btn d-none">Play again</button>
-        <button class="btn d-none">Go to startscreen</button>
+
+      <div id="myDivFinish" class="pos-btn d-none">
+        <button class="btn" onclick="playAgain();">Play again</button>
+        <button class="btn" onclick="startGameScreen();">Go to startscreen</button>
       </div>
     </div>
 

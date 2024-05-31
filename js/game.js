@@ -10,34 +10,47 @@ let keyboard = new Keyboard();
 let intro_audio = new Audio('audio/intro_sound _v1.mp3');
 document.fonts.load("50px Gilgongo Sledge");
 
-function init() {
-  pauseAudio(intro_audio);
-  initLevel();
-  canvas.removeEventListener('click', init, false);
-  world = new World(canvas, keyboard);
-  // console.log('My character is', world.character);
-}
-
 function startGameScreen() {
-  canvas = document.getElementById("canvas");
-  ctx = canvas.getContext("2d");
-  canvas.addEventListener("click", init, false);
+  showBtn('Start');
+  hideBtn('Finish');
+  getCtx();
   setImgSrc();
   awaitImgLoad(ctx, imgStartScreen, 0, 0, 720, 480);
-  awaitImgLoad(ctx, imgStartGame, canvas.width / 2 - imgStartGame.width / 2, canvas.height / 2, 50, 50);
   // playAudio(intro_audio);
 }
 
-function stopGameScreen() {
+function getCtx() {
+  canvas = document.getElementById("canvas");
+  ctx = canvas.getContext("2d");
+}
+
+function init() {
+  hideBtn('Start');
+  hideBtn('Finish');
+  pauseAudio(intro_audio);
+  initLevel();
+  world = new World(canvas, keyboard);
+}
+
+function showBtn(value) {
+  let myDiv = document.getElementById(`myDiv${value}`);
+  myDiv.classList.remove('d-none');
+}
+
+function hideBtn(value) {
+  let myDiv = document.getElementById(`myDiv${value}`);
+  myDiv.classList.add('d-none');
+}
+
+function lostGameScreen() {
+  showBtn('Finish');
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.drawImage(imgLandscape, 0, 0, 720, 480);
   ctx.drawImage(imgEndScreen, 0, 0, 720, 480);
-  setTimeout(startGameScreen, 3000);
 }
 
 function wonGameScreen() {
-  let myDiv = document.getElementById('myDiv');
-  myDiv.classList.remove('d-none');
+  showBtn('Finish');
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.drawImage(imgLandscape, 0, 0, 720, 480);
   ctx.drawImage(deadEndboss, canvas.width/2 - 100, canvas.height/5, 250, 400);
@@ -46,7 +59,13 @@ function wonGameScreen() {
   ctx.fillStyle = '#FFC700';
   ctx.fillStyle = "rgb(255 199 0 / 100%)";
   ctx.font = "75px Gilgongo Sledge";
-  // setTimeout(startGameScreen, 5000);
+}
+
+function playAgain() {
+  hideBtn('Finish');
+  setTimeout(() => {
+    init();
+  }, 200);
 }
 
 function playAudio(audio) {
@@ -62,7 +81,7 @@ function pauseAudio(audio) {
 
 function setImgSrc() {
   imgStartScreen.src = './img/9_intro_outro_screens/start/startscreen_2.png';
-  imgStartGame.src = 'img/start_game.png';
+  // imgStartGame.src = 'img/start_game.png';
   imgEndScreen.src = 'img/9_intro_outro_screens/game_over/game over!.png';
   imgLandscape.src = 'img/5_background/first_half_background.png';
   deadEndboss.src = 'img/4_enemie_boss_chicken/5_dead/G26.png';
