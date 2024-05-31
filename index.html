@@ -36,15 +36,31 @@
     <div class="container flex-box x-center">
       <canvas id="canvas" width="720" height="480"></canvas>
 
-      <div id="myDivStart" class="flex-box pos-btn dune-color gap-12px" onclick="">
+      <div id="myDivStart" class="flex-box pos-absolute pos-btn dune-color gap-12px" onclick="">
         <button class="btn" onclick="init();">Play</button>
-        <button class="btn">Introduction</button>
-        <button class="btn">Mute Audio</button>
+        <button class="btn" onclick="showIntroduction();">Introduction</button>
+        <button class="btn" onclick="getAudio();">Mute Audio</button>
       </div>
 
-      <div id="myDivFinish" class="pos-btn d-none">
+      <div id="myDivFinish" class="pos-absolute pos-btn d-none">
         <button class="btn" onclick="playAgain();">Play again</button>
-        <button class="btn" onclick="startGameScreen();">Go to startscreen</button>
+        <button class="btn" onclick="clearCanvas();">Go to startscreen</button>
+      </div>
+
+      <div id="introduction" class="flex-box x-center pos-absolute d-none">
+        <div><img src="/img/go_back.png" alt="back"></div>
+        <div>
+          <h2>Introcution</h2>
+          <p>Welcome to El Pollo Loco!
+            Main target is to kill the endboss a big angry chicken.
+            But it's not so easy to come
+      
+            You can collect five bottles and five coins at once.
+            If you've collected five coins a new bottle spawns into the map. 
+            This is possible two times. 
+            
+          </p>
+        </div>
       </div>
     </div>
 

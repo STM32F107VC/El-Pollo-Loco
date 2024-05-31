@@ -52,22 +52,20 @@ h1 {
 
 .invisible { opacity: 0; }
 
+.opacity-02 { opacity: 0.2; }
+
 .container { position: relative; }
+
+.pos-absolute { position: absolute; }
 
 .c-pointer { cursor: pointer; }
 
-.pos-btn {
-    position: absolute;
-    top: 10px;
-}
+.pos-btn { top: 10px; }
 
-#myDiv { 
-    position: absolute;
-    /* left: 50%;
-    right: 50%;  */
-    /* margin: auto; */
-    top: 10px;
-}
+/* #introduction {
+    width: 720px;
+    height: 480px;
+} */
 
 .btn {
     font-family: 'Gilgongo Sledge';

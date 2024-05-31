@@ -1,22 +1,24 @@
 let canvas;
 let world;
 let ctx;
+let audios = [];
 let imgStartScreen = new Image();
 let imgStartGame = new Image();
 let imgEndScreen = new Image();
 let imgLandscape = new Image();
 let deadEndboss = new Image();
 let keyboard = new Keyboard();
-let intro_audio = new Audio('audio/intro_sound _v1.mp3');
+let intro_music = new Audio('audio/intro_music.mp3');
+let chicken_noise = new Audio('audio/chicken_noise.mp3');
 document.fonts.load("50px Gilgongo Sledge");
 
 function startGameScreen() {
-  showBtn('Start');
   hideBtn('Finish');
+  showBtn('Start');
   getCtx();
   setImgSrc();
   awaitImgLoad(ctx, imgStartScreen, 0, 0, 720, 480);
-  // playAudio(intro_audio);
+  // playAudio(intro_music);
 }
 
 function getCtx() {
@@ -24,12 +26,22 @@ function getCtx() {
   ctx = canvas.getContext("2d");
 }
 
+function clearCanvas() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  startGameScreen();
+}
+
 function init() {
   hideBtn('Start');
   hideBtn('Finish');
-  pauseAudio(intro_audio);
+  pauseAudio(intro_music);
   initLevel();
   world = new World(canvas, keyboard);
+  playAudio(chicken_noise);
+}
+
+function getAudio() {
+  pauseAudio(intro_music);
 }
 
 function showBtn(value) {
@@ -43,6 +55,7 @@ function hideBtn(value) {
 }
 
 function lostGameScreen() {
+  pauseAudio(chicken_noise);
   showBtn('Finish');
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.drawImage(imgLandscape, 0, 0, 720, 480);
@@ -50,6 +63,7 @@ function lostGameScreen() {
 }
 
 function wonGameScreen() {
+  pauseAudio(chicken_noise);
   showBtn('Finish');
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.drawImage(imgLandscape, 0, 0, 720, 480);
@@ -73,15 +87,30 @@ function playAudio(audio) {
   newAudio.autoplay = true;
   newAudio.loop = true;
   audio.play();
+  audios.push(audio);
 }
 
 function pauseAudio(audio) {
   audio.pause();
 }
 
+function pauseAllAudios() {
+  audios.forEach(a => {
+    a.pause();
+  });
+}
+
+function showIntroduction() {
+  hideBtn('Start');
+  canvas.classList.add('opacity-02');
+  let div = document.getElementById('introduction');
+  div.classList.remove('d-none');
+  div.style.width = `${canvas.width}px`;
+  div.style.height = `${canvas.height}px`;
+}
+
 function setImgSrc() {
   imgStartScreen.src = './img/9_intro_outro_screens/start/startscreen_2.png';
-  // imgStartGame.src = 'img/start_game.png';
   imgEndScreen.src = 'img/9_intro_outro_screens/game_over/game over!.png';
   imgLandscape.src = 'img/5_background/first_half_background.png';
   deadEndboss.src = 'img/4_enemie_boss_chicken/5_dead/G26.png';

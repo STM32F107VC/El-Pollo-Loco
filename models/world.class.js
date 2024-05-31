@@ -53,6 +53,7 @@ class World extends DrawableObject {
   collisionWithCollectableObject(type, i) {
     let arrayName = `collectable${type}`;
     let lowerCaseInitialLetter = this.toLowerCase(type);
+    let audio = new Audio(`audio/collect_${lowerCaseInitialLetter}.mp3`);
     let accessObj = lowerCaseInitialLetter + `State`;
 
     this.level[arrayName].forEach((obj) => {
@@ -60,6 +61,7 @@ class World extends DrawableObject {
         this.level.statusBar[i].setPercentage(20 + this[accessObj]);
         this[accessObj] += 20;
         this.removeCollectableObject(type, obj);
+        audio.play(); 
       }
     });
   }
@@ -89,6 +91,8 @@ class World extends DrawableObject {
     if (this.keyboard.D && this.bottleState > 0) {
       let salsaBottle = new ThrowableObject(this.character.x, this.character.y);
       if (this.level.enemies[this.lastArrayPlace].isColliding(salsaBottle)) {
+        let audio = new Audio('audio/burn_endboss.mp3');
+        audio.play();
         this.endbossLife += 20;
         this.level.statusBar[3].setPercentage(100 - this.endbossLife);
         this.endBoss.hit();
