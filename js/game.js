@@ -40,10 +40,6 @@ function init() {
   playAudio(chicken_noise);
 }
 
-function getAudio() {
-  pauseAudio(intro_music);
-}
-
 function showBtn(value) {
   let myDiv = document.getElementById(`myDiv${value}`);
   myDiv.classList.remove('d-none');
@@ -105,8 +101,15 @@ function showIntroduction() {
   canvas.classList.add('opacity-02');
   let div = document.getElementById('introduction');
   div.classList.remove('d-none');
-  div.style.width = `${canvas.width}px`;
-  div.style.height = `${canvas.height}px`;
+  // div.style.width = `${canvas.width}px`;
+  // div.style.height = `${canvas.height}px`;
+}
+
+function closeIntroduction() {
+  showBtn('Start');
+  let div = document.getElementById('introduction');
+  div.classList.add('d-none');
+  canvas.classList.remove('opacity-02');
 }
 
 function setImgSrc() {
