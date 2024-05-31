@@ -75,6 +75,7 @@ class Character extends MovableObject {
     super().loadImage("../img/2_character_pepe/2_walk/W-21.png");
     this.checkEnergy = this.checkEnergy.bind(this);
     this.animate = this.animate.bind(this); // Binde den Kontext von this
+    this.idleAnimation = this.idleAnimation.bind(this);
     this.loadImages(this.IMAGES_IDLE);
     this.loadImages(this.IMAGES_LONG_IDLE);
     this.loadImages(this.IMAGES_WALKING);
@@ -84,8 +85,17 @@ class Character extends MovableObject {
     this.applyGravity(this.IMAGES_JUMPING);
     this.setStoppableInterval(this.animate, 1000 / 60);
     this.setStoppableInterval(this.checkEnergy, 50);
+    this.setStoppableInterval(this.idleAnimation, 150);
     this.startTime = new Date().getTime() / 1000;
-    // console.log(this.startTime);
+  }
+
+  idleAnimation() {
+    if(this.countPassedTime() >= 0) {
+      this.playAnimation(this.IMAGES_IDLE);
+    }
+    if(this.countPassedTime() >= 4) {
+      this.playAnimation(this.IMAGES_LONG_IDLE);
+    }
   }
 
   animate() {
@@ -105,13 +115,6 @@ class Character extends MovableObject {
   }
 
   checkEnergy() {
-    // console.log(this.countPassedTime());
-    if(this.countPassedTime() >= 0) {
-      this.playAnimation(this.IMAGES_IDLE);
-    }
-    if(this.countPassedTime() >= 4) {
-      this.playAnimation(this.IMAGES_LONG_IDLE);
-    }
     if (this.isDead()) {
       this.playAnimation(this.IMAGES_DEAD);
       this.dead_audio.play();
