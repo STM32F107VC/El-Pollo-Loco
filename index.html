@@ -36,17 +36,22 @@
     <div class="container flex-box x-center">
       <canvas id="canvas" width="720" height="480"></canvas>
       <div id="myDiv" class="flex-box dune-color gap-12px" onclick="">
-        <button class="btn bgc-dune">Play</button>
-        <button class="btn bgc-dune">Introduction</button>
-        <button class="btn bgc-dune">Mute Audio</button>
-        <button class="btn bgc-dune d-none">Play again</button>
-        <button class="btn bgc-dune d-none">Mute Audio</button>
+        <button class="btn">Play</button>
+        <button class="btn">Introduction</button>
+        <button class="btn">Mute Audio</button>
+        
+      </div>
+      <div>
+        <button class="btn d-none">Play again</button>
+        <button class="btn d-none">Go to startscreen</button>
       </div>
     </div>
 
     <!-- Legend controll options -->
-    <button id="showLegend" class="dune-color btn" onclick="hideLegend();"
-    >Show legend</button>
+    <button id="showLegend" class="btn" onclick="hideLegend();">
+      Show legend
+    </button>
+
     <div id="legend" class="dune-color d-none c-pointer" onclick="hideLegend();">
       <div class="flex-box gap-12px">
         <div>

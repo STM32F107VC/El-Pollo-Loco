@@ -44,7 +44,7 @@ function wonGameScreen() {
   ctx.fillText("You win!", canvas.width/2, 125);
   ctx.textAlign = 'center';
   ctx.fillStyle = '#FFC700';
-  ctx.fillStyle = "rgb(255 199 0 / 90%)";
+  ctx.fillStyle = "rgb(255 199 0 / 100%)";
   ctx.font = "75px Gilgongo Sledge";
   // setTimeout(startGameScreen, 5000);
 }

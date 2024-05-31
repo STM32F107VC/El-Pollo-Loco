@@ -64,7 +64,7 @@ class Endboss extends MovableObject {
 
     animate() {
         let distanceToCharacter = this.x - this.world.character.x;
-        if (distanceToCharacter < 700) {
+        if (distanceToCharacter < 700 && distanceToCharacter > 500) {
             this.playAnimation(this.IMAGES_ALERT);
         }
         if (distanceToCharacter < 500 && this.x >= this.world.character.x) {

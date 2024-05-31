@@ -44,7 +44,7 @@ h1 {
 
 .dune-color { color: #FFC700; }
 
-.bgc-dune { background-color: #FFC700 !important; } 
+.bgc-dune { background-color: #FFC700; } 
 
 .mtm-12px { margin-top: -12px; }
 
@@ -66,7 +66,7 @@ h1 {
 
 .btn {
     font-family: 'Gilgongo Sledge';
-    background-color: #51504c;
+    background-color: #FFC700;
     cursor: pointer;
     box-shadow: 0px 4px 25px 1px #FFC700;
     border-radius: 10px;
@@ -79,11 +79,10 @@ h1 {
     transition: scale 200ms ease-in-out;
 }
 
-
-
-#showLegend {
-    
-    margin-top: 4px;
+#showLegend { 
+    margin-top: 4px; 
+    font-size: 10px;
+    padding: 6px 8px;
 }
 
 @media screen and (max-width: 760px) {
