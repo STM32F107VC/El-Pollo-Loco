@@ -21,51 +21,84 @@ h1 {
     font-size: 45px;
 }
 
+h2 {
+    margin: 0;
+}
+
 #startGame {
     background-image: url('img/9_intro_outro_screens/start/startscreen_2.png');
     background-position: center;
 }
 
-.flex-box { display: flex; }
-
-.x-center { justify-content: center; }
-
-.y-center { align-items: center; }
-
-.flex-spacebetw { justify-content: space-between; }
-
-.flex-column { flex-direction: column; }
-
-.mt-8px { margin-top: 8px; }
-
-.gap-12px { gap: 12px; }
-
-.legend { font-size: 14px; }
-
-.dune-color { color: #FFC700; }
-
-.bgc-dune { background-color: #FFC700; } 
-
-.mtm-12px { margin-top: -12px; }
-
-.d-none { display: none; }
-
-.invisible { opacity: 0; }
-
-.container { position: relative; }
-
-.c-pointer { cursor: pointer; }
-
-.pos-btn {
-    position: absolute;
-    top: 10px;
+.flex-box {
+    display: flex;
 }
 
-#myDiv { 
+.x-center {
+    justify-content: center;
+}
+
+.y-center {
+    align-items: center;
+}
+
+.flex-spacebetw {
+    justify-content: space-between;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.mt-8px {
+    margin-top: 8px;
+}
+
+.gap-12px {
+    gap: 12px;
+}
+
+.legend {
+    font-size: 14px;
+}
+
+.dune-color {
+    color: #FFC700;
+}
+
+.bgc-dune {
+    background-color: #FFC700;
+}
+
+.mtm-12px {
+    margin-top: -12px;
+}
+
+.d-none {
+    display: none;
+}
+
+.invisible {
+    opacity: 0;
+}
+
+.opacity-02 {
+    opacity: 0.2;
+}
+
+.container {
+    position: relative;
+}
+
+.pos-absolute {
     position: absolute;
-    /* left: 50%;
-    right: 50%;  */
-    /* margin: auto; */
+}
+
+.c-pointer {
+    cursor: pointer;
+}
+
+.pos-btn {
     top: 10px;
 }
 
@@ -84,22 +117,65 @@ h1 {
     transition: scale 200ms ease-in-out;
 }
 
-#showLegend { 
-    margin-top: 4px; 
+#showLegend {
+    margin-top: 4px;
     font-size: 10px;
     padding: 6px 8px;
 }
 
+#introduction>img {
+    width: 32px;
+    height: 32px;
+}
+
+#introduction {
+    font-size: 12px;
+    color: #ffee00;
+    overflow-y: auto; 
+    max-height: 100%;
+}
+
+#introduction>div {
+    margin-left: 8px;
+}
+
 @media screen and (max-width: 760px) {
-    canvas { width: 100%; }
+    canvas {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 620px) {
+    #introduction {
+        /* overflow-y: scroll; */
+        max-height: 250px;
+    }
+}
+
+
+
+@media screen and (max-width: 480px) {
+    #legend {
+        font-size: 12px;
+    }
+
+    #introduction {
+        max-height: 190px;
+    }
 }
 
 @media screen and (max-width: 500px) {
-    h1 { font-size: 30px; }
+    h1 {
+        font-size: 30px;
+    }
 }
 
 @media screen and (max-height: 480px) {
-    canvas { height: 100vh; }
+    canvas {
+        height: 100vh;
+    }
 
-    h1 { display: none; }
+    h1 {
+        display: none;
+    }
 }

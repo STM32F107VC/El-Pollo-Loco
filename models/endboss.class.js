@@ -5,6 +5,8 @@ class Endboss extends MovableObject {
     world;
     speed = 8;
     xPrevious = 0;
+    win_audio = new Audio('audio/win_game.mp3');
+
 
     IMAGES_ALERT = [
         'img/4_enemie_boss_chicken/2_alert/G5.png',
@@ -87,6 +89,7 @@ class Endboss extends MovableObject {
         if (this.isDead()) {
             this.x = this.xPrevious;
             this.playAnimation(this.IMAGES_DEAD);
+            this.win_audio.play();
             setTimeout(() => {
                 this.applyGravity();
             }, 300);
@@ -95,8 +98,8 @@ class Endboss extends MovableObject {
                 this.clearAllIntervals();
                 this.world.character.clearAllIntervals();
                 wonGameScreen();
-            }, 2000);    
-        } else if(this.isHurt()) {
+            }, 2000);
+        } else if (this.isHurt()) {
             this.playAnimation(this.IMAGES_HURT);
         }
     }
