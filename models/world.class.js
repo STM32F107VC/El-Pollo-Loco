@@ -3,7 +3,6 @@ class World extends DrawableObject {
   animationFrameId;
   throwableObject = [];
   level = level1;
-  lastArrayPlace = this.level.enemies.length - 1;
   ctx;
   canvas;
   keyboard;
@@ -11,6 +10,7 @@ class World extends DrawableObject {
   bottleState = 0;
   coinState = 0;
   endbossLife = 0;
+  lastArrayPlace = this.level.enemies.length - 1;
   endBoss = this.level.enemies[this.lastArrayPlace];
 
   constructor(canvas, keyboard) {
@@ -32,7 +32,7 @@ class World extends DrawableObject {
   }
 
   run() {
-    this.setStoppableInterval(this.checkCollisions, 100);
+    this.setStoppableInterval(this.checkCollisions, 200);
     this.setStoppableInterval(this.checkThrowObjects, 200);
     this.setStoppableInterval(this.checkFullScreen, 100);
   }
@@ -89,7 +89,8 @@ class World extends DrawableObject {
 
   checkThrowObjects() {
     if (this.keyboard.D && this.bottleState > 0) {
-      let salsaBottle = new ThrowableObject(this.character.x, this.character.y);
+      
+      let salsaBottle = new ThrowableObject(this.character.x + 30, this.character.y);
       if (this.level.enemies[this.lastArrayPlace].isColliding(salsaBottle)) {
         let audio = new Audio('audio/burn_endboss.mp3');
         audio.play();
@@ -144,11 +145,8 @@ class World extends DrawableObject {
     if (mo.otherDirection) {
       this.flipImage(mo);
     }
-    // console.log(mo);
-    // this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
     mo.draw(this.ctx);
-    mo.drawFrame(this.ctx);
-
+    // mo.drawFrame(this.ctx);
     if (mo.otherDirection) {
       this.flipImageBack(mo);
     }

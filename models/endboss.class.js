@@ -59,7 +59,6 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
         this.x = 1900;
-        // console.log(this);
         this.setStoppableInterval(this.animate, 125);
         this.setStoppableInterval(this.checkEnergy, 75);
     }
