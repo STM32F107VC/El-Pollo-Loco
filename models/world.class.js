@@ -1,4 +1,4 @@
-class World extends DrawableObject {
+class World extends MovableObject {
   character = new Character();
   animationFrameId;
   throwableObject = [];
@@ -44,7 +44,7 @@ class World extends DrawableObject {
         this.level.statusBar[2].setPercentage(this.character.energy);
       }
     });
-
+    
     this.collisionWithCollectableObject('Bottle', 0);
     this.collisionWithCollectableObject('Coin', 1);
     this.checkCoinDepot();
@@ -55,13 +55,12 @@ class World extends DrawableObject {
     let lowerCaseInitialLetter = this.toLowerCase(type);
     let audio = new Audio(`audio/collect_${lowerCaseInitialLetter}.mp3`);
     let accessObj = lowerCaseInitialLetter + `State`;
-
     this.level[arrayName].forEach((obj) => {
       if (this.character.isColliding(obj) && this[accessObj] < 100) {
         this.level.statusBar[i].setPercentage(20 + this[accessObj]);
         this[accessObj] += 20;
         this.removeCollectableObject(type, obj);
-        audio.play(); 
+        audio.play();
       }
     });
   }
