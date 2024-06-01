@@ -89,8 +89,9 @@ class World extends DrawableObject {
 
   checkThrowObjects() {
     if (this.keyboard.D && this.bottleState > 0) {
-      
-      let salsaBottle = new ThrowableObject(this.character.x + 30, this.character.y);
+      let throwAudio = new Audio('audio/throw_salsabottle.mp3');
+      throwAudio.play();
+      let salsaBottle = new ThrowableObject(this.character.x + this.xOffset, this.character.y);
       if (this.level.enemies[this.lastArrayPlace].isColliding(salsaBottle)) {
         let audio = new Audio('audio/burn_endboss.mp3');
         audio.play();

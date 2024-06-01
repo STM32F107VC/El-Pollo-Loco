@@ -8,6 +8,7 @@ class DrawableObject {
   width = 100;
   intervalIds = [];
   startTime;
+  xOffset = 30;
 
   countPassedTime() {
     let passedTime;
