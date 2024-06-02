@@ -38,14 +38,22 @@
       <div class="pos-relative">
         <canvas id="canvas" width="720" height="480"></canvas>
 
-        <div id="myDivStart" class="pos-absolute pos-btn">
-          <button class="btn" onclick="init();">Play</button>
-          <button class="btn" onclick="showIntroduction();">Introduction</button>
+        <div id="myDivStart" class="flex-box gap-12px pos-absolute pos-btn">
+          <div>
+            <img class="img-controll c-pointer" onclick="init();" src="img/play_game.png" alt="play game">
+          </div>
+          <div>
+            <img class="img-controll c-pointer" onclick="showIntroduction();" src="img/info.png" alt="information">
+          </div>
         </div>
   
-        <div id="myDivFinish" class="pos-absolute pos-btn d-none">
-          <button class="btn" onclick="playAgain();">Play again</button>
-          <button class="btn" onclick="clearCanvas();">Go to startscreen</button>
+        <div id="myDivFinish" class="flex-box gap-12px pos-absolute pos-btn d-none">
+          <div>
+            <img class="img-controll c-pointer" onclick="playAgain();" src="img/play_again.png" alt="play again">
+          </div>
+          <div>
+            <img class="img-controll c-pointer" onclick="clearCanvas();" src="img/home.png" alt="home">
+          </div>
         </div>
   
         <div id="introduction" class="flex-box x-center pos-absolute d-none dune-color">
@@ -80,14 +88,22 @@
 
       <div>
         <div class="flex-box flex-spacebetw">
-          <div>
-            <img src="img/arrow_left.png" alt="arrow left">
-            <img src="img/arrow_right.png" alt="arrow left">
+          <div class="flex-box gap-12px">
+            <div>
+              <img src="img/arrow_left.png" alt="arrow left">
+            </div>
+            <div>
+              <img src="img/arrow_right.png" alt="arrow left">
+            </div>
           </div>
     
-          <div>
-            <img class="img-controll" src="img/6_salsa_bottle/salsa_bottle.png" alt="salsa bottle">
-            <img src="img/arrow_up.png" alt="arrow up">
+          <div class="flex-box y-center gap-12px">
+            <div class="salsaBottle flex-box x-center y-center">
+              <img class="" src="img/6_salsa_bottle/salsa_bottle.png" alt="salsa bottle">
+            </div>
+            <div>
+              <img src="img/arrow_up.png" alt="arrow up">
+            </div>
           </div>
         </div>
       </div>
