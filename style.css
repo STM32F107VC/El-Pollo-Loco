@@ -1,12 +1,18 @@
 body {
+    margin: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     font-family: 'Gilgongo Sledge';
-    background-image: url('img/5_background/desert.png');
-    background-position: center;
+    background-image: url('img/landscape.jpeg');
     background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    background-position: center;
+    /* 
     object-fit: cover;
+    */
 }
 
 canvas {
@@ -18,7 +24,8 @@ canvas {
 h1 {
     letter-spacing: 2px;
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-    font-size: 45px;
+    font-size: 40px;
+    margin: 0;
 }
 
 h2 { margin: 0; }
@@ -29,6 +36,8 @@ h2 { margin: 0; }
 }
 
 .flex-box { display: flex; }
+
+.x-start { justify-content: flex-start; }
 
 .x-center { justify-content: center; }
 
@@ -56,7 +65,7 @@ h2 { margin: 0; }
 
 .opacity-02 { opacity: 0.2; }
 
-.container { position: relative; }
+.pos-relative { position: relative; }
 
 .pos-absolute { position: absolute; }
 
@@ -93,6 +102,7 @@ h2 { margin: 0; }
     padding: 4px 0 0 4px;
     scrollbar-color: #FFC700 rgb(239, 153, 48);
     scrollbar-width: thin;
+    top: 0;
 }
 
 #introduction > img {
@@ -101,6 +111,11 @@ h2 { margin: 0; }
 }
 
 #introduction > div { margin-left: 8px; }
+
+.img-controll {
+    height: 48px;
+    width: 48px;
+}
 
 @media screen and (max-width: 760px) {
     canvas { width: 100% }

@@ -3,6 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="img/favicon.webp">
+
     <title>El Pollo Loco</title>
 
     <link rel="stylesheet" href="style.css" />
@@ -32,46 +34,61 @@
 
   <body id="body" onload="startGameScreen();">
     <h1 class="dune-color">El Pollo Loco</h1>
+    <div class="flex-box flex-column x-center"> 
+      <div class="pos-relative">
+        <canvas id="canvas" width="720" height="480"></canvas>
 
-    <div class="container flex-box x-center">
-      <canvas id="canvas" width="720" height="480"></canvas>
-
-      <div id="myDivStart" class="flex-box pos-absolute pos-btn dune-color gap-12px" onclick="">
-        <button class="btn" onclick="init();">Play</button>
-        <button class="btn" onclick="showIntroduction();">Introduction</button>
+        <div id="myDivStart" class="pos-absolute pos-btn">
+          <button class="btn" onclick="init();">Play</button>
+          <button class="btn" onclick="showIntroduction();">Introduction</button>
+        </div>
+  
+        <div id="myDivFinish" class="pos-absolute pos-btn d-none">
+          <button class="btn" onclick="playAgain();">Play again</button>
+          <button class="btn" onclick="clearCanvas();">Go to startscreen</button>
+        </div>
+  
+        <div id="introduction" class="flex-box x-center pos-absolute d-none dune-color">
+          <img class="c-pointer" onclick="closeIntroduction();" src="/img/go_back.png" alt="back">
+          <div>
+            <h2>Introduction</h2>
+            <p id="explanation">
+              Welcome to El Pollo Loco! <br><br>
+              The target is to kill the endboss a big angry chicken. <br>
+              But it's not so easy to come there because you have to avoid contact 
+              with the other chickens otherwise you get hurt and lose livepoints. <br><br>
+        
+              There are salsa bottles and coins scattered all over the map. <br><br>
+  
+              You can collect maximum five salsa bottles and coins.
+              If you've collected five coins a new bottle spawns on a random place into the map. 
+              This is possible two times there are ten coins totally to collect.
+  
+              You can always check how many salsa bottles or coins you've already collected. The status bar from the coins starts
+              to count at zero after collecting five. <br><br>
+              You can also check your statusbar for showing how many life points your character or the endboss has left.<br><br>
+  
+              If you win or lose a game you have the chance to start the game new or return to the start screen. <br><br>
+  
+              Game controll: <br>
+  
+              ⬅ = move left / ➞ = move right / — = jump / D = throw bottle / P = Fullscreen / esc = leave Fullscreen 
+            </p>
+          </div>
+        </div>
       </div>
 
-      <div id="myDivFinish" class="pos-absolute pos-btn d-none">
-        <button class="btn" onclick="playAgain();">Play again</button>
-        <button class="btn" onclick="clearCanvas();">Go to startscreen</button>
-      </div>
-
-      <div id="introduction" class="flex-box x-center pos-absolute d-none dune-color">
-        <img class="c-pointer" onclick="closeIntroduction();" src="/img/go_back.png" alt="back">
-        <div>
-          <h2>Introduction</h2>
-          <p id="explanation">
-            Welcome to El Pollo Loco! <br><br>
-            The target is to kill the endboss a big angry chicken. <br>
-            But it's not so easy to come there because you have to avoid contact 
-            with the other chickens otherwise you get hurt and lose livepoints. <br><br>
-      
-            There are salsa bottles and coins scattered all over the map. <br><br>
-
-            You can collect maximum five salsa bottles and coins.
-            If you've collected five coins a new bottle spawns on a random place into the map. 
-            This is possible two times there are ten coins totally to collect.
-
-            You can always check your statusbar for showing how many life points your character or the endboss has left. <br><br>
-            You also see how many salsa bottles or coins you've already collected. The status bar from the coins starts to count at zero after collecting five. <br><br>
-
-            If you win or lose a game you have the chance to start the game new or return to the start screen. <br><br>
-
-            At the bottom you see another button to show the legend which showing you how to controll the game. <br><br>
-            Click the button to show the legend and to close click into the text. <br><br>
-
-            ⬅ = move left / ➞ = move right / — = jump / D = throw bottle / P = Fullscreen / esc = leave Fullscreen 
-          </p>
+      <div>
+        <div class="flex-box flex-spacebetw">
+          <div>
+            <img src="img/arrow_left.png" alt="arrow left">
+            <img src="img/arrow_right.png" alt="arrow left">
+          </div>
+    
+          <div>
+            <img class="img-controll" src="img/6_salsa_bottle/salsa_bottle.png" alt="salsa bottle">
+            <img src="img/arrow_up.png" alt="arrow up">
+          </div>
         </div>
       </div>
     </div>
