@@ -15,6 +15,12 @@ class ThrowableObject extends MovableObject {
         'img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png'
     ];
 
+    /**
+     * The cunstructor function is always called first when a new instance of this class is generated and configures the object
+     * 
+     * @param {number} x - This is the value how far the bottle in x-direction can be thrown away
+     * @param {number} y - This is the value how far the bottle in y-direction can be thrown away
+     */
     constructor(x, y) {
         super().loadImage('img/6_salsa_bottle/salsa_bottle.png');
         this.bottleForwarding = this.bottleForwarding.bind(this);
@@ -27,6 +33,12 @@ class ThrowableObject extends MovableObject {
         this.throw(x, y);
     }
 
+    /**
+     * This function throws the bottle away
+     * 
+     * @param {number} x - This is the value how far the bottle in x-direction can be thrown away
+     * @param {number} y - This is the value how far the bottle in y-direction can be thrown away
+     */
     throw(x, y) {
         this.x = x + 150;
         this.y = y - 50;
@@ -41,6 +53,10 @@ class ThrowableObject extends MovableObject {
         }, 500);
     }
 
+    /**
+     * This function sets an offset so the bottle can make damage earlier to the endboss so you dont have to be as close as possible in front of him
+     * 
+     */
     bottleForwarding() {
         this.x += 10;
     }

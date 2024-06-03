@@ -13,6 +13,12 @@ class World extends MovableObject {
   lastArrayPlace = this.level.enemies.length - 1;
   endBoss = this.level.enemies[this.lastArrayPlace];
 
+  /**
+   * The cunstructor function is always called first when a new instance of this class is generated and configures the object
+   * 
+   * @param {canvas} canvas - This this is the paintable are where you can bring all you objects on
+   * @param {key value} keyboard - This is the value of the pressed or released key 
+   */
   constructor(canvas, keyboard) {
     super();
     this.checkThrowObjects = this.checkThrowObjects.bind(this);
@@ -26,17 +32,30 @@ class World extends MovableObject {
     this.run();
   }
 
+  /**
+   * This functions inherits the whole world to the character and the endboss to easily access all attributes form the world
+   * 
+   */
   setWorld() {
     this.character.world = this;
     this.level.enemies[this.lastArrayPlace].world = this;
   }
 
+  /**
+   * This function sets all stoppable intervals for checking collisions between the character and enemies or when a salsa bottle is thrown away
+   * and if you want to enter the fullscreen mode
+   * 
+   */
   run() {
     this.setStoppableInterval(this.checkCollisions, 200);
     this.setStoppableInterval(this.checkThrowObjects, 200);
     this.setStoppableInterval(this.checkFullScreen, 100);
   }
 
+  /**
+   * This function checks collisions between objects in the map
+   * 
+   */
   checkCollisions() {
     this.level.enemies.forEach((enemy) => {
       if (this.character.isColliding(enemy)) {
@@ -44,12 +63,19 @@ class World extends MovableObject {
         this.level.statusBar[2].setPercentage(this.character.energy);
       }
     });
-    
+
     this.collisionWithCollectableObject('Bottle', 0);
     this.collisionWithCollectableObject('Coin', 1);
     this.checkCoinDepot();
   }
 
+
+  /**
+   * This function checks collisions between collectable objects in the map like coins or salsa bottles
+   * 
+   * @param {string} type - This is the name of the collectable object either: Coin or Bottle 
+   * @param {variable} i - This is the number of the status bar which needs to be refreshed after a collision
+   */
   collisionWithCollectableObject(type, i) {
     let arrayName = `collectable${type}`;
     let lowerCaseInitialLetter = this.toLowerCase(type);
@@ -65,6 +91,11 @@ class World extends MovableObject {
     });
   }
 
+  /**
+   * This function checks the current state of collected coins. If the value is 100 the status bar gets refreshed
+   * it beginns to count from the beginning
+   * 
+   */
   checkCoinDepot() {
     if (this.coinState == 100) {
       this.coinState = 0;
@@ -73,11 +104,23 @@ class World extends MovableObject {
     }
   }
 
+  /**
+   * This function makes all letters from uppercase to lowercase
+   * 
+   * @param {string} obj - This is the word you want to change from uppercase to lowercase 
+   * @returns 
+   */
   toLowerCase(obj) {
     let lowerCaseInitialLetter = obj.toLowerCase();
     return lowerCaseInitialLetter;
   }
 
+  /**
+   * This function removes a collected object like a coin or bottle
+   * 
+   * @param {string} type - This is the name of the collectable object either: Coin or Bottle
+   * @param {object} obj - This is the object you want to remove from the map after you collected it
+   */
   removeCollectableObject(type, obj) {
     let arrayName = `collectable${type}`;
     let arrayIndex = this.level[arrayName].indexOf(obj);
@@ -86,6 +129,11 @@ class World extends MovableObject {
     }
   }
 
+  /**
+   * This is the function to check if you want to throw a salsa bottle necessarly you have to collect first one that it
+   * is possible. Then it generates a sound of a throwable object and if you hit the endboss his life gets reduced.
+   * 
+   */
   checkThrowObjects() {
     if (this.keyboard.D && this.bottleState > 0) {
       let throwAudio = new Audio('audio/throw_salsabottle.mp3');
@@ -104,12 +152,20 @@ class World extends MovableObject {
     }
   }
 
+  /**
+   * This function is to switch to full screen
+   * 
+   */
   checkFullScreen() {
     if (keyboard.P) {
       canvas.requestFullscreen();
     }
   }
 
+  /**
+   * This is a self repetitive function to add objects to the map.
+   * 
+   */
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.ctx.translate(this.camera_x, 0);
@@ -120,13 +176,13 @@ class World extends MovableObject {
     this.addObjectsToMap(this.level.collectableCoin);
     this.addObjectsToMap(this.throwableObject);
 
-    this.ctx.translate(-this.camera_x, 0); // backward
+    this.ctx.translate(-this.camera_x, 0); // move backward
     //------ Space for fixed objects ------
     this.addObjectsToMap(this.level.statusBar);
     this.ctx.translate(this.camera_x, 0); // forward
 
     this.addToMap(this.character);
-    this.ctx.translate(-this.camera_x, 0); // backward
+    this.ctx.translate(-this.camera_x, 0); // move backward
 
     // draw() wird immer wieder aufgerufen
     let self = this;
@@ -135,12 +191,22 @@ class World extends MovableObject {
     });
   }
 
+  /**
+   * This function also adds all objects to the map overgiven from the draw() function
+   * 
+   * @param {object} objects - This is the object that has to be drawn to the map
+   */
   addObjectsToMap(objects) {
     objects.forEach((o) => {
       this.addToMap(o);
     });
   }
 
+  /**
+   * This function draws objects to the map
+   * 
+   * @param {object} mo - This is the object which is drawn to the map 
+   */
   addToMap(mo) {
     if (mo.otherDirection) {
       this.flipImage(mo);
@@ -152,6 +218,11 @@ class World extends MovableObject {
     }
   }
 
+  /**
+   * This function switches the image when the direction of the object changes
+   * 
+   * @param {object} mo - This is a object which is in the shown in the world 
+   */
   flipImage(mo) {
     this.ctx.save();
     this.ctx.translate(mo.width, 0);
@@ -159,6 +230,11 @@ class World extends MovableObject {
     mo.x = mo.x * -1;
   }
 
+  /**
+   * This function switches the image back when the direction of the object changes
+   * 
+   * @param {object} mo - This is a object which is shown in the world
+   */
   flipImageBack(mo) {
     this.ctx.restore();
     mo.x = mo.x * -1;

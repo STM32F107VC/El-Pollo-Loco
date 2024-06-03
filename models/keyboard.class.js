@@ -1,10 +1,7 @@
 class Keyboard {
-    LEFT = false;
-    RIGHT = false;
-    UP = false;
-    DOWN = false
-    SPACE = false;
+    LEFT = false; // Move left
+    RIGHT = false; // Move right
+    SPACE = false; // Jump
     D = false; // Throw bottle
-    P = false;
-    constructor() {}
+    P = false; // Full screen
 }
