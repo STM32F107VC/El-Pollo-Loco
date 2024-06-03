@@ -48,7 +48,7 @@ class Endboss extends MovableObject {
         'img/4_enemie_boss_chicken/5_dead/G25.png',
         'img/4_enemie_boss_chicken/5_dead/G26.png',
     ];
-
+ 
     constructor() {
         super().loadImage(this.IMAGES_WALKING[0]);
         this.animate = this.animate.bind(this); // Access correct object with bind this to the class EndBoss
@@ -91,11 +91,11 @@ class Endboss extends MovableObject {
             this.win_audio.play();
             setTimeout(() => {
                 this.applyGravity();
+                this.world.character.clearAllIntervals();
+                this.clearAllIntervals();
             }, 300);
             setTimeout(() => {
                 this.stopGame(this.world.animationFrameId);
-                this.clearAllIntervals();
-                this.world.character.clearAllIntervals();
                 wonGameScreen();
             }, 2000);
         } else if (this.isHurt()) {

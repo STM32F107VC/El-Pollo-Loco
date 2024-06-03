@@ -1,12 +1,18 @@
 body {
+    margin: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     font-family: 'Gilgongo Sledge';
-    background-image: url('img/5_background/desert.png');
-    background-position: center;
+    background-image: url('img/landscape.jpeg');
     background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    background-position: center;
+    /* 
     object-fit: cover;
+    */
 }
 
 canvas {
@@ -18,7 +24,8 @@ canvas {
 h1 {
     letter-spacing: 2px;
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-    font-size: 45px;
+    font-size: 40px;
+    margin: 0;
 }
 
 h2 { margin: 0; }
@@ -29,6 +36,8 @@ h2 { margin: 0; }
 }
 
 .flex-box { display: flex; }
+
+.x-start { justify-content: flex-start; }
 
 .x-center { justify-content: center; }
 
@@ -56,7 +65,7 @@ h2 { margin: 0; }
 
 .opacity-02 { opacity: 0.2; }
 
-.container { position: relative; }
+.pos-relative { position: relative; }
 
 .pos-absolute { position: absolute; }
 
@@ -64,30 +73,10 @@ h2 { margin: 0; }
 
 .pos-btn { top: 24px; }
 
-.btn {
-    font-family: 'Gilgongo Sledge';
-    background-color: #FFC700;
-    cursor: pointer;
-    box-shadow: 0px 4px 25px 1px #FFC700;
-    border-radius: 10px;
-    border: none;
-    padding: 8px 12px;
-}
-
-.btn:hover {
-    scale: 1.04;
-    transition: scale 200ms ease-in-out;
-}
-
 #showLegend {
     margin-top: 4px;
     font-size: 10px;
     padding: 6px 8px;
-}
-
-#introduction>img {
-    width: 32px;
-    height: 32px;
 }
 
 #introduction {
@@ -96,13 +85,37 @@ h2 { margin: 0; }
     overflow-y: auto; 
     max-height: 100%;
     padding: 4px 0 0 4px;
+    scrollbar-color: #FFC700 rgb(239, 153, 48);
+    scrollbar-width: thin;
+    top: 0;
+}
+
+#introduction > img {
+    width: 32px;
+    height: 32px;
 }
 
 #introduction > div { margin-left: 8px; }
 
-#introduction {
-    scrollbar-color: #FFC700 rgb(239, 153, 48);
-    scrollbar-width: thin;
+.img-controll {
+    height: 48px;
+    width: 48px;
+}
+
+.img-controll:hover {
+    scale: 1.04;
+    transition: scale 200ms ease-in-out;
+}
+
+.salsaBottle {
+    background-color: #BCBCBC;
+    border-radius: 50%;
+    border: 1px solid black;
+}
+
+.salsaBottle > img {
+    width: 36px;
+    height: 36px;
 }
 
 @media screen and (max-width: 760px) {

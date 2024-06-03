@@ -95,7 +95,7 @@ function initLevel() {
       new CollectableCoin("img/8_coin/coin_2.png", 1100, 175),
       new CollectableCoin("img/8_coin/coin_2.png", 1200, 175),
       new CollectableCoin("img/8_coin/coin_2.png", 1400, 150),
-      new CollectableCoin("img/8_coin/coin_2.png", 1600, 175),
+      new CollectableCoin("img/8_coin/coin_2.png", 1600, 175)
     ]
   );
 }

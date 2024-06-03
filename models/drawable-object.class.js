@@ -23,7 +23,6 @@ class DrawableObject {
   }
 
   stopGame(aFI) {
-    this.clearAllIntervals();
     cancelAnimationFrame(aFI);
   }
 

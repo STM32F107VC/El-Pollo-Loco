@@ -123,13 +123,6 @@ function awaitImgLoad(ctx, img, posX, posY, width, height) {
   };
 }
 
-function hideLegend() {
-  let legend = document.getElementById('legend');
-  let button = document.getElementById('showLegend');
-  legend.classList.toggle('d-none');
-  button.classList.toggle('d-none');
-}
-
 addEventListener("keydown", (e) => {
   if (e.code == "ArrowRight") {
     keyboard.RIGHT = true;
