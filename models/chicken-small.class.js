@@ -7,24 +7,37 @@ class ChickenSmall extends MovableObject {
         'img/3_enemies_chicken/chicken_small/1_walk/1_w.png',
         'img/3_enemies_chicken/chicken_small/1_walk/2_w.png',
         'img/3_enemies_chicken/chicken_small/1_walk/3_w.png'
-    ];    
+    ];
 
+    /**
+     * The cunstructor function is always called first when a new instance of this class is generated and configures the object
+     * 
+     */
     constructor() {
         super().loadImage('img/3_enemies_chicken/chicken_small/1_walk/1_w.png');
         this.loadImages(this.IMAGES_WALKING);
+        this.animate = this.animate.bind(this);
+        this.walking = this.walking.bind(this);
         this.x = 300 + Math.random() * 1000;
         this.speed = 0.15 + Math.random() * 0.25;
-        this.animate();
+        this.setStoppableInterval(this.animate, 1000 / 60);
+        this.setStoppableInterval(this.walking, 200);
     }
 
+    /**
+     * This function let the chickens move left with 60fps
+     * 
+     */
     animate() {
-        setInterval(() => {
-            this.moveLeft();
-            this.otherDirection = false;
-        }, 1000/60);
-        
-        setInterval(() => {
-            this.playAnimation(this.IMAGES_WALKING);
-        }, 200);
+        this.moveLeft();
+        this.otherDirection = false;
+    }
+
+    /**
+     * This function let the chicken image animation play with 200ms
+     * 
+     */
+    walking() {
+        this.playAnimation(this.IMAGES_WALKING);
     }
 }

@@ -71,6 +71,10 @@ class Character extends MovableObject {
     "img/2_character_pepe/5_dead/D-57.png",
   ];
 
+  /**
+   * The cunstructor function is always called first when a new instance of this class is generated and configures the object
+   * 
+   */
   constructor() {
     super().loadImage("../img/2_character_pepe/2_walk/W-21.png");
     this.checkEnergy = this.checkEnergy.bind(this);
@@ -89,15 +93,23 @@ class Character extends MovableObject {
     this.startTime = new Date().getTime() / 1000;
   }
 
+  /**
+   * This function plays the idle animation when he isn't walking. From 0 sec. upwards is the short idle and from 3 sec. upwards the long idle
+   * 
+   */
   idleAnimation() {
-    if(this.countPassedTime() >= 0) {
+    if (this.countPassedTime() >= 0) {
       this.playAnimation(this.IMAGES_IDLE);
     }
-    if(this.countPassedTime() >= 4) {
+    if (this.countPassedTime() >= 4) {
       this.playAnimation(this.IMAGES_LONG_IDLE);
     }
   }
 
+  /**
+   * This function checks keydown inputs so the character can walk left, right, jump and throw salsa bottles
+   * 
+   */
   animate() {
     if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
       this.moveRight();
@@ -114,28 +126,44 @@ class Character extends MovableObject {
     this.world.camera_x = -this.x + 100;
   }
 
+  /**
+   * This function checks the if the character is dead, above ground or go hurt
+   * 
+   */
   checkEnergy() {
     if (this.isDead()) {
       this.playAnimation(this.IMAGES_DEAD);
       this.dead_audio.play();
-      this.clearAllIntervals();
-      this.stopGame(this.world.animationFrameId);
-      lostGameScreen();
+      this.stop();
     } else if (this.isHurt()) {
       this.playAnimation(this.IMAGES_HURT);
       this.hurt_audio.play();
     } else if (this.isAboveGround()) {
       this.playAnimation(this.IMAGES_JUMPING);
-      this.startTime = new Date().getTime() / 1000;
+      this.startTime = this.newTimeStamp();
     } else {
       if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-        this.startTime = new Date().getTime() / 1000;
+        this.startTime = this.newTimeStamp();
         // Walk animation
         this.playAnimation(this.IMAGES_WALKING);
       }
     }
   }
 
+  /**
+   * This function stops the game when it's finish
+   * 
+   */
+  stop() {
+    this.clearAllIntervals();
+    this.stopGame(this.world.animationFrameId);
+    lostGameScreen();
+  }
+
+  /**
+   * This function let the character jump
+   * 
+   */
   jump() {
     this.speedY = 30;
   }

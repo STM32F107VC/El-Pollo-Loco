@@ -6,6 +6,10 @@ class MovableObject extends DrawableObject {
   energy = 100;
   lastHit = 0;
 
+  /**
+   * This function applies gravity to falling objects
+   * 
+   */
   applyGravity() {
     setInterval(() => {
       if (this.isAboveGround() || this.speedY > 0) {
@@ -15,6 +19,11 @@ class MovableObject extends DrawableObject {
     }, 1000 / 25);
   }
 
+  /**
+   * This function checks if a salsa bottle (ThrowableObject) or the endboss is above the ground to applie gravity or not
+   * 
+   * @returns - Returns true if object is above ground and also return in the else {} path this.y < 285 as a condition for if statement
+   */
   isAboveGround() {
     if (this instanceof ThrowableObject || this instanceof Endboss) {
       // Throwable objects should always fall
@@ -24,6 +33,12 @@ class MovableObject extends DrawableObject {
     }
   }
 
+  /**
+   * This function checks if an object is colliding with an other object
+   * 
+   * @param {object} enemy - This is the enemies but also objects like coins and salsa bottles 
+   * @returns 
+   */
   isColliding(enemy) {
     return (
       this.x + this.width > enemy.x &&
@@ -33,6 +48,10 @@ class MovableObject extends DrawableObject {
     );
   }
 
+  /**
+   * This function lowers life points when a hit happens
+   * 
+   */
   hit() {
     this.energy -= 20;
     if (this.energy <= 0) {
@@ -42,16 +61,31 @@ class MovableObject extends DrawableObject {
     }
   }
 
+  /**
+   * This function checks if the character or the endboss i dead and return its own energy with zero
+   * 
+   * @returns - Returns the death state with zero energy
+   */
   isDead() {
     return this.energy == 0;
   }
 
+  /**
+   * This function checks if character or endboss was hit
+   * 
+   * @returns - Returns a statement for a if() condition
+   */
   isHurt() {
     let timepassed = new Date().getTime() - this.lastHit;
     timepassed = timepassed / 1000;
     return timepassed < 0.5;
   }
 
+  /**
+   * This function play/iterates all images from the array given to it so a flowing movement is created (also depending on the setIntervall time)
+   * 
+   * @param {images} images - This are all image paths in the images array 
+   */
   playAnimation(images) {
     let i = this.currentImage % images.length;
     let path = images[i];
@@ -59,11 +93,19 @@ class MovableObject extends DrawableObject {
     this.currentImage++;
   }
 
+  /**
+   * This function lets an object move right
+   * 
+   */
   moveRight() {
     this.x += this.speed;
     this.otherDirection = false;
   }
 
+  /**
+   * This function lets an object move left
+   * 
+   */
   moveLeft() {
     this.x -= this.speed;
     this.otherDirection = true;

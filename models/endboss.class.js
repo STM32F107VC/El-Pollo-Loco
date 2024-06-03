@@ -49,6 +49,10 @@ class Endboss extends MovableObject {
         'img/4_enemie_boss_chicken/5_dead/G26.png',
     ];
  
+    /**
+     * The cunstructor function is always called first when a new instance of this class is generated and configures the object
+     * 
+     */
     constructor() {
         super().loadImage(this.IMAGES_WALKING[0]);
         this.animate = this.animate.bind(this); // Access correct object with bind this to the class EndBoss
@@ -63,6 +67,10 @@ class Endboss extends MovableObject {
         this.setStoppableInterval(this.checkEnergy, 75);
     }
 
+    /**
+     * This function is to check how far away in x-direction the character from the endboss is
+     * 
+     */
     animate() {
         let distanceToCharacter = this.x - this.world.character.x;
         if (distanceToCharacter < 700 && distanceToCharacter > 500) {
@@ -83,6 +91,10 @@ class Endboss extends MovableObject {
         }
     }
 
+    /**
+     * This function is to check if the endboss is death and cancle all active intervalls and forwarding to the win screen
+     * 
+     */
     checkEnergy() {
         this.xPrevious = this.x;
         if (this.isDead()) {
