@@ -8,17 +8,18 @@ let imgEndScreen = new Image();
 let imgLandscape = new Image();
 let deadEndboss = new Image();
 let keyboard = new Keyboard();
-let intro_music = new Audio('audio/intro_music.mp3');
+let intro_music = new Audio('audio/intro_sound _v2.mp3');
 let chicken_noise = new Audio('audio/chicken_noise.mp3');
 document.fonts.load("50px Gilgongo Sledge");
+let k;
 
 function startGameScreen() {
+  addTouchEventListener();
   hideBtn('Finish');
   showBtn('Start');
   getCtx();
   setImgSrc();
   awaitImgLoad(ctx, imgStartScreen, 0, 0, 720, 480);
-  // playAudio(intro_music);
 }
 
 function getCtx() {
@@ -63,8 +64,8 @@ function wonGameScreen() {
   showBtn('Finish');
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.drawImage(imgLandscape, 0, 0, 720, 480);
-  ctx.drawImage(deadEndboss, canvas.width/2 - 100, canvas.height/5, 250, 400);
-  ctx.fillText("You win!", canvas.width/2, 125);
+  ctx.drawImage(deadEndboss, canvas.width / 2 - 100, canvas.height / 5, 250, 400);
+  ctx.fillText("You win!", canvas.width / 2, 125);
   ctx.textAlign = 'center';
   ctx.fillStyle = '#FFC700';
   ctx.fillStyle = "rgb(255 199 0 / 100%)";
@@ -78,10 +79,17 @@ function playAgain() {
   }, 200);
 }
 
+function setImgSrc() {
+  imgStartScreen.src = './img/9_intro_outro_screens/start/startscreen_2.png';
+  imgEndScreen.src = 'img/9_intro_outro_screens/game_over/game over!.png';
+  imgLandscape.src = 'img/5_background/first_half_background.png';
+  deadEndboss.src = 'img/4_enemie_boss_chicken/5_dead/G26.png';
+}
+
 function playAudio(audio) {
   let newAudio = audio;
-  newAudio.autoplay = true;
   newAudio.loop = true;
+  // media.muted = true;
   audio.play();
   audios.push(audio);
 }
@@ -90,17 +98,11 @@ function pauseAudio(audio) {
   audio.pause();
 }
 
-function pauseAllAudios() {
-  audios.forEach(a => {
-    a.pause();
-  });
-}
-
 function showIntroduction() {
-  hideBtn('Start');
-  canvas.classList.add('opacity-02');
   let div = document.getElementById('introduction');
   div.classList.remove('d-none');
+  canvas.classList.add('opacity-02');
+  hideBtn('Start');
 }
 
 function closeIntroduction() {
@@ -110,18 +112,22 @@ function closeIntroduction() {
   canvas.classList.remove('opacity-02');
 }
 
-function setImgSrc() {
-  imgStartScreen.src = './img/9_intro_outro_screens/start/startscreen_2.png';
-  imgEndScreen.src = 'img/9_intro_outro_screens/game_over/game over!.png';
-  imgLandscape.src = 'img/5_background/first_half_background.png';
-  deadEndboss.src = 'img/4_enemie_boss_chicken/5_dead/G26.png';
-}
-
 function awaitImgLoad(ctx, img, posX, posY, width, height) {
   img.onload = function () {
     ctx.drawImage(img, posX, posY, width, height);
   };
 }
+
+function muteAudio() {
+  if (!k) {
+    pauseAudio(intro_music);
+    k = true;
+  } else {
+    playAudio(intro_music);
+    k = false;
+  }
+}
+
 
 addEventListener("keydown", (e) => {
   if (e.code == "ArrowRight") {
@@ -170,3 +176,31 @@ addEventListener("keyup", (e) => {
     keyboard.P = false;
   }
 });
+
+function addTouchEventListener() {
+  document.getElementById('moveLeft').addEventListener('touchstart', (e) => {
+    keyboard.LEFT = true;
+  });
+  document.getElementById('moveLeft').addEventListener('touchend', (e) => {
+    keyboard.LEFT = false;
+    console.log(keyboard.LEFT);
+  });
+  document.getElementById('moveRight').addEventListener('touchstart', (e) => {
+    keyboard.RIGHT = true;
+  });
+  document.getElementById('moveRight').addEventListener('touchend', (e) => {
+    keyboard.RIGHT = false;
+  });
+  document.getElementById('throwBottle').addEventListener('touchstart', (e) => {
+    keyboard.D = true;
+  });
+  document.getElementById('throwBottle').addEventListener('touchend', (e) => {
+    keyboard.D = false;
+  });
+  document.getElementById('jump').addEventListener('touchstart', (e) => {
+    keyboard.SPACE = true;
+  });
+  document.getElementById('jump').addEventListener('touchend', (e) => {
+    keyboard.SPACE = false;
+  });  
+}

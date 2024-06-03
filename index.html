@@ -33,21 +33,29 @@
   </head>
 
   <body id="body" onload="startGameScreen();">
+
     <h1 class="dune-color">El Pollo Loco</h1>
+
     <div class="flex-box flex-column x-center"> 
       <div class="pos-relative">
         <canvas id="canvas" width="720" height="480"></canvas>
 
-        <div id="myDivStart" class="flex-box gap-12px pos-absolute pos-btn">
+        <!-- Images start game, introduction and mute audio -->
+        <div id="myDivStart" class="flex-box x-center gap-12px pos-absolute pos-btn">
           <div>
             <img class="img-controll c-pointer" onclick="init();" src="img/play_game.png" alt="play game">
           </div>
           <div>
             <img class="img-controll c-pointer" onclick="showIntroduction();" src="img/info.png" alt="information">
           </div>
+          <div>
+            <img class="img-controll c-pointer" onclick="muteAudio();" src="img/mute.png" alt="mute">
+          </div>
         </div>
-  
-        <div id="myDivFinish" class="flex-box gap-12px pos-absolute pos-btn d-none">
+        
+        <!-- Is stadard display: none; turns visible when game is over and invisible when games restarts -->
+        <!-- Has restart and go to start screen images to click on -->
+        <div id="myDivFinish" class="flex-box x-center gap-12px pos-absolute pos-btn d-none">
           <div>
             <img class="img-controll c-pointer" onclick="playAgain();" src="img/play_again.png" alt="play again">
           </div>
@@ -55,7 +63,8 @@
             <img class="img-controll c-pointer" onclick="clearCanvas();" src="img/home.png" alt="home">
           </div>
         </div>
-  
+        
+        <!-- Container with introduction in it -->
         <div id="introduction" class="flex-box x-center pos-absolute d-none dune-color">
           <img class="c-pointer" onclick="closeIntroduction();" src="/img/go_back.png" alt="back">
           <div>
@@ -86,22 +95,25 @@
         </div>
       </div>
 
-      <div>
+      <!-- Controll unit-->
+      <div id="controllUnit">
+        <!-- Move left or right -->
         <div class="flex-box flex-spacebetw">
           <div class="flex-box gap-12px">
-            <div>
+            <div id="moveLeft" class="c-pointer">
               <img src="img/arrow_left.png" alt="arrow left">
             </div>
-            <div>
+            <div id="moveRight" class="c-pointer">
               <img src="img/arrow_right.png" alt="arrow left">
             </div>
           </div>
-    
+          
+          <!-- Throw salsa bottle or jump -->
           <div class="flex-box y-center gap-12px">
-            <div class="salsaBottle flex-box x-center y-center">
-              <img class="" src="img/6_salsa_bottle/salsa_bottle.png" alt="salsa bottle">
+            <div id="throwBottle" class="salsaBottle flex-box x-center y-center c-pointer">
+              <img src="img/6_salsa_bottle/salsa_bottle.png" alt="salsa bottle">
             </div>
-            <div>
+            <div id="jump" class="c-pointer">
               <img src="img/arrow_up.png" alt="arrow up">
             </div>
           </div>
