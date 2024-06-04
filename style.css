@@ -177,6 +177,12 @@ h2 {
     width: 100%;
 }
 
+.landscapeMode>img {
+    width: 100px;
+    height: 100px;
+    transform: rotate(-45deg);
+}
+
 @media screen and (max-width: 760px) {
     canvas {
         width: 100%
@@ -240,20 +246,15 @@ h2 {
 @media screen and (orientation:portrait) {
 
     canvas,
-    #myDivStart,
+    #startBtn,
     #myDivFinish,
     #controllUnit {
         opacity: 0.1;
         z-index: -1;
     }
 
-    .landscapeMode {
-        transform: rotate(90deg);
-    }
-
-    .landscapeMode>img {
-        width: 100px;
-        height: 100px;
+    .landscapeMode:hover > img {
+        transform: rotate(45deg);
     }
 }
 
