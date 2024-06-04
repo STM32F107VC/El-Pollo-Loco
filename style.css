@@ -1,6 +1,5 @@
 body {
     margin: 0;
-    padding: 0 12px 0 12px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -91,8 +90,8 @@ h2 {
     opacity: 0;
 }
 
-.opacity-02 {
-    opacity: 0.2;
+.opacity-01 {
+    opacity: 0.1;
 }
 
 .pos-relative {
@@ -142,11 +141,6 @@ h2 {
     width: 48px;
 }
 
-.img-controll:hover {
-    scale: 1.04;
-    transition: scale 200ms ease-in-out;
-}
-
 .salsaBottle {
     background-color: #BCBCBC;
     border-radius: 50%;
@@ -163,6 +157,25 @@ h2 {
     width: 100%;
 }
 
+.landscapeMode {
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.landscapeMode>img {
+    width: 150px;
+    height: 150px;
+}
+
+#controllUnit {
+    width: 100%;
+    bottom: 0;
+}
+
+#controllUnit>div {
+    width: 100%;
+}
 
 @media screen and (max-width: 760px) {
     canvas {
@@ -215,9 +228,39 @@ h2 {
 }
 
 @media screen and (max-width: 400px) {
+
     #myDivStart img,
     #myDivFinish img {
         width: 28px;
         height: 28px;
+    }
+}
+
+/* Force landscape mode */
+@media screen and (orientation:portrait) {
+
+    canvas,
+    #myDivStart,
+    #myDivFinish,
+    #controllUnit {
+        opacity: 0.1;
+        z-index: -1;
+    }
+
+    .landscapeMode {
+        transform: rotate(90deg);
+    }
+
+    .landscapeMode>img {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+@media screen and (orientation:landscape) {
+
+    h1,
+    .landscapeMode {
+        display: none;
     }
 }

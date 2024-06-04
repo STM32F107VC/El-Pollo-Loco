@@ -156,7 +156,7 @@ function pauseAudio(audio) {
 function showIntroduction() {
   let div = document.getElementById('introduction');
   div.classList.remove('d-none');
-  canvas.classList.add('opacity-02');
+  canvas.classList.add('opacity-01');
   hideBtn('Start');
 }
 
@@ -168,7 +168,7 @@ function closeIntroduction() {
   showBtn('Start');
   let div = document.getElementById('introduction');
   div.classList.add('d-none');
-  canvas.classList.remove('opacity-02');
+  canvas.classList.remove('opacity-01');
 }
 
 /**
@@ -192,11 +192,14 @@ function awaitImgLoad(ctx, img, posX, posY, width, height) {
  * 
  */
 function muteAudio() {
+  let icon = document.getElementById('speakerIcon');
   if (!k) {
     pauseAudio(intro_music);
+    icon.src = 'img/mute.png';
     k = true;
   } else {
     playAudio(intro_music);
+    icon.src = 'img/unmute.png';
     k = false;
   }
 }

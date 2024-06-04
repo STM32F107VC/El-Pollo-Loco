@@ -9,6 +9,7 @@ class DrawableObject {
   intervalIds = [];
   startTime;
   xOffset = 30;
+  yOffset = 10;
 
   /**
    * This function checks how mutch time passed to set the character into the idle mode
