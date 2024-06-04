@@ -33,9 +33,14 @@
 
     <h1 class="dune-color">El Pollo Loco</h1>
 
-    <div class="flex-box flex-column x-center"> 
+    <div id="mainContainer" class="flex-box flex-column x-center"> 
       <div class="pos-relative">
         <canvas id="canvas" width="720" height="480"></canvas>
+
+
+        <div class="landscapeMode pos-absolute flex-box x-center y-center">
+          <img class="" src="img/rotate_phone.png" alt="landscape mode">
+        </div>
 
         <!-- Images start game, introduction and mute audio -->
         <div id="myDivStart" class="flex-box x-center gap-12px pos-absolute pos-btn">
@@ -46,7 +51,7 @@
             <img class="img-controll c-pointer" onclick="showIntroduction();" src="img/info.png" alt="information">
           </div>
           <div>
-            <img class="img-controll c-pointer" onclick="muteAudio();" src="img/sound_on.png" alt="mute">
+            <img id="speakerIcon" class="img-controll c-pointer" onclick="muteAudio();" src="img/mute.png" alt="mute">
           </div>
         </div>
         
@@ -90,10 +95,9 @@
             </p>
           </div>
         </div>
-      </div>
 
-      <!-- Controll unit-->
-      <div id="controllUnit">
+        <!-- Controll unit-->
+      <div id="controllUnit" class="flex-box flex-spacebetw pos-absolute">
         <!-- Move left or right -->
         <div class="flex-box flex-spacebetw">
           <div class="flex-box gap-12px">
@@ -115,6 +119,7 @@
             </div>
           </div>
         </div>
+      </div>
       </div>
     </div>
   </body>
