@@ -14,6 +14,10 @@ class MuteableAudio extends DrawableObject {
         'audio/win_game.mp3'
     ];
 
+    /**
+     * The cunstructor function is always called first when a new instance of this class is generated and configures the object
+     * 
+     */
     constructor() {
         super();
         this.loadSounds(this.SOUNDS);

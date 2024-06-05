@@ -180,24 +180,26 @@ function playAudio(path) {
 }
 
 /**
- * This function pauses an audio
+ * This function mutes all audios from the audioCache{}
  * 
- * @param {audio} audio - This is the audio you give into the function to pause
  */
 function muteAllAudios() {
   let allAudios = Object.values(audios);
   allAudios.forEach((audio) => {
     audio.muted = true;
   });
-  // console.log(Object.values(audios));
 }
 
+
+/**
+ * This function unmutes all audios from the audioCache{}
+ * 
+ */
 function unmuteAllAudios() {
   let allAudios = Object.values(audios);
   allAudios.forEach((audio) => {
     audio.muted = false;
   });
-  // console.log(Object.values(allSounds.audioCache));
 }
 
 /**
@@ -220,24 +222,6 @@ function muteUnmuteAudio() {
     k = false;
   }
 }
-
-/**
- * Is probably a bad solution
-*/
-// function muteUnmuteAllAudios() {
-//   let speakerStartScreen = document.getElementById('myDivspeakerIcon');
-//   let speakerInGameScreen = document.getElementById('onGameSpeaker');
-//   if(!k) {
-//     speakerStartScreen.src = 'img/mute.png';
-//     speakerInGameScreen.src = 'img/mute.png';
-//     k = true;
-//   } else {
-//     speakerStartScreen.src = 'img/unmute.png';
-//     speakerInGameScreen.src = 'img/unmute.png';
-//     k = false;
-//   }
-//   console.log('all audios');
-// }
 
 /**
  * This function adds keydown eventlistener to the keys to fire an action

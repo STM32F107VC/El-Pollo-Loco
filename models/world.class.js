@@ -28,7 +28,6 @@ class World extends MovableObject {
     this.canvas = canvas;
     this.keyboard = keyboard;
     this.allSounds = allSounds;
-    console.log(this.allSounds);
     this.draw();
     this.setWorld();
     this.checkCollisions();
@@ -142,13 +141,17 @@ class World extends MovableObject {
       let throwAudio = this.allSounds.audioCache['audio/throw_salsabottle.mp3'];
       throwAudio.play();
       let salsaBottle = new ThrowableObject(this.character.x + this.xOffset, this.character.y);
-      if (this.level.enemies[this.lastArrayPlace].isColliding(salsaBottle)) {
+      console.log('Character' + ' ' + 'x = ' + this.character.x + ' ' + 'and' + 'y = ' + this.character.y);
+      console.log('Endboss' + ' ' + 'x = ' + this.endBoss.x + ' ' + 'and' + 'y = ' + this.endBoss.y);
+      
+      if(this.level.enemies[this.lastArrayPlace].bottleHitsEndboss(salsaBottle)) {
         let audioHitEndboss = this.allSounds.audioCache['audio/burn_endboss.mp3'];
         audioHitEndboss.play();
         this.endbossLife += 20;
         this.level.statusBar[3].setPercentage(100 - this.endbossLife);
         this.endBoss.hit();
       }
+
       this.throwableObject.push(salsaBottle);
       let updatedBottleState = this.bottleState -= 20;
       this.level.statusBar[0].setPercentage(updatedBottleState);
