@@ -6,6 +6,7 @@ class World extends MovableObject {
   ctx;
   canvas;
   keyboard;
+  allSounds;
   camera_x = 0;
   bottleState = 0;
   coinState = 0;
@@ -19,13 +20,15 @@ class World extends MovableObject {
    * @param {canvas} canvas - This this is the paintable are where you can bring all you objects on
    * @param {key value} keyboard - This is the value of the pressed or released key 
    */
-  constructor(canvas, keyboard) {
+  constructor(canvas, keyboard, allSounds) {
     super();
     this.checkThrowObjects = this.checkThrowObjects.bind(this);
     this.checkCollisions = this.checkCollisions.bind(this);
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
+    this.allSounds = allSounds;
+    console.log(this.allSounds);
     this.draw();
     this.setWorld();
     this.checkCollisions();
@@ -79,7 +82,7 @@ class World extends MovableObject {
   collisionWithCollectableObject(type, i) {
     let arrayName = `collectable${type}`;
     let lowerCaseInitialLetter = this.toLowerCase(type);
-    let audio = new Audio(`audio/collect_${lowerCaseInitialLetter}.mp3`);
+    let audio = this.allSounds.audioCache[`audio/collect_${lowerCaseInitialLetter}.mp3`];
     let accessObj = lowerCaseInitialLetter + `State`;
     this.level[arrayName].forEach((obj) => {
       if (this.character.isColliding(obj) && this[accessObj] < 100) {
@@ -136,12 +139,12 @@ class World extends MovableObject {
    */
   checkThrowObjects() {
     if (this.keyboard.D && this.bottleState > 0) {
-      let throwAudio = new Audio('audio/throw_salsabottle.mp3');
+      let throwAudio = this.allSounds.audioCache['audio/throw_salsabottle.mp3'];
       throwAudio.play();
       let salsaBottle = new ThrowableObject(this.character.x + this.xOffset, this.character.y);
       if (this.level.enemies[this.lastArrayPlace].isColliding(salsaBottle)) {
-        let audio = new Audio('audio/burn_endboss.mp3');
-        audio.play();
+        let audioHitEndboss = this.allSounds.audioCache['audio/burn_endboss.mp3'];
+        audioHitEndboss.play();
         this.endbossLife += 20;
         this.level.statusBar[3].setPercentage(100 - this.endbossLife);
         this.endBoss.hit();

@@ -1,6 +1,7 @@
 class DrawableObject {
   img;
   imgCache = {};
+  audioCache = [];
   currentImage = 0;
   x = 120;
   y = 300;
@@ -63,7 +64,7 @@ class DrawableObject {
   /**
    * This function is to generate a new image
    * 
-   * @param {string} path - This is the path out of which an image has to be generated 
+   * @param {string} path - This is the path out of which an image is generated 
    */
   loadImage(path) {
     this.img = new Image();
@@ -80,6 +81,21 @@ class DrawableObject {
       let img = new Image();
       img.src = path;
       this.imgCache[path] = img;
+    });
+  }
+
+  loadSounds(arr) {
+    arr.forEach((path) => {
+      let audio = new Audio();
+      audio.src = path;
+      this.audioCache[path] = audio;
+      // console.log(audio);
+    });
+  }
+
+  muteUnmuteAllAudios() {
+    this.audioCache.forEach((audio) => {
+      audio.pause();
     });
   }
 

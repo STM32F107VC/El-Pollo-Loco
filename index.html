@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="./fonts/gilgongo-webfont/style.css" />
     
     <script src="models/drawable-object.class.js"></script>
+    <script src="models/muteable-audio.class.js"></script>
     <script src="models/movable-object.class.js"></script>
     <script src="models/character.class.js"></script>
     <script src="models/chicken-small.class.js"></script>
@@ -51,8 +52,13 @@
             <img class="img-controll c-pointer" onclick="showIntroduction();" src="img/info.png" alt="information">
           </div>
           <div>
-            <img id="speakerIcon" class="img-controll c-pointer" onclick="muteAudio();" src="img/mute.png" alt="mute">
+            <img id="myDivspeakerIcon" class="img-controll c-pointer" onclick="muteUnmuteAudio();" src="img/mute.png" alt="mute">
           </div>
+        </div>
+
+        <!-- Mute and unmute all sound when game is playing -->
+        <div id="myDivspeakerIconInGame" class="flex-box x-center pos-absolute pos-btn d-none" >
+          <img id="onGameSpeaker" class="img-controll c-pointer" onclick="muteUnmuteAudio();" src="img/mute.png" alt="mute">
         </div>
         
         <!-- Is stadard display: none; turns visible when game is over and invisible when games restarts -->
