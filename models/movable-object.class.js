@@ -49,6 +49,18 @@ class MovableObject extends DrawableObject {
   }
 
   /**
+   * This function checks if the salsa bottle hits the endboss
+   * 
+   * @param {object} enemy - Contains the salsa bottle as an object 
+   * @returns - Returns the condition if the x coordinate is higher or lower than the x coordinate from the endboss to register a hit or not
+   */
+  bottleHitsEndboss(enemy) {
+    return (
+      this.x - this.xBottleOffset <= enemy.x
+    );
+  }
+
+  /**
    * This function lowers life points when a hit happens
    * 
    */

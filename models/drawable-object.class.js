@@ -9,8 +9,9 @@ class DrawableObject {
   width = 100;
   intervalIds = [];
   startTime;
-  xOffset = 30;
+  xOffset = 100;
   yOffset = 10;
+  xBottleOffset = 250;
 
   /**
    * This function checks how mutch time passed to set the character into the idle mode
@@ -74,7 +75,7 @@ class DrawableObject {
   /**
    * This function is to generate new images
    * 
-   * @param {string} arr - This are the paths out of which images has to be generated 
+   * @param {array} arr - These are the paths from which images have to be generated 
    */
   loadImages(arr) {
     arr.forEach((path) => {
@@ -84,18 +85,16 @@ class DrawableObject {
     });
   }
 
+  /**
+   * This function is to generate new sounds
+   * 
+   * @param {array} arr - These are the paths from which sounds have to be generated
+   */
   loadSounds(arr) {
     arr.forEach((path) => {
       let audio = new Audio();
       audio.src = path;
       this.audioCache[path] = audio;
-      // console.log(audio);
-    });
-  }
-
-  muteUnmuteAllAudios() {
-    this.audioCache.forEach((audio) => {
-      audio.pause();
     });
   }
 

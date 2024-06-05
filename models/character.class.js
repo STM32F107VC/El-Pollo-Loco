@@ -1,6 +1,6 @@
 class Character extends MovableObject {
   y = 10;
-  speed = 15;
+  speed = 10;
   world;
   currentTime = 0;
 
