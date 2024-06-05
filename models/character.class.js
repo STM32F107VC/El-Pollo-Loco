@@ -2,10 +2,6 @@ class Character extends MovableObject {
   y = 10;
   speed = 15;
   world;
-  walking_audio = new Audio('audio/running_pepe.mp3');
-  dead_audio = new Audio('audio/dead_pepe.mp3');
-  hurt_audio = new Audio('audio/hurt_pepe.mp3');
-  jump_audio = new Audio('audio/jump_pepe.mp3');
   currentTime = 0;
 
   IMAGES_IDLE = [
@@ -113,15 +109,15 @@ class Character extends MovableObject {
   animate() {
     if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
       this.moveRight();
-      this.walking_audio.play();
+      this.world.allSounds.audioCache['audio/running_pepe.mp3'].play();
     }
     if (this.world.keyboard.LEFT && this.x > 0) {
       this.moveLeft();
-      this.walking_audio.play();
+      this.world.allSounds.audioCache['audio/running_pepe.mp3'].play();
     }
     if (this.world.keyboard.SPACE && !this.isAboveGround()) {
       this.jump();
-      this.jump_audio.play();
+      this.world.allSounds.audioCache['audio/jump_pepe.mp3'].play();
     }
     this.world.camera_x = -this.x + 100;
   }
@@ -132,22 +128,53 @@ class Character extends MovableObject {
    */
   checkEnergy() {
     if (this.isDead()) {
-      this.playAnimation(this.IMAGES_DEAD);
-      this.dead_audio.play();
-      this.stop();
+      this.energyZero();
     } else if (this.isHurt()) {
-      this.playAnimation(this.IMAGES_HURT);
-      this.hurt_audio.play();
+      this.gotHurt();
     } else if (this.isAboveGround()) {
-      this.playAnimation(this.IMAGES_JUMPING);
-      this.startTime = this.newTimeStamp();
+      this.notOnGround();
     } else {
       if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-        this.startTime = this.newTimeStamp();
-        // Walk animation
-        this.playAnimation(this.IMAGES_WALKING);
+        this.inMotion();
       }
     }
+  }
+
+  /**
+   * This function checks if the energy of the  character is zero i.e. is dead
+   * 
+   */
+  energyZero() {
+    this.playAnimation(this.IMAGES_DEAD);
+    this.world.allSounds.audioCache['audio/dead_pepe.mp3'].play();
+    this.stop();
+  }
+
+  /**
+   * This function checks if the character got hurt
+   * 
+   */
+  gotHurt() {
+    this.playAnimation(this.IMAGES_HURT);
+    this.world.allSounds.audioCache['audio/hurt_pepe.mp3'].play();
+  }
+
+  /**
+   * This function checks if the character is above the ground i.e. juming
+   * 
+   */
+  notOnGround() {
+    this.playAnimation(this.IMAGES_JUMPING);
+    this.startTime = this.newTimeStamp();
+  }
+
+  /**
+   * This function checks if the character is moving left or right
+   * 
+   */
+  inMotion() {
+    this.startTime = this.newTimeStamp();
+    this.playAnimation(this.IMAGES_WALKING);
   }
 
   /**

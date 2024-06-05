@@ -100,7 +100,8 @@ class Endboss extends MovableObject {
         if (this.isDead()) {
             this.x = this.xPrevious;
             this.playAnimation(this.IMAGES_DEAD);
-            this.win_audio.play();
+            // console.log(this.world.allSounds.audioCache['audio/win_game.mp3']);
+            this.world.allSounds.audioCache['audio/win_game.mp3'].play();
             setTimeout(() => {
                 this.applyGravity();
                 this.world.character.clearAllIntervals();

@@ -1,16 +1,16 @@
 let canvas;
 let world;
 let ctx;
-let k = true;
+let k = false;
 let keyboard = new Keyboard();
+let allSounds = new MuteableAudio();
 let deadEndboss = new Image();
 let imgStartGame = new Image();
 let imgEndScreen = new Image();
 let imgLandscape = new Image();
 let imgStartScreen = new Image();
-let intro_music = new Audio('audio/intro_music.mp3');
-let chicken_noise = new Audio('audio/chicken_noise.mp3');
 document.fonts.load("50px Gilgongo Sledge");
+let audios = allSounds.audioCache;
 
 
 /**
@@ -18,13 +18,13 @@ document.fonts.load("50px Gilgongo Sledge");
  * 
  */
 function startGameScreen() {
+  muteUnmuteAudio();
   addTouchEventListener();
   hideBtn('Finish');
   showBtn('Start');
   getCtx();
   setImgSrc();
   awaitImgLoad(ctx, imgStartScreen, 0, 0, 720, 480);
-  pauseAudio(intro_music);
 }
 
 /**
@@ -52,10 +52,9 @@ function clearCanvas() {
 function init() {
   hideBtn('Start');
   hideBtn('Finish');
-  pauseAudio(intro_music);
+  showBtn('speakerIconInGame');
   initLevel();
-  world = new World(canvas, keyboard);
-  playAudio(chicken_noise);
+  world = new World(canvas, keyboard, allSounds);
 }
 
 /**
@@ -83,8 +82,8 @@ function hideBtn(value) {
  * 
  */
 function lostGameScreen() {
-  pauseAudio(chicken_noise);
   showBtn('Finish');
+  hideBtn('speakerIconInGame');
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.drawImage(imgLandscape, 0, 0, 720, 480);
   ctx.drawImage(imgEndScreen, 0, 0, 720, 480);
@@ -95,8 +94,8 @@ function lostGameScreen() {
  * 
  */
 function wonGameScreen() {
-  pauseAudio(chicken_noise);
   showBtn('Finish');
+  hideBtn('speakerIconInGame');
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.drawImage(imgLandscape, 0, 0, 720, 480);
   ctx.drawImage(deadEndboss, canvas.width / 2 - 100, canvas.height / 5, 250, 400);
@@ -127,26 +126,6 @@ function setImgSrc() {
   imgEndScreen.src = 'img/9_intro_outro_screens/game_over/game over!.png';
   imgLandscape.src = 'img/5_background/first_half_background.png';
   deadEndboss.src = 'img/4_enemie_boss_chicken/5_dead/G26.png';
-}
-
-/**
- * This function plays an audio
- * 
- * @param {audio} audio - This is the audio you give into the function to play
- */
-function playAudio(audio) {
-  let newAudio = audio;
-  newAudio.loop = true;
-  audio.play();
-}
-
-/**
- * This function pauses an audio
- * 
- * @param {audio} audio - This is the audio you give into the function to pause
- */
-function pauseAudio(audio) {
-  audio.pause();
 }
 
 /**
@@ -188,21 +167,77 @@ function awaitImgLoad(ctx, img, posX, posY, width, height) {
 }
 
 /**
+ * This function plays an audio
+ * 
+ * @param {audio} audio - This is the audio you give into the function to play
+ */
+function playAudio(path) {
+  let newAudio = allSounds.audioCache[path];
+  if (path == 'audio/chicken_noise.mp3') {
+    newAudio.loop = true;
+  }
+  newAudio.play();
+}
+
+/**
+ * This function pauses an audio
+ * 
+ * @param {audio} audio - This is the audio you give into the function to pause
+ */
+function muteAllAudios() {
+  let allAudios = Object.values(audios);
+  allAudios.forEach((audio) => {
+    audio.muted = true;
+  });
+  // console.log(Object.values(audios));
+}
+
+function unmuteAllAudios() {
+  let allAudios = Object.values(audios);
+  allAudios.forEach((audio) => {
+    audio.muted = false;
+  });
+  // console.log(Object.values(allSounds.audioCache));
+}
+
+/**
  * This function mutes the intro audio whne the mute audio gets clicked
  * 
- */
-function muteAudio() {
-  let icon = document.getElementById('speakerIcon');
+*/
+function muteUnmuteAudio() {
+  let speakerStartScreen = document.getElementById('myDivspeakerIcon');
+  let speakerInGameScreen = document.getElementById('onGameSpeaker');
   if (!k) {
-    pauseAudio(intro_music);
-    icon.src = 'img/mute.png';
+    muteAllAudios();
+    speakerStartScreen.src = 'img/mute.png';
+    speakerInGameScreen.src = 'img/mute.png';
     k = true;
   } else {
-    playAudio(intro_music);
-    icon.src = 'img/unmute.png';
+    playAudio('audio/chicken_noise.mp3');
+    unmuteAllAudios();
+    speakerStartScreen.src = 'img/unmute.png';
+    speakerInGameScreen.src = 'img/unmute.png';
     k = false;
   }
 }
+
+/**
+ * Is probably a bad solution
+*/
+// function muteUnmuteAllAudios() {
+//   let speakerStartScreen = document.getElementById('myDivspeakerIcon');
+//   let speakerInGameScreen = document.getElementById('onGameSpeaker');
+//   if(!k) {
+//     speakerStartScreen.src = 'img/mute.png';
+//     speakerInGameScreen.src = 'img/mute.png';
+//     k = true;
+//   } else {
+//     speakerStartScreen.src = 'img/unmute.png';
+//     speakerInGameScreen.src = 'img/unmute.png';
+//     k = false;
+//   }
+//   console.log('all audios');
+// }
 
 /**
  * This function adds keydown eventlistener to the keys to fire an action
@@ -276,5 +311,5 @@ function addTouchEventListener() {
   });
   document.getElementById('jump').addEventListener('touchend', (e) => {
     keyboard.SPACE = false;
-  });  
+  });
 }

@@ -1,0 +1,21 @@
+class MuteableAudio extends DrawableObject {
+
+    SOUNDS = [
+        'audio/burn_endboss.mp3',
+        'audio/chicken_noise.mp3',
+        'audio/collect_bottle.mp3',
+        'audio/collect_coin.mp3',
+        'audio/dead_pepe.mp3',
+        'audio/hurt_pepe.mp3',
+        'audio/intro_music.mp3',
+        'audio/jump_pepe.mp3',
+        'audio/running_pepe.mp3',
+        'audio/throw_salsabottle.mp3',
+        'audio/win_game.mp3'
+    ];
+
+    constructor() {
+        super();
+        this.loadSounds(this.SOUNDS);
+    }
+}
