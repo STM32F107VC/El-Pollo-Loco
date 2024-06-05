@@ -24,6 +24,7 @@ class World extends MovableObject {
     super();
     this.checkThrowObjects = this.checkThrowObjects.bind(this);
     this.checkCollisions = this.checkCollisions.bind(this);
+    this.jumpingOnEnemy = this.jumpingOnEnemy.bind(this);
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
@@ -52,6 +53,30 @@ class World extends MovableObject {
     this.setStoppableInterval(this.checkCollisions, 200);
     this.setStoppableInterval(this.checkThrowObjects, 200);
     this.setStoppableInterval(this.checkFullScreen, 100);
+    this.setStoppableInterval(this.jumpingOnEnemy, 50);
+  }
+
+
+  /**
+   * This function checks if the character jumps on an enemy
+   * 
+   */
+  jumpingOnEnemy() {
+    this.level.enemies.forEach((enemy) => {
+      if (this.character.isJumpingOn(enemy)) {
+        enemy.energy -= 100;
+        this.character.jump();
+        setTimeout(() => {
+          this.character.y = 285;
+        }, 500);
+        let arrayIndex = this.level.enemies.indexOf(enemy);
+
+        /**Hier weiterfahren */
+        enemy.img.src = 'img/3_enemies_chicken/chicken_normal/2_dead/dead.png';
+
+        this.level.enemies.splice(arrayIndex, 1);
+      }
+    });
   }
 
   /**
@@ -65,12 +90,10 @@ class World extends MovableObject {
         this.level.statusBar[2].setPercentage(this.character.energy);
       }
     });
-
     this.collisionWithCollectableObject('Bottle', 0);
     this.collisionWithCollectableObject('Coin', 1);
     this.checkCoinDepot();
   }
-
 
   /**
    * This function checks collisions between collectable objects in the map like coins or salsa bottles
@@ -138,24 +161,41 @@ class World extends MovableObject {
    */
   checkThrowObjects() {
     if (this.keyboard.D && this.bottleState > 0) {
-      let throwAudio = this.allSounds.audioCache['audio/throw_salsabottle.mp3'];
-      throwAudio.play();
+      this.allSounds.audioCache['audio/throw_salsabottle.mp3'].play();;
       let salsaBottle = new ThrowableObject(this.character.x + this.xOffset, this.character.y);
-      console.log('Character' + ' ' + 'x = ' + this.character.x + ' ' + 'and' + 'y = ' + this.character.y);
-      console.log('Endboss' + ' ' + 'x = ' + this.endBoss.x + ' ' + 'and' + 'y = ' + this.endBoss.y);
-      
-      if(this.level.enemies[this.lastArrayPlace].bottleHitsEndboss(salsaBottle)) {
-        let audioHitEndboss = this.allSounds.audioCache['audio/burn_endboss.mp3'];
-        audioHitEndboss.play();
-        this.endbossLife += 20;
-        this.level.statusBar[3].setPercentage(100 - this.endbossLife);
-        this.endBoss.hit();
+      this.addsalsaBottelToArray(salsaBottle);
+      let arrayLength = this.level.enemies.length;
+      if(arrayLength == 1) {
+        // console.log(arrayLength-1);
+        arrayLength -= 1;
+        this.lastArrayPlace = arrayLength;
       }
-
-      this.throwableObject.push(salsaBottle);
-      let updatedBottleState = this.bottleState -= 20;
-      this.level.statusBar[0].setPercentage(updatedBottleState);
+      if (this.level.enemies[this.lastArrayPlace].bottleHitsEndboss(salsaBottle)) {
+        this.damageEndboss();
+      }
     }
+  }
+
+  /**
+   * This Function adds damage to the entboss and lowers his life points with every damage by 20%
+   * 
+   */
+  damageEndboss() {
+    this.allSounds.audioCache['audio/burn_endboss.mp3'].play();
+    this.endbossLife += 20;
+    this.level.statusBar[3].setPercentage(100 - this.endbossLife);
+    this.endBoss.hit();
+  }
+
+
+  /**
+   * This function adds salsa bottles to throwableObject array to draw on canvas and updates the statusbar by -20 percent
+   * @param {object} salsaBottle - This is the ThrowableObject which is new instantiated
+   */
+  addsalsaBottelToArray(salsaBottle) {
+    this.throwableObject.push(salsaBottle);
+    let updatedBottleState = this.bottleState -= 20;
+    this.level.statusBar[0].setPercentage(updatedBottleState);
   }
 
   /**
