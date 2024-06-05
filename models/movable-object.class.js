@@ -26,7 +26,6 @@ class MovableObject extends DrawableObject {
    */
   isAboveGround() {
     if (this instanceof ThrowableObject || this instanceof Endboss) {
-      // Throwable objects should always fall
       return true;
     } else {
       return this.y < 285;
@@ -41,19 +40,37 @@ class MovableObject extends DrawableObject {
    */
   isColliding(enemy) {
     return (
-      (this.x - this.xOffset) + this.width > enemy.x &&
-      (this.y + this.height - this.yOffset) > enemy.y &&
+      this.x + this.width > enemy.x + 20 &&
+      this.y + this.height - this.yOffset > enemy.y &&
       this.x < enemy.x + enemy.width &&
       this.y < enemy.y + enemy.height
     );
   }
 
   /**
-   * This function checks if the salsa bottle hits the endboss
-   * 
-   * @param {object} enemy - Contains the salsa bottle as an object 
-   * @returns - Returns the condition if the x coordinate is higher or lower than the x coordinate from the endboss to register a hit or not
+   * This function checks if the character jumps on a chicken
+   * @param {object} enemy - Contains the chicken on which the character jumped
+   * @returns - Returns the evaluation if the character really jumped on the chicken
    */
+  isJumpingOn(enemy) {
+    if (enemy instanceof ChickenSmall || enemy instanceof Chicken) {
+      return (
+        this.y + this.height < enemy.y + enemy.height &&
+        this.y + this.height >= enemy.y &&
+        this.x + this.width > enemy.x &&
+        this.x < enemy.x + enemy.width
+      );
+    }
+  }
+
+
+
+  /**
+ * This function checks if the salsa bottle hits the endboss
+ * 
+ * @param {object} enemy - Contains the salsa bottle as an object 
+ * @returns - Returns the evaluation if the x coordinate is higher or lower than the x coordinate from the endboss to register a hit or not
+ */
   bottleHitsEndboss(enemy) {
     return (
       this.x - this.xBottleOffset <= enemy.x

@@ -9,6 +9,8 @@ class Chicken extends MovableObject {
         '../img/3_enemies_chicken/chicken_normal/1_walk/3_w.png'
     ];
 
+    IMAGE_DEAD = ['img/3_enemies_chicken/chicken_normal/2_dead/dead.png'];
+
     /**
      * The cunstructor function is always called first when a new instance of this class is generated and configures the object
      * 
@@ -16,13 +18,15 @@ class Chicken extends MovableObject {
     constructor() {
         super().loadImage('../img/3_enemies_chicken/chicken_normal/1_walk/1_w.png');
         this.loadImages(this.IMAGES_WALKING);
+        this.loadImages(this.IMAGE_DEAD);
         this.animate = this.animate.bind(this);
         this.walking = this.walking.bind(this);
+        this.checkEnergy = this.checkEnergy.bind(this);
         this.x = 350 + Math.random() * 950;
         this.speed = 0.15 + Math.random() * 0.25;
         this.setStoppableInterval(this.animate, 1000 / 60);
         this.setStoppableInterval(this.walking, 200);
-        
+        this.setStoppableInterval(this.checkEnergy, 50);
     }
 
     /**
@@ -30,8 +34,8 @@ class Chicken extends MovableObject {
      * 
      */
     animate() {
-            this.moveLeft();
-            this.otherDirection = false;
+        this.moveLeft();
+        this.otherDirection = false;
     }
 
     /**
@@ -40,5 +44,16 @@ class Chicken extends MovableObject {
      */
     walking() {
         this.playAnimation(this.IMAGES_WALKING);
+    }
+
+    /**
+   * This function checks the if the character is dead, above ground or go hurt
+   * 
+   */
+    checkEnergy() {
+        if (this.isDead()) {
+            console.log('Chicken is dead');
+            this.playAnimation(this.IMAGE_DEAD);
+        }
     }
 }

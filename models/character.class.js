@@ -121,7 +121,7 @@ class Character extends MovableObject {
     }
     this.world.camera_x = -this.x + 100;
   }
-
+  
   /**
    * This function checks the if the character is dead, above ground or go hurt
    * 
