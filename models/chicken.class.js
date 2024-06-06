@@ -47,12 +47,11 @@ class Chicken extends MovableObject {
     }
 
     /**
-   * This function checks the if the character is dead, above ground or go hurt
-   * 
-   */
+     * This function checks if a normal chicken is dead
+     * 
+     */
     checkEnergy() {
         if (this.isDead()) {
-            console.log('Chicken is dead');
             this.playAnimation(this.IMAGE_DEAD);
         }
     }

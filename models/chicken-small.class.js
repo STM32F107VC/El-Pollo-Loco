@@ -9,6 +9,9 @@ class ChickenSmall extends MovableObject {
         'img/3_enemies_chicken/chicken_small/1_walk/3_w.png'
     ];
 
+    IMAGE_DEAD = ['img/3_enemies_chicken/chicken_small/2_dead/dead.png'];
+
+
     /**
      * The cunstructor function is always called first when a new instance of this class is generated and configures the object
      * 
@@ -16,12 +19,15 @@ class ChickenSmall extends MovableObject {
     constructor() {
         super().loadImage('img/3_enemies_chicken/chicken_small/1_walk/1_w.png');
         this.loadImages(this.IMAGES_WALKING);
+        this.loadImages(this.IMAGE_DEAD);
         this.animate = this.animate.bind(this);
         this.walking = this.walking.bind(this);
+        this.checkEnergy = this.checkEnergy.bind(this);
         this.x = 300 + Math.random() * 1000;
         this.speed = 0.15 + Math.random() * 0.25;
         this.setStoppableInterval(this.animate, 1000 / 60);
         this.setStoppableInterval(this.walking, 200);
+        this.setStoppableInterval(this.checkEnergy, 50);
     }
 
     /**
@@ -39,5 +45,15 @@ class ChickenSmall extends MovableObject {
      */
     walking() {
         this.playAnimation(this.IMAGES_WALKING);
+    }
+
+    /**
+     * This function checks if a normal chicken is dead
+     * 
+     */
+    checkEnergy() {
+        if (this.isDead()) {
+            this.playAnimation(this.IMAGE_DEAD);
+        }
     }
 }

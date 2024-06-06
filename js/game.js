@@ -207,20 +207,28 @@ function unmuteAllAudios() {
  * 
 */
 function muteUnmuteAudio() {
-  let speakerStartScreen = document.getElementById('myDivspeakerIcon');
-  let speakerInGameScreen = document.getElementById('onGameSpeaker');
   if (!k) {
     muteAllAudios();
-    speakerStartScreen.src = 'img/mute.png';
-    speakerInGameScreen.src = 'img/mute.png';
+    changeImageSrc('img/mute.png');
     k = true;
   } else {
     playAudio('audio/chicken_noise.mp3');
     unmuteAllAudios();
-    speakerStartScreen.src = 'img/unmute.png';
-    speakerInGameScreen.src = 'img/unmute.png';
+    changeImageSrc('img/unmute.png');
     k = false;
   }
+}
+
+/**
+ * This function changes the source of the speaker mute/unmute icons
+ * 
+ * @param {string} src - Includes the image path 
+ */
+function changeImageSrc(src) {
+  let speakerStartScreen = document.getElementById('myDivspeakerIcon');
+  let speakerInGameScreen = document.getElementById('onGameSpeaker');
+  speakerStartScreen.src = `${src}`;
+  speakerInGameScreen.src = `${src}`;
 }
 
 /**
