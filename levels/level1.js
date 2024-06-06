@@ -9,11 +9,11 @@ function initLevel() {
     [
       new Chicken(),
       new Chicken(),
-      // new Chicken(),
-      // new Chicken(),
-      // new ChickenSmall(),
-      // new ChickenSmall(),
-      // new ChickenSmall(),
+      new Chicken(),
+      new Chicken(),
+      new ChickenSmall(),
+      new ChickenSmall(),
+      new ChickenSmall(),
       new Endboss()
     ],
     [

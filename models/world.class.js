@@ -56,7 +56,6 @@ class World extends MovableObject {
     this.setStoppableInterval(this.jumpingOnEnemy, 50);
   }
 
-
   /**
    * This function checks if the character jumps on an enemy
    * 
@@ -64,20 +63,63 @@ class World extends MovableObject {
   jumpingOnEnemy() {
     this.level.enemies.forEach((enemy) => {
       if (this.character.isJumpingOn(enemy)) {
-        enemy.energy -= 100;
+        let arrayIndex = this.level.enemies.map(enemy => enemy).indexOf(enemy);
         this.character.jump();
+        enemy.energy -= 100;
+        setTimeout(() => {
+          this.level.enemies.splice(arrayIndex, 1);
+        }, 100);
         setTimeout(() => {
           this.character.y = 285;
         }, 500);
-        let arrayIndex = this.level.enemies.indexOf(enemy);
-
-        /**Hier weiterfahren */
-        enemy.img.src = 'img/3_enemies_chicken/chicken_normal/2_dead/dead.png';
-
-        this.level.enemies.splice(arrayIndex, 1);
+        this.allSounds.audioCache['audio/jump_on_sound.mp3'].play();
       }
     });
   }
+
+  /**
+   * This function gets the index of the endboss
+   * 
+   * @returns - The index of the endboss in from the array this.level.enemies[]
+   */
+  getIndexOfEndBoss() {
+    return this.level.enemies.findIndex(enemy => enemy instanceof Endboss);
+  }
+
+  /**
+ * This is the function to check if you want to throw a salsa bottle necessarly you have to collect first one that it
+ * is possible. Then it generates a sound of a throwable object and if you hit the endboss his life gets reduced.
+ * 
+ */
+  checkThrowObjects() {
+    if (this.keyboard.D && this.bottleState > 0) {
+      this.allSounds.audioCache['audio/throw_salsabottle.mp3'].play();;
+      let salsaBottle = new ThrowableObject(this.character.x + this.xOffset, this.character.y);
+      this.addsalsaBottelToArray(salsaBottle);
+
+      if (this.level.enemies[this.getIndexOfEndBoss()].bottleHitsEndboss(salsaBottle)) {
+        this.damageEndboss();
+      }
+    }
+  }
+
+  //   checkThrowObjects() {
+  //     if (this.keyboard.D && this.bottleState > 0) {
+  //         this.allSounds.audioCache['audio/throw_salsabottle.mp3'].play();
+  //         let salsaBottle = new ThrowableObject(this.character.x + this.xOffset, this.character.y);
+  //         this.addsalsaBottelToArray(salsaBottle);
+
+  //         let endbossIndex = this.getIndexOfEndBoss();
+  //         if (endbossIndex !== -1) {
+  //             let endboss = this.level.enemies[endbossIndex];
+  //             if (endboss.bottleHitsEndboss(salsaBottle)) {
+  //                 this.damageEndboss();
+  //             }
+  //         } else {
+  //             console.warn("Endboss not found!");
+  //         }
+  //     }
+  // }
 
   /**
    * This function checks collisions between objects in the map
@@ -151,28 +193,6 @@ class World extends MovableObject {
     let arrayIndex = this.level[arrayName].indexOf(obj);
     if (arrayIndex > -1) {
       this.level[arrayName].splice(arrayIndex, 1);
-    }
-  }
-
-  /**
-   * This is the function to check if you want to throw a salsa bottle necessarly you have to collect first one that it
-   * is possible. Then it generates a sound of a throwable object and if you hit the endboss his life gets reduced.
-   * 
-   */
-  checkThrowObjects() {
-    if (this.keyboard.D && this.bottleState > 0) {
-      this.allSounds.audioCache['audio/throw_salsabottle.mp3'].play();;
-      let salsaBottle = new ThrowableObject(this.character.x + this.xOffset, this.character.y);
-      this.addsalsaBottelToArray(salsaBottle);
-      let arrayLength = this.level.enemies.length;
-      if(arrayLength == 1) {
-        // console.log(arrayLength-1);
-        arrayLength -= 1;
-        this.lastArrayPlace = arrayLength;
-      }
-      if (this.level.enemies[this.lastArrayPlace].bottleHitsEndboss(salsaBottle)) {
-        this.damageEndboss();
-      }
     }
   }
 

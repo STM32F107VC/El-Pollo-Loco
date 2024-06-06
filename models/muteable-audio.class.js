@@ -11,7 +11,8 @@ class MuteableAudio extends DrawableObject {
         'audio/jump_pepe.mp3',
         'audio/running_pepe.mp3',
         'audio/throw_salsabottle.mp3',
-        'audio/win_game.mp3'
+        'audio/win_game.mp3',
+        'audio/jump_on_sound.mp3'
     ];
 
     /**
