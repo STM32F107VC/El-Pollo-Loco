@@ -101,17 +101,25 @@ class Endboss extends MovableObject {
             this.x = this.xPrevious;
             this.playAnimation(this.IMAGES_DEAD);
             this.world.allSounds.audioCache['audio/win_game.mp3'].play();
-            setTimeout(() => {
-                this.applyGravity();
-                this.world.character.clearAllIntervals();
-                this.clearAllIntervals();
-            }, 300);
-            setTimeout(() => {
-                this.stopGame(this.world.animationFrameId);
-                wonGameScreen();
-            }, 2000);
+            this.setTimeouts();
         } else if (this.isHurt()) {
             this.playAnimation(this.IMAGES_HURT);
         }
+    }
+
+    /**
+     * This function sets timeouts till next functions can be executed after game over
+     * 
+     */
+    setTimeouts() {
+        setTimeout(() => {
+            this.applyGravity();
+            this.world.character.clearAllIntervals();
+            this.clearAllIntervals();
+        }, 300);
+        setTimeout(() => {
+            this.stopGame(this.world.animationFrameId);
+            wonGameScreen();
+        }, 2000);
     }
 }

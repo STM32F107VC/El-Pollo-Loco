@@ -53,17 +53,17 @@ class MovableObject extends DrawableObject {
    * @returns - Returns the evaluation if the character really jumped on the chicken
    */
   isJumpingOn(enemy) {
-    if (enemy instanceof ChickenSmall || enemy instanceof Chicken) {
+    if (enemy instanceof Chicken || enemy instanceof ChickenSmall) {
       return (
         this.y + this.height < enemy.y + enemy.height &&
         this.y + this.height >= enemy.y &&
-        this.x + this.width > enemy.x &&
+        this.x + this.width - 30 > enemy.x &&
         this.x < enemy.x + enemy.width
       );
+    } else {
+      return false;
     }
   }
-
-
 
   /**
  * This function checks if the salsa bottle hits the endboss
