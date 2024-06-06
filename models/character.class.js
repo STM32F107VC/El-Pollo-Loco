@@ -164,6 +164,7 @@ class Character extends MovableObject {
    * 
    */
   notOnGround() {
+    this.isJumping = true;
     this.playAnimation(this.IMAGES_JUMPING);
     this.startTime = this.newTimeStamp();
   }

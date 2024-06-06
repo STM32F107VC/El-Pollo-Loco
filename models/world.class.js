@@ -63,18 +63,34 @@ class World extends MovableObject {
   jumpingOnEnemy() {
     this.level.enemies.forEach((enemy) => {
       if (this.character.isJumpingOn(enemy)) {
-        let arrayIndex = this.level.enemies.map(enemy => enemy).indexOf(enemy);
-        this.character.jump();
-        enemy.energy -= 100;
-        setTimeout(() => {
-          this.level.enemies.splice(arrayIndex, 1);
-        }, 100);
-        setTimeout(() => {
-          this.character.y = 285;
-        }, 500);
-        this.allSounds.audioCache['audio/jump_on_sound.mp3'].play();
+        let arrayIndex = this.level.enemies.indexOf(enemy);
+        if (enemy instanceof Chicken || enemy instanceof ChickenSmall && !(enemy instanceof Endboss)) {
+          let jumpState = this.character.isJumping;
+          if (jumpState) {
+            this.character.jump();
+            enemy.energy -= 100;
+            this.character.isJumping = !jumpState;
+            this.allSounds.audioCache['audio/jump_on_sound.mp3'].play();
+            this.setOnJumpTimeout(arrayIndex);
+          }
+        }
       }
     });
+  }
+
+  /**
+   * This function sets an timeout after the character jumped on a chicken an splices the chicken out of the enemies array
+   * and sets the y-coordinate from the character back to y=285;
+   * 
+   * @param {*} i 
+   */
+  setOnJumpTimeout(i) {
+    setTimeout(() => {
+      this.level.enemies.splice(i, 1);
+    }, 100);
+    setTimeout(() => {
+      this.character.y = 285;
+    }, 500);
   }
 
   /**
@@ -93,33 +109,20 @@ class World extends MovableObject {
  */
   checkThrowObjects() {
     if (this.keyboard.D && this.bottleState > 0) {
-      this.allSounds.audioCache['audio/throw_salsabottle.mp3'].play();;
+      this.allSounds.audioCache['audio/throw_salsabottle.mp3'].play();
       let salsaBottle = new ThrowableObject(this.character.x + this.xOffset, this.character.y);
       this.addsalsaBottelToArray(salsaBottle);
 
-      if (this.level.enemies[this.getIndexOfEndBoss()].bottleHitsEndboss(salsaBottle)) {
-        this.damageEndboss();
+      let endbossIndex = this.getIndexOfEndBoss();
+      if (endbossIndex !== -1) {
+        let endboss = this.level.enemies[endbossIndex];
+        if (endboss.bottleHitsEndboss(salsaBottle)) {
+          this.damageEndboss();
+        }
       }
     }
   }
 
-  //   checkThrowObjects() {
-  //     if (this.keyboard.D && this.bottleState > 0) {
-  //         this.allSounds.audioCache['audio/throw_salsabottle.mp3'].play();
-  //         let salsaBottle = new ThrowableObject(this.character.x + this.xOffset, this.character.y);
-  //         this.addsalsaBottelToArray(salsaBottle);
-
-  //         let endbossIndex = this.getIndexOfEndBoss();
-  //         if (endbossIndex !== -1) {
-  //             let endboss = this.level.enemies[endbossIndex];
-  //             if (endboss.bottleHitsEndboss(salsaBottle)) {
-  //                 this.damageEndboss();
-  //             }
-  //         } else {
-  //             console.warn("Endboss not found!");
-  //         }
-  //     }
-  // }
 
   /**
    * This function checks collisions between objects in the map
@@ -132,6 +135,7 @@ class World extends MovableObject {
         this.level.statusBar[2].setPercentage(this.character.energy);
       }
     });
+
     this.collisionWithCollectableObject('Bottle', 0);
     this.collisionWithCollectableObject('Coin', 1);
     this.checkCoinDepot();
@@ -150,12 +154,24 @@ class World extends MovableObject {
     let accessObj = lowerCaseInitialLetter + `State`;
     this.level[arrayName].forEach((obj) => {
       if (this.character.isColliding(obj) && this[accessObj] < 100) {
-        this.level.statusBar[i].setPercentage(20 + this[accessObj]);
-        this[accessObj] += 20;
+        this.refreshStatusBar(i, audio, accessObj);
         this.removeCollectableObject(type, obj);
-        audio.play();
       }
     });
+  }
+
+  /**
+   * This function refreshs the status bar from the collectable object like salsa bottles and coins and play the specific
+   * audio for collecting a salsa bottle or a coin
+   * 
+   * @param {number} i - Is the number of the status bar which gets refreshed 
+   * @param {audio} audio - Is the audio to play when a salsa bottle or a coin get collected 
+   * @param {string} accessObj - Is the object that gets collected either a salsa bottle or coin
+   */
+  refreshStatusBar(i, audio, accessObj) {
+    this.level.statusBar[i].setPercentage(20 + this[accessObj]);
+    this[accessObj] += 20;
+    audio.play();
   }
 
   /**
@@ -207,7 +223,6 @@ class World extends MovableObject {
     this.endBoss.hit();
   }
 
-
   /**
    * This function adds salsa bottles to throwableObject array to draw on canvas and updates the statusbar by -20 percent
    * @param {object} salsaBottle - This is the ThrowableObject which is new instantiated
@@ -230,31 +245,46 @@ class World extends MovableObject {
 
   /**
    * This is a self repetitive function to add objects to the map.
-   * 
+   * Note: this.ctx.translate(-this.camera_x, 0); = move backwards
+   *       this.ctx.translate(this.camera_x, 0);  = move forward
    */
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.ctx.translate(this.camera_x, 0);
+    this.addMultiplyObjToMap();
+
+    this.ctx.translate(-this.camera_x, 0);
+    this.addObjectsToMap(this.level.statusBar);
+    this.ctx.translate(this.camera_x, 0);
+
+    this.addToMap(this.character);
+    this.ctx.translate(-this.camera_x, 0);
+
+    this.selfRequest();
+  }
+
+  /**
+   * This function is requesting itself on a matching frequenzy with the display refresh rate
+   * 
+   */
+  selfRequest() {
+    let self = this;
+    this.animationFrameId = requestAnimationFrame(function () {
+      self.draw();
+    });
+  }
+
+  /**
+   * This function adds multiply objects to map
+   * 
+   */
+  addMultiplyObjToMap() {
     this.addObjectsToMap(this.level.backgroundObject);
     this.addObjectsToMap(this.level.clouds);
     this.addObjectsToMap(this.level.enemies);
     this.addObjectsToMap(this.level.collectableBottle);
     this.addObjectsToMap(this.level.collectableCoin);
     this.addObjectsToMap(this.throwableObject);
-
-    this.ctx.translate(-this.camera_x, 0); // move backward
-    //------ Space for fixed objects ------
-    this.addObjectsToMap(this.level.statusBar);
-    this.ctx.translate(this.camera_x, 0); // forward
-
-    this.addToMap(this.character);
-    this.ctx.translate(-this.camera_x, 0); // move backward
-
-    // draw() wird immer wieder aufgerufen
-    let self = this;
-    this.animationFrameId = requestAnimationFrame(function () {
-      self.draw();
-    });
   }
 
   /**
@@ -277,8 +307,9 @@ class World extends MovableObject {
     if (mo.otherDirection) {
       this.flipImage(mo);
     }
+
     mo.draw(this.ctx);
-    // mo.drawFrame(this.ctx);
+
     if (mo.otherDirection) {
       this.flipImageBack(mo);
     }

@@ -27,7 +27,6 @@ class ThrowableObject extends MovableObject {
         this.loadImages(this.IMAGES_BOTTLE);
         this.loadImages(this.IMAGES_SPLASH);
         this.x = x;
-        // console.log('Slasa bottle x first value = ' + this.x);
         this.y = y;
         this.height = 80;
         this.width = 60;
@@ -43,7 +42,6 @@ class ThrowableObject extends MovableObject {
     throw(x, y) {
         this.x = x + 150;
         this.y = y - 50;
-        // console.log('Bottle' + ' ' + 'x = ' + x + ' ' + 'and' + 'y = ' + y);
         this.speedY = 30;
         this.applyGravity();
         this.setStoppableInterval(this.bottleForwarding, 25);

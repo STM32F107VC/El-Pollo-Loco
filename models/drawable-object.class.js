@@ -12,6 +12,7 @@ class DrawableObject {
   xOffset = 100;
   yOffset = 10;
   xBottleOffset = 250;
+  isJumping = false;
 
   /**
    * This function checks how mutch time passed to set the character into the idle mode
