@@ -26,7 +26,7 @@ class Chicken extends MovableObject {
         this.speed = 0.15 + Math.random() * 0.25;
         this.setStoppableInterval(this.animate, 1000 / 60);
         this.setStoppableInterval(this.walking, 200);
-        this.setStoppableInterval(this.checkEnergy, 50);
+        this.setStoppableInterval(this.checkEnergy, 10);
     }
 
     /**

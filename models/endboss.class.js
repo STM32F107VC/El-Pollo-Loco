@@ -48,7 +48,7 @@ class Endboss extends MovableObject {
         'img/4_enemie_boss_chicken/5_dead/G25.png',
         'img/4_enemie_boss_chicken/5_dead/G26.png',
     ];
- 
+
     /**
      * The cunstructor function is always called first when a new instance of this class is generated and configures the object
      * 
@@ -77,18 +77,34 @@ class Endboss extends MovableObject {
             this.playAnimation(this.IMAGES_ALERT);
         }
         if (distanceToCharacter < 500 && this.x >= this.world.character.x) {
-            this.moveLeft();
-            this.otherDirection = false;
-            this.playAnimation(this.IMAGES_WALKING);
+            this.walkLeft();
         }
         if (this.x < this.world.character.x && this.x < this.world.level.level_end_x) {
-            this.moveRight();
-            this.otherDirection = true;
-            this.playAnimation(this.IMAGES_WALKING);
+            this.walkRight();
         }
         if (distanceToCharacter < 150) {
             this.playAnimation(this.IMAGES_ATTACK);
         }
+    }
+
+    /**
+     * This function let the endboss walk left
+     * 
+     */
+    walkLeft() {
+        this.moveLeft();
+        this.otherDirection = false;
+        this.playAnimation(this.IMAGES_WALKING);
+    }
+
+    /**
+     * This function let the endboss walk right
+     * 
+     */
+    walkRight() {
+        this.moveRight();
+        this.otherDirection = true;
+        this.playAnimation(this.IMAGES_WALKING);
     }
 
     /**

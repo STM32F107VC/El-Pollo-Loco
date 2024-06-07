@@ -1,6 +1,6 @@
 class Character extends MovableObject {
   y = 10;
-  speed = 10;
+  speed = 8;
   world;
   currentTime = 0;
 
@@ -84,7 +84,7 @@ class Character extends MovableObject {
     this.loadImages(this.IMAGES_DEAD);
     this.applyGravity(this.IMAGES_JUMPING);
     this.setStoppableInterval(this.animate, 1000 / 60);
-    this.setStoppableInterval(this.checkEnergy, 50);
+    this.setStoppableInterval(this.checkEnergy, 95);
     this.setStoppableInterval(this.idleAnimation, 150);
     this.startTime = new Date().getTime() / 1000;
   }
@@ -116,12 +116,12 @@ class Character extends MovableObject {
       this.world.allSounds.audioCache['audio/running_pepe.mp3'].play();
     }
     if (this.world.keyboard.SPACE && !this.isAboveGround()) {
-      this.jump();
+      this.jump();                    // !(y < 285)
       this.world.allSounds.audioCache['audio/jump_pepe.mp3'].play();
     }
     this.world.camera_x = -this.x + 100;
   }
-  
+
   /**
    * This function checks the if the character is dead, above ground or go hurt
    * 
