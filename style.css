@@ -254,7 +254,7 @@ h2 {
         z-index: -1;
     }
 
-    .landscapeMode:hover > img {
+    .landscapeMode:hover>img {
         transform: rotate(45deg);
     }
 }
@@ -263,6 +263,12 @@ h2 {
 
     h1,
     .landscapeMode {
+        display: none;
+    }
+}
+
+@media (pointer: fine), (pointer: none) {
+	#controllUnit {
         display: none;
     }
 }

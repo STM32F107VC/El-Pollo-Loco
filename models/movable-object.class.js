@@ -40,7 +40,7 @@ class MovableObject extends DrawableObject {
    */
   isColliding(enemy) {
     return (
-      this.x + this.width > enemy.x + 20 &&
+      this.x + this.width > enemy.x + 35 &&
       this.y + this.height - this.yOffset > enemy.y &&
       this.x < enemy.x + enemy.width &&
       this.y < enemy.y + enemy.height
@@ -53,16 +53,12 @@ class MovableObject extends DrawableObject {
    * @returns - Returns the evaluation if the character really jumped on the chicken
    */
   isJumpingOn(enemy) {
-    if (enemy instanceof Chicken || enemy instanceof ChickenSmall) {
-      return (
-        this.y + this.height < enemy.y + enemy.height &&
-        this.y + this.height >= enemy.y &&
-        this.x + this.width - 30 > enemy.x &&
-        this.x < enemy.x + enemy.width
-      );
-    } else {
-      return false;
-    }
+    let yTolerance = 10;
+    let xTolerance = 3;
+    let isAbove = (this.y + this.height) >= enemy.y - yTolerance && (this.y + this.height) <= enemy.y + yTolerance;
+    let isJumpingDown = this.speedY < 0;
+    let isWithinXRange = this.x + this.width >= enemy.x - xTolerance && this.x <= enemy.x + enemy.width + xTolerance;
+    return isAbove && isWithinXRange && isJumpingDown;
   }
 
   /**

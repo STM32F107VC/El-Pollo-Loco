@@ -13,6 +13,7 @@ class World extends MovableObject {
   endbossLife = 0;
   lastArrayPlace = this.level.enemies.length - 1;
   endBoss = this.level.enemies[this.lastArrayPlace];
+  recoverEnergy = 0;
 
   /**
    * The cunstructor function is always called first when a new instance of this class is generated and configures the object
@@ -56,22 +57,23 @@ class World extends MovableObject {
     this.setStoppableInterval(this.jumpingOnEnemy, 50);
   }
 
+
   /**
    * This function checks if the character jumps on an enemy
    * 
    */
   jumpingOnEnemy() {
-    this.level.enemies.forEach((enemy) => {
+    this.level.enemies.forEach((enemy, index) => {
       if (this.character.isJumpingOn(enemy)) {
-        let arrayIndex = this.level.enemies.indexOf(enemy);
-        if (enemy instanceof Chicken || enemy instanceof ChickenSmall && !(enemy instanceof Endboss)) {
+        this.character.jump();
+        if ((enemy instanceof Chicken || enemy instanceof ChickenSmall) && !(enemy instanceof Endboss)) {
           let jumpState = this.character.isJumping;
           if (jumpState) {
-            this.character.jump();
             enemy.energy -= 100;
-            this.character.isJumping = !jumpState;
             this.allSounds.audioCache['audio/jump_on_sound.mp3'].play();
-            this.setOnJumpTimeout(arrayIndex);
+            this.recoverLifePoints();
+            this.setOnJumpTimeout(index);
+            this.character.isJumping = !jumpState;
           }
         }
       }
@@ -79,19 +81,38 @@ class World extends MovableObject {
   }
 
   /**
+   * This function recovers the energy from the character by +20% each time he killed two chicken
+   * 
+   */
+  recoverLifePoints() {
+    if (this.character.energy < 100 && !(this.character.energy > 100)) {
+      this.recoverEnergy += 1;
+      if (this.recoverEnergy == 2) {
+        this.character.energy += 20;
+        this.level.statusBar[2].setPercentage(this.character.energy);
+        this.recoverEnergy = 0;
+      }
+    }
+  }
+
+
+  /**
    * This function sets an timeout after the character jumped on a chicken an splices the chicken out of the enemies array
    * and sets the y-coordinate from the character back to y=285;
    * 
-   * @param {*} i 
+   * @param {number} index - This is the index of the array place of the enemy to splice it out
    */
-  setOnJumpTimeout(i) {
+  setOnJumpTimeout(index) {
     setTimeout(() => {
-      this.level.enemies.splice(i, 1);
-    }, 100);
+      if (index >= 0 && index < this.level.enemies.length) {
+        this.level.enemies.splice(index, 1);
+      }
+    }, 200);
     setTimeout(() => {
       this.character.y = 285;
     }, 500);
   }
+
 
   /**
    * This function gets the index of the endboss
