@@ -13,7 +13,7 @@ function initLevel() {
       new Chicken(),
       new ChickenSmall(),
       new ChickenSmall(),
-      new ChickenSmall(),
+      // new ChickenSmall(),
       new Endboss()
     ],
     [
@@ -91,15 +91,15 @@ function initLevel() {
     ], 
     [
       new CollectableCoin("img/8_coin/coin_2.png", 300, 150),
-      new CollectableCoin("img/8_coin/coin_2.png", 400, 175),
-      new CollectableCoin("img/8_coin/coin_2.png", 500, 175),
-      new CollectableCoin("img/8_coin/coin_2.png", 600, 175),
-      new CollectableCoin("img/8_coin/coin_2.png", 900, 125),
-      new CollectableCoin("img/8_coin/coin_2.png", 1000, 150),
-      new CollectableCoin("img/8_coin/coin_2.png", 1100, 175),
-      new CollectableCoin("img/8_coin/coin_2.png", 1200, 175),
-      new CollectableCoin("img/8_coin/coin_2.png", 1400, 150),
-      new CollectableCoin("img/8_coin/coin_2.png", 1600, 175)
+      new CollectableCoin("img/8_coin/coin_2.png", 400, 200),
+      new CollectableCoin("img/8_coin/coin_2.png", 500, 200),
+      new CollectableCoin("img/8_coin/coin_2.png", 600, 160),
+      new CollectableCoin("img/8_coin/coin_2.png", 900, 205),
+      new CollectableCoin("img/8_coin/coin_2.png", 1000, 180),
+      new CollectableCoin("img/8_coin/coin_2.png", 1100, 195),
+      new CollectableCoin("img/8_coin/coin_2.png", 1200, 210),
+      new CollectableCoin("img/8_coin/coin_2.png", 1400, 195),
+      new CollectableCoin("img/8_coin/coin_2.png", 1600, 230)
     ]
   );
 }

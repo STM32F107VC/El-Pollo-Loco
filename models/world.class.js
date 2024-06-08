@@ -109,10 +109,12 @@ class World extends MovableObject {
       }
     }, 200);
     setTimeout(() => {
+      this.applyGravity();
+    }, 300);
+    setTimeout(() => {
       this.character.y = 285;
-    }, 500);
+    }, 700);
   }
-
 
   /**
    * This function gets the index of the endboss
@@ -174,7 +176,7 @@ class World extends MovableObject {
     let audio = this.allSounds.audioCache[`audio/collect_${lowerCaseInitialLetter}.mp3`];
     let accessObj = lowerCaseInitialLetter + `State`;
     this.level[arrayName].forEach((obj) => {
-      if (this.character.isColliding(obj) && this[accessObj] < 100) {
+      if (this.character.isCollidingCoin(obj) && this[accessObj] < 100) {
         this.refreshStatusBar(i, audio, accessObj);
         this.removeCollectableObject(type, obj);
       }
@@ -330,6 +332,7 @@ class World extends MovableObject {
     }
 
     mo.draw(this.ctx);
+    mo.drawFrame(this.ctx);
 
     if (mo.otherDirection) {
       this.flipImageBack(mo);

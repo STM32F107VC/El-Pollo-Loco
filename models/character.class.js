@@ -1,8 +1,9 @@
 class Character extends MovableObject {
   y = 10;
-  speed = 8;
+  speed = 10;
   world;
   currentTime = 0;
+  activeJump = false;
 
   IMAGES_IDLE = [
     "img/2_character_pepe/1_idle/idle/I-1.png",
@@ -74,8 +75,9 @@ class Character extends MovableObject {
   constructor() {
     super().loadImage("../img/2_character_pepe/2_walk/W-21.png");
     this.checkEnergy = this.checkEnergy.bind(this);
-    this.animate = this.animate.bind(this); // Binde den Kontext von this
+    this.animate = this.animate.bind(this);
     this.idleAnimation = this.idleAnimation.bind(this);
+    this.jumpMovement = this.jumpMovement.bind(this);
     this.loadImages(this.IMAGES_IDLE);
     this.loadImages(this.IMAGES_LONG_IDLE);
     this.loadImages(this.IMAGES_WALKING);
@@ -83,9 +85,10 @@ class Character extends MovableObject {
     this.loadImages(this.IMAGES_HURT);
     this.loadImages(this.IMAGES_DEAD);
     this.applyGravity(this.IMAGES_JUMPING);
-    this.setStoppableInterval(this.animate, 1000 / 60);
-    this.setStoppableInterval(this.checkEnergy, 95);
-    this.setStoppableInterval(this.idleAnimation, 150);
+    this.setStoppableInterval(this.animate, 1000 / 24);
+    this.setStoppableInterval(this.jumpMovement, 1000/ 12);
+    this.setStoppableInterval(this.checkEnergy, 1000 / 16);
+    this.setStoppableInterval(this.idleAnimation, 400);
     this.startTime = new Date().getTime() / 1000;
   }
 
@@ -116,7 +119,8 @@ class Character extends MovableObject {
       this.world.allSounds.audioCache['audio/running_pepe.mp3'].play();
     }
     if (this.world.keyboard.SPACE && !this.isAboveGround()) {
-      this.jump();                    // !(y < 285)
+      this.activeJump = true;
+      this.jump();
       this.world.allSounds.audioCache['audio/jump_pepe.mp3'].play();
     }
     this.world.camera_x = -this.x + 100;
@@ -131,13 +135,31 @@ class Character extends MovableObject {
       this.energyZero();
     } else if (this.isHurt()) {
       this.gotHurt();
-    } else if (this.isAboveGround()) {
-      this.notOnGround();
     } else {
       if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
         this.inMotion();
       }
     }
+  }
+
+  /**
+   * This function checks if the character is above the ground i.e. juming
+   * 
+   */
+  jumpMovement() {
+    if (this.isAboveGround()) {
+      this.notOnGround();
+    }
+  }
+
+  /**
+   * This function play the jumping animation when the characte takes off from ground and resets the timestamp for idle/idle long animation
+   * 
+   */
+  notOnGround() {
+    this.isJumping = true;
+    this.playAnimationOnce(this.IMAGES_JUMPING);
+    this.startTime = this.newTimeStamp();
   }
 
   /**
@@ -157,16 +179,6 @@ class Character extends MovableObject {
   gotHurt() {
     this.playAnimation(this.IMAGES_HURT);
     this.world.allSounds.audioCache['audio/hurt_pepe.mp3'].play();
-  }
-
-  /**
-   * This function checks if the character is above the ground i.e. juming
-   * 
-   */
-  notOnGround() {
-    this.isJumping = true;
-    this.playAnimation(this.IMAGES_JUMPING);
-    this.startTime = this.newTimeStamp();
   }
 
   /**
@@ -193,6 +205,6 @@ class Character extends MovableObject {
    * 
    */
   jump() {
-    this.speedY = 30;
+    this.speedY = 40;
   }
 }

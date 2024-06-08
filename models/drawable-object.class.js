@@ -107,4 +107,48 @@ class DrawableObject {
   draw(ctx) {
     ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
   }
+
+   /**
+   * This function is for development purposes to show where the objects touch each other
+   * 
+   * @param {context} ctx - This is the 2d context of the canvas
+   */
+   drawFrame(ctx) {
+    // if (this instanceof Chicken || this instanceof ChickenSmall) {
+    //   ctx.beginPath();
+    //   ctx.lineWidth = "4";
+    //   ctx.strokeStyle = "blue";
+    //   ctx.rect(this.x, this.y, this.width, this.height);
+    //   ctx.stroke();
+    // }
+
+    // if (this instanceof Character) {
+    //   ctx.beginPath();
+    //   ctx.lineWidth = "4";
+    //   ctx.strokeStyle = "green";
+    //   ctx.rect(this.x, this.y, this.width, this.height);
+    //   ctx.stroke();
+    // }
+
+    // let middle = this.x + 20 + this.width -50
+
+    // if (this instanceof Character) {
+    //   ctx.beginPath();
+    //   ctx.lineWidth = "4";
+    //   ctx.strokeStyle = "red";
+    //   ctx.rect(this.x + 20, this.y, this.width - 50, this.height - 5);
+    //   ctx.stroke();
+    // }
+
+    // let xStart = (this.x + 20);
+    // let xEnd = (this.width - 50);
+    // // let xMidline = ((xEnd - xStart)/2);
+    // if (this instanceof Character) {
+    //   ctx.beginPath();
+    //   ctx.lineWidth = "4";
+    //   ctx.strokeStyle = "red";
+    //   ctx.rect(xStart, this.y, this.width-75, this.height - 5);
+    //   ctx.stroke();
+    // }
+  }
 }

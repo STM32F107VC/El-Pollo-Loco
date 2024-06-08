@@ -35,8 +35,8 @@ class MovableObject extends DrawableObject {
   /**
    * This function checks if an object is colliding with an other object
    * 
-   * @param {object} enemy - This is the enemies but also objects like coins and salsa bottles 
-   * @returns 
+   * @param {object} enemy - This are the enemies and salsa bottles (salsa bottle aren't enemys but the function is correct to for the these)
+   * @returns - Returns the condition true or false if an object collides with another
    */
   isColliding(enemy) {
     return (
@@ -48,13 +48,29 @@ class MovableObject extends DrawableObject {
   }
 
   /**
+   *  This function checks if the character is colliding coin
+   * 
+   * @param {object} coin - This is the coin to collect 
+   * @returns - Returns the condition true or false if an object collides with another
+   */
+  isCollidingCoin(coin) {
+    let yOffset = 55;
+    return (
+      this.x + this.width > coin.x + 35 &&
+      this.y + this.height - this.yOffset > coin.y &&
+      this.x < coin.x + coin.width &&
+      this.y + yOffset < coin.y + coin.height
+    );
+  }
+
+  /**
    * This function checks if the character jumps on a chicken
    * @param {object} enemy - Contains the chicken on which the character jumped
    * @returns - Returns the evaluation if the character really jumped on the chicken
    */
   isJumpingOn(enemy) {
-    let yTolerance = 10;
-    let xTolerance = 3;
+    let yTolerance = 15;
+    let xTolerance = 1;
     let isAbove = (this.y + this.height) >= enemy.y - yTolerance && (this.y + this.height) <= enemy.y + yTolerance;
     let isJumpingDown = this.speedY < 0;
     let isWithinXRange = this.x + this.width >= enemy.x - xTolerance && this.x <= enemy.x + enemy.width + xTolerance;
@@ -109,13 +125,29 @@ class MovableObject extends DrawableObject {
   /**
    * This function play/iterates all images from the array given to it so a flowing movement is created (also depending on the setIntervall time)
    * 
-   * @param {images} images - This are all image paths in the images array 
+   * @param {array} images - These are all image paths in the images array 
    */
   playAnimation(images) {
     let i = this.currentImage % images.length;
     let path = images[i];
     this.img = this.imgCache[path];
     this.currentImage++;
+  }
+
+
+  /**
+   * This function play/iterates all images from the array given to it so a flowing movement is created (also depending on the setIntervall time) but only once
+   * This function is for the jumping animation
+   * @param {array} images - These are all image paths in the images array 
+   */
+  playAnimationOnce(images) {
+    if (this.currentImage < images.length) {
+      let path = images[this.currentImage];
+      this.img = this.imgCache[path];
+      this.currentImage++;
+    } else {
+      this.currentImage = 0;
+    }
   }
 
   /**
